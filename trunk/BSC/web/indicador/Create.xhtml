@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IndicadorCreateDlg" widgetVar="IndicadorCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateIndicadorTitle}">
+            <h:form id="IndicadorCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{indicadorController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateIndicadorLabel_idIndicador}" for="idIndicador" />
+                        <p:inputText id="idIndicador" value="#{indicadorController.selected.idIndicador}" title="#{bundle.CreateIndicadorTitle_idIndicador}" required="true" requiredMessage="#{bundle.CreateIndicadorRequiredMessage_idIndicador}"/>
+                        <p:outputLabel value="#{bundle.CreateIndicadorLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{indicadorController.selected.nombre}" title="#{bundle.CreateIndicadorTitle_nombre}" required="true" requiredMessage="#{bundle.CreateIndicadorRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.CreateIndicadorLabel_formula}" for="formula" />
+                        <p:inputText id="formula" value="#{indicadorController.selected.formula}" title="#{bundle.CreateIndicadorTitle_formula}" />
+                        <p:outputLabel value="#{bundle.CreateIndicadorLabel_unidades}" for="unidades" />
+                        <p:inputText id="unidades" value="#{indicadorController.selected.unidades}" title="#{bundle.CreateIndicadorTitle_unidades}" />
+                        <p:outputLabel value="#{bundle.CreateIndicadorLabel_glosario}" for="glosario" />
+                        <p:inputText id="glosario" value="#{indicadorController.selected.glosario}" title="#{bundle.CreateIndicadorTitle_glosario}" />
+                        <p:outputLabel value="#{bundle.CreateIndicadorLabel_kpi}" for="kpi" />
+                        <p:inputText id="kpi" value="#{indicadorController.selected.kpi}" title="#{bundle.CreateIndicadorTitle_kpi}" />
+                        <p:outputLabel value="#{bundle.CreateIndicadorLabel_base}" for="base" />
+                        <p:inputText id="base" value="#{indicadorController.selected.base}" title="#{bundle.CreateIndicadorTitle_base}" />
+                        <p:outputLabel value="#{bundle.CreateIndicadorLabel_meta}" for="meta" />
+                        <p:inputText id="meta" value="#{indicadorController.selected.meta}" title="#{bundle.CreateIndicadorTitle_meta}" />
+                        <p:outputLabel value="#{bundle.CreateIndicadorLabel_tiempoMedicion}" for="tiempoMedicion" />
+                        <p:inputText id="tiempoMedicion" value="#{indicadorController.selected.tiempoMedicion}" title="#{bundle.CreateIndicadorTitle_tiempoMedicion}" />
+                        <p:outputLabel value="#{bundle.CreateIndicadorLabel_idPersonaResponsable}" for="idPersonaResponsable" />
+                        <p:selectOneMenu id="idPersonaResponsable" value="#{indicadorController.selected.idPersonaResponsable}" >
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="idPersonaResponsableItem"
+                                           itemValue="#{idPersonaResponsableItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{indicadorController.create}" value="#{bundle.Save}" update="display,:IndicadorListForm:datalist,:growl" oncomplete="handleSubmit(args,'IndicadorCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="IndicadorCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

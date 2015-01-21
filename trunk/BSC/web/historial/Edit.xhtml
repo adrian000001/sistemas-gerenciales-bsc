@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="HistorialEditDlg" widgetVar="HistorialEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditHistorialTitle}">
+            <h:form id="HistorialEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{historialController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditHistorialLabel_idHistorial}" for="idHistorial" />
+                        <p:inputText id="idHistorial" value="#{historialController.selected.idHistorial}" title="#{bundle.EditHistorialTitle_idHistorial}" required="true" requiredMessage="#{bundle.EditHistorialRequiredMessage_idHistorial}"/>
+                        <p:outputLabel value="#{bundle.EditHistorialLabel_valor}" for="valor" />
+                        <p:inputText id="valor" value="#{historialController.selected.valor}" title="#{bundle.EditHistorialTitle_valor}" />
+                        <p:outputLabel value="#{bundle.EditHistorialLabel_fechaMedicion}" for="fechaMedicion" />
+                        <p:calendar id="fechaMedicion" pattern="MM/dd/yyyy" value="#{historialController.selected.fechaMedicion}" title="#{bundle.EditHistorialTitle_fechaMedicion}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditHistorialLabel_idIndicador}" for="idIndicador" />
+                        <p:selectOneMenu id="idIndicador" value="#{historialController.selected.idIndicador}" required="true" requiredMessage="#{bundle.EditHistorialRequiredMessage_idIndicador}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{indicadorController.itemsAvailableSelectOne}"
+                                           var="idIndicadorItem"
+                                           itemValue="#{idIndicadorItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{historialController.update}" value="#{bundle.Save}" update="display,:HistorialListForm:datalist,:growl" oncomplete="handleSubmit(args, 'HistorialEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="HistorialEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

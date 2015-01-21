@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ObjetivoestrategicoEditDlg" widgetVar="ObjetivoestrategicoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditObjetivoestrategicoTitle}">
+            <h:form id="ObjetivoestrategicoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{objetivoestrategicoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditObjetivoestrategicoLabel_idObjetivoEstrategico}" for="idObjetivoEstrategico" />
+                        <p:inputText id="idObjetivoEstrategico" value="#{objetivoestrategicoController.selected.idObjetivoEstrategico}" title="#{bundle.EditObjetivoestrategicoTitle_idObjetivoEstrategico}" required="true" requiredMessage="#{bundle.EditObjetivoestrategicoRequiredMessage_idObjetivoEstrategico}"/>
+                        <p:outputLabel value="#{bundle.EditObjetivoestrategicoLabel_numero}" for="numero" />
+                        <p:inputText id="numero" value="#{objetivoestrategicoController.selected.numero}" title="#{bundle.EditObjetivoestrategicoTitle_numero}" />
+                        <p:outputLabel value="#{bundle.EditObjetivoestrategicoLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{objetivoestrategicoController.selected.nombre}" title="#{bundle.EditObjetivoestrategicoTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.EditObjetivoestrategicoLabel_idEstrategiaGlobal}" for="idEstrategiaGlobal" />
+                        <p:selectOneMenu id="idEstrategiaGlobal" value="#{objetivoestrategicoController.selected.idEstrategiaGlobal}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{estrategiaglobalController.itemsAvailableSelectOne}"
+                                           var="idEstrategiaGlobalItem"
+                                           itemValue="#{idEstrategiaGlobalItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditObjetivoestrategicoLabel_idPerspectiva}" for="idPerspectiva" />
+                        <p:selectOneMenu id="idPerspectiva" value="#{objetivoestrategicoController.selected.idPerspectiva}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{perspectivaController.itemsAvailableSelectOne}"
+                                           var="idPerspectivaItem"
+                                           itemValue="#{idPerspectivaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{objetivoestrategicoController.update}" value="#{bundle.Save}" update="display,:ObjetivoestrategicoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ObjetivoestrategicoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ObjetivoestrategicoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

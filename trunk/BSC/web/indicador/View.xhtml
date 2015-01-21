@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IndicadorViewDlg" widgetVar="IndicadorViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewIndicadorTitle}">
+            <h:form id="IndicadorViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{indicadorController.selected != null}">
+                        <h:outputText value="#{bundle.ViewIndicadorLabel_idIndicador}"/>
+                        <h:outputText value="#{indicadorController.selected.idIndicador}" title="#{bundle.ViewIndicadorTitle_idIndicador}"/>
+                        <h:outputText value="#{bundle.ViewIndicadorLabel_nombre}"/>
+                        <h:outputText value="#{indicadorController.selected.nombre}" title="#{bundle.ViewIndicadorTitle_nombre}"/>
+                        <h:outputText value="#{bundle.ViewIndicadorLabel_formula}"/>
+                        <h:outputText value="#{indicadorController.selected.formula}" title="#{bundle.ViewIndicadorTitle_formula}"/>
+                        <h:outputText value="#{bundle.ViewIndicadorLabel_unidades}"/>
+                        <h:outputText value="#{indicadorController.selected.unidades}" title="#{bundle.ViewIndicadorTitle_unidades}"/>
+                        <h:outputText value="#{bundle.ViewIndicadorLabel_glosario}"/>
+                        <h:outputText value="#{indicadorController.selected.glosario}" title="#{bundle.ViewIndicadorTitle_glosario}"/>
+                        <h:outputText value="#{bundle.ViewIndicadorLabel_kpi}"/>
+                        <h:outputText value="#{indicadorController.selected.kpi}" title="#{bundle.ViewIndicadorTitle_kpi}"/>
+                        <h:outputText value="#{bundle.ViewIndicadorLabel_base}"/>
+                        <h:outputText value="#{indicadorController.selected.base}" title="#{bundle.ViewIndicadorTitle_base}"/>
+                        <h:outputText value="#{bundle.ViewIndicadorLabel_meta}"/>
+                        <h:outputText value="#{indicadorController.selected.meta}" title="#{bundle.ViewIndicadorTitle_meta}"/>
+                        <h:outputText value="#{bundle.ViewIndicadorLabel_tiempoMedicion}"/>
+                        <h:outputText value="#{indicadorController.selected.tiempoMedicion}" title="#{bundle.ViewIndicadorTitle_tiempoMedicion}"/>
+                        <h:outputText value="#{bundle.ViewIndicadorLabel_idPersonaResponsable}"/>
+                        <h:outputText value="#{indicadorController.selected.idPersonaResponsable}" title="#{bundle.ViewIndicadorTitle_idPersonaResponsable}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="IndicadorViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

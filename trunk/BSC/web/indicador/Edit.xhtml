@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IndicadorEditDlg" widgetVar="IndicadorEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditIndicadorTitle}">
+            <h:form id="IndicadorEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{indicadorController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditIndicadorLabel_idIndicador}" for="idIndicador" />
+                        <p:inputText id="idIndicador" value="#{indicadorController.selected.idIndicador}" title="#{bundle.EditIndicadorTitle_idIndicador}" required="true" requiredMessage="#{bundle.EditIndicadorRequiredMessage_idIndicador}"/>
+                        <p:outputLabel value="#{bundle.EditIndicadorLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{indicadorController.selected.nombre}" title="#{bundle.EditIndicadorTitle_nombre}" required="true" requiredMessage="#{bundle.EditIndicadorRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.EditIndicadorLabel_formula}" for="formula" />
+                        <p:inputText id="formula" value="#{indicadorController.selected.formula}" title="#{bundle.EditIndicadorTitle_formula}" />
+                        <p:outputLabel value="#{bundle.EditIndicadorLabel_unidades}" for="unidades" />
+                        <p:inputText id="unidades" value="#{indicadorController.selected.unidades}" title="#{bundle.EditIndicadorTitle_unidades}" />
+                        <p:outputLabel value="#{bundle.EditIndicadorLabel_glosario}" for="glosario" />
+                        <p:inputText id="glosario" value="#{indicadorController.selected.glosario}" title="#{bundle.EditIndicadorTitle_glosario}" />
+                        <p:outputLabel value="#{bundle.EditIndicadorLabel_kpi}" for="kpi" />
+                        <p:inputText id="kpi" value="#{indicadorController.selected.kpi}" title="#{bundle.EditIndicadorTitle_kpi}" />
+                        <p:outputLabel value="#{bundle.EditIndicadorLabel_base}" for="base" />
+                        <p:inputText id="base" value="#{indicadorController.selected.base}" title="#{bundle.EditIndicadorTitle_base}" />
+                        <p:outputLabel value="#{bundle.EditIndicadorLabel_meta}" for="meta" />
+                        <p:inputText id="meta" value="#{indicadorController.selected.meta}" title="#{bundle.EditIndicadorTitle_meta}" />
+                        <p:outputLabel value="#{bundle.EditIndicadorLabel_tiempoMedicion}" for="tiempoMedicion" />
+                        <p:inputText id="tiempoMedicion" value="#{indicadorController.selected.tiempoMedicion}" title="#{bundle.EditIndicadorTitle_tiempoMedicion}" />
+                        <p:outputLabel value="#{bundle.EditIndicadorLabel_idPersonaResponsable}" for="idPersonaResponsable" />
+                        <p:selectOneMenu id="idPersonaResponsable" value="#{indicadorController.selected.idPersonaResponsable}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="idPersonaResponsableItem"
+                                           itemValue="#{idPersonaResponsableItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{indicadorController.update}" value="#{bundle.Save}" update="display,:IndicadorListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IndicadorEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="IndicadorEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

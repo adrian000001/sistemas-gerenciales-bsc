@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="HistorialViewDlg" widgetVar="HistorialViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewHistorialTitle}">
+            <h:form id="HistorialViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{historialController.selected != null}">
+                        <h:outputText value="#{bundle.ViewHistorialLabel_idHistorial}"/>
+                        <h:outputText value="#{historialController.selected.idHistorial}" title="#{bundle.ViewHistorialTitle_idHistorial}"/>
+                        <h:outputText value="#{bundle.ViewHistorialLabel_valor}"/>
+                        <h:outputText value="#{historialController.selected.valor}" title="#{bundle.ViewHistorialTitle_valor}"/>
+                        <h:outputText value="#{bundle.ViewHistorialLabel_fechaMedicion}"/>
+                        <h:outputText value="#{historialController.selected.fechaMedicion}" title="#{bundle.ViewHistorialTitle_fechaMedicion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewHistorialLabel_idIndicador}"/>
+                        <h:outputText value="#{historialController.selected.idIndicador}" title="#{bundle.ViewHistorialTitle_idIndicador}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="HistorialViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
