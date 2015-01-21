@@ -8,17 +8,21 @@
 
     <ui:composition>
 
-        <p:dialog id="PerspectivaCreateDlg" widgetVar="PerspectivaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePerspectivaTitle}">
+        <p:dialog id="PerspectivaCreateDlg" 
+                  widgetVar="PerspectivaCreateDialog" 
+                  modal="true" resizable="false" 
+                  appendTo="@(body)" 
+                  header="NUEAVA PERSPECTIVA">
             <h:form id="PerspectivaCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{perspectivaController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreatePerspectivaLabel_idPerspectiva}" for="idPerspectiva" />
-                        <p:inputText id="idPerspectiva" value="#{perspectivaController.selected.idPerspectiva}" title="#{bundle.CreatePerspectivaTitle_idPerspectiva}" required="true" requiredMessage="#{bundle.CreatePerspectivaRequiredMessage_idPerspectiva}"/>
-                        <p:outputLabel value="#{bundle.CreatePerspectivaLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{perspectivaController.selected.nombre}" title="#{bundle.CreatePerspectivaTitle_nombre}" />
-                    </p:panelGrid>
-                    <p:commandButton actionListener="#{perspectivaController.create}" value="#{bundle.Save}" update="display,:PerspectivaListForm:datalist,:growl" oncomplete="handleSubmit(args,'PerspectivaCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="PerspectivaCreateDialog.hide()"/>
+                    <h:panelGrid columns="2" rendered="#{perspectivaController.selected != null}">
+                        <p:outputLabel value="Perspectiva" for="nombre" />
+                        <p:inputText id="nombre" 
+                                     value="#{perspectivaController.selected.nombre}" 
+                                     title="#{bundle.CreatePerspectivaTitle_nombre}" />
+                    </h:panelGrid>
+                    <p:commandButton actionListener="#{perspectivaController.create}" value="GUARDAR" update="display,:PerspectivaListForm:datalist,:growl" oncomplete="handleSubmit(args,'PerspectivaCreateDialog');"/>
+                    <p:commandButton value="CANCELAR" onclick="PerspectivaCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

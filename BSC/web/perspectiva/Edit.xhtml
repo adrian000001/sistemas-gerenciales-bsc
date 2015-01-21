@@ -8,17 +8,25 @@
 
     <ui:composition>
 
-        <p:dialog id="PerspectivaEditDlg" widgetVar="PerspectivaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPerspectivaTitle}">
+        <p:dialog id="PerspectivaEditDlg" 
+                  widgetVar="PerspectivaEditDialog" 
+                  modal="true" 
+                  resizable="false" 
+                  appendTo="@(body)" 
+                  header="EDITAR PERSPECTIVA">
             <h:form id="PerspectivaEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{perspectivaController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditPerspectivaLabel_idPerspectiva}" for="idPerspectiva" />
-                        <p:inputText id="idPerspectiva" value="#{perspectivaController.selected.idPerspectiva}" title="#{bundle.EditPerspectivaTitle_idPerspectiva}" required="true" requiredMessage="#{bundle.EditPerspectivaRequiredMessage_idPerspectiva}"/>
-                        <p:outputLabel value="#{bundle.EditPerspectivaLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{perspectivaController.selected.nombre}" title="#{bundle.EditPerspectivaTitle_nombre}" />
+                        <h:outputText value="Codigo"/>
+                        <h:outputText value="#{perspectivaController.selected.idPerspectiva}" 
+                                      title="#{bundle.ViewPerspectivaTitle_idPerspectiva}"/>
+                        <p:outputLabel value="Perspectiva" for="nombre" />
+                        <p:inputText id="nombre" 
+                                     value="#{perspectivaController.selected.nombre}" 
+                                     title="#{bundle.EditPerspectivaTitle_nombre}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{perspectivaController.update}" value="#{bundle.Save}" update="display,:PerspectivaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PerspectivaEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="PerspectivaEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{perspectivaController.update}" value="GUARDAR" update="display,:PerspectivaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PerspectivaEditDialog');"/>
+                    <p:commandButton value="CANCELAR" onclick="PerspectivaEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

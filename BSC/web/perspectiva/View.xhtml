@@ -8,16 +8,22 @@
 
     <ui:composition>
 
-        <p:dialog id="PerspectivaViewDlg" widgetVar="PerspectivaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPerspectivaTitle}">
+        <p:dialog id="PerspectivaViewDlg" 
+                  widgetVar="PerspectivaViewDialog" 
+                  modal="true" 
+                  resizable="false" 
+                  appendTo="@(body)" 
+                  header="PERSPECTIVA">
             <h:form id="PerspectivaViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{perspectivaController.selected != null}">
-                        <h:outputText value="#{bundle.ViewPerspectivaLabel_idPerspectiva}"/>
-                        <h:outputText value="#{perspectivaController.selected.idPerspectiva}" title="#{bundle.ViewPerspectivaTitle_idPerspectiva}"/>
-                        <h:outputText value="#{bundle.ViewPerspectivaLabel_nombre}"/>
+                    <h:panelGrid columns="2" rendered="#{perspectivaController.selected != null}">
+                        <h:outputText value="Codigo"/>
+                        <h:outputText value="#{perspectivaController.selected.idPerspectiva}" 
+                                      title="#{bundle.ViewPerspectivaTitle_idPerspectiva}"/>
+                        <h:outputText value="Perspectiva"/>
                         <h:outputText value="#{perspectivaController.selected.nombre}" title="#{bundle.ViewPerspectivaTitle_nombre}"/>
-                    </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="PerspectivaViewDialog.hide()"/>
+                    </h:panelGrid>
+                    <p:commandButton value="CERRAR" onclick="PerspectivaViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

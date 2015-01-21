@@ -8,17 +8,15 @@
 
     <ui:composition>
 
-        <p:dialog id="EstrategiaglobalCreateDlg" widgetVar="EstrategiaglobalCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateEstrategiaglobalTitle}">
+        <p:dialog id="EstrategiaglobalCreateDlg" widgetVar="EstrategiaglobalCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="NUEVA ESTRATEGIA GLOBAL">
             <h:form id="EstrategiaglobalCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{estrategiaglobalController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateEstrategiaglobalLabel_idEstrategiaGlobal}" for="idEstrategiaGlobal" />
-                        <p:inputText id="idEstrategiaGlobal" value="#{estrategiaglobalController.selected.idEstrategiaGlobal}" title="#{bundle.CreateEstrategiaglobalTitle_idEstrategiaGlobal}" required="true" requiredMessage="#{bundle.CreateEstrategiaglobalRequiredMessage_idEstrategiaGlobal}"/>
+                    <h:panelGrid columns="1" rendered="#{estrategiaglobalController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateEstrategiaglobalLabel_estrategia}" for="estrategia" />
-                        <p:inputText id="estrategia" value="#{estrategiaglobalController.selected.estrategia}" title="#{bundle.CreateEstrategiaglobalTitle_estrategia}" required="true" requiredMessage="#{bundle.CreateEstrategiaglobalRequiredMessage_estrategia}"/>
-                    </p:panelGrid>
-                    <p:commandButton actionListener="#{estrategiaglobalController.create}" value="#{bundle.Save}" update="display,:EstrategiaglobalListForm:datalist,:growl" oncomplete="handleSubmit(args,'EstrategiaglobalCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="EstrategiaglobalCreateDialog.hide()"/>
+                        <p:inputTextarea cols="100" id="estrategia" value="#{estrategiaglobalController.selected.estrategia}" title="#{bundle.CreateEstrategiaglobalTitle_estrategia}" required="true" requiredMessage="#{bundle.CreateEstrategiaglobalRequiredMessage_estrategia}"/>
+                    </h:panelGrid>
+                    <p:commandButton actionListener="#{estrategiaglobalController.create}" value="GUARDAR" update="display,:EstrategiaglobalListForm:datalist,:growl" oncomplete="handleSubmit(args,'EstrategiaglobalCreateDialog');"/>
+                    <p:commandButton value="CANCELAR" onclick="EstrategiaglobalCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
