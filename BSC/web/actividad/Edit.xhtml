@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ActividadEditDlg" widgetVar="ActividadEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditActividadTitle}">
+            <h:form id="ActividadEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{actividadController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditActividadLabel_idActividad}" for="idActividad" />
+                        <p:inputText id="idActividad" value="#{actividadController.selected.idActividad}" title="#{bundle.EditActividadTitle_idActividad}" required="true" requiredMessage="#{bundle.EditActividadRequiredMessage_idActividad}"/>
+                        <p:outputLabel value="#{bundle.EditActividadLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{actividadController.selected.nombre}" title="#{bundle.EditActividadTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.EditActividadLabel_control}" for="control" />
+                        <p:inputText id="control" value="#{actividadController.selected.control}" title="#{bundle.EditActividadTitle_control}" />
+                        <p:outputLabel value="#{bundle.EditActividadLabel_fechaInicio}" for="fechaInicio" />
+                        <p:calendar id="fechaInicio" pattern="MM/dd/yyyy" value="#{actividadController.selected.fechaInicio}" title="#{bundle.EditActividadTitle_fechaInicio}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditActividadLabel_fechaFin}" for="fechaFin" />
+                        <p:calendar id="fechaFin" pattern="MM/dd/yyyy" value="#{actividadController.selected.fechaFin}" title="#{bundle.EditActividadTitle_fechaFin}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditActividadLabel_avance}" for="avance" />
+                        <p:inputText id="avance" value="#{actividadController.selected.avance}" title="#{bundle.EditActividadTitle_avance}" />
+                        <p:outputLabel value="#{bundle.EditActividadLabel_idObjetivoEstrategico}" for="idObjetivoEstrategico" />
+                        <p:selectOneMenu id="idObjetivoEstrategico" value="#{actividadController.selected.idObjetivoEstrategico}" required="true" requiredMessage="#{bundle.EditActividadRequiredMessage_idObjetivoEstrategico}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{objetivoestrategicoController.itemsAvailableSelectOne}"
+                                           var="idObjetivoEstrategicoItem"
+                                           itemValue="#{idObjetivoEstrategicoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditActividadLabel_idPersonaResponsable}" for="idPersonaResponsable" />
+                        <p:selectOneMenu id="idPersonaResponsable" value="#{actividadController.selected.idPersonaResponsable}" required="true" requiredMessage="#{bundle.EditActividadRequiredMessage_idPersonaResponsable}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="idPersonaResponsableItem"
+                                           itemValue="#{idPersonaResponsableItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{actividadController.update}" value="#{bundle.Save}" update="display,:ActividadListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ActividadEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ActividadEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ObjetivoestrategicoindicadorEditDlg" widgetVar="ObjetivoestrategicoindicadorEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditObjetivoestrategicoindicadorTitle}">
+            <h:form id="ObjetivoestrategicoindicadorEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{objetivoestrategicoindicadorController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditObjetivoestrategicoindicadorLabel_meta}" for="meta" />
+                        <p:inputText id="meta" value="#{objetivoestrategicoindicadorController.selected.meta}" title="#{bundle.EditObjetivoestrategicoindicadorTitle_meta}" />
+                        <p:outputLabel value="#{bundle.EditObjetivoestrategicoindicadorLabel_definicion}" for="definicion" />
+                        <p:inputText id="definicion" value="#{objetivoestrategicoindicadorController.selected.definicion}" title="#{bundle.EditObjetivoestrategicoindicadorTitle_definicion}" />
+                        <p:outputLabel value="#{bundle.EditObjetivoestrategicoindicadorLabel_aclaracion}" for="aclaracion" />
+                        <p:inputText id="aclaracion" value="#{objetivoestrategicoindicadorController.selected.aclaracion}" title="#{bundle.EditObjetivoestrategicoindicadorTitle_aclaracion}" />
+                        <p:outputLabel value="#{bundle.EditObjetivoestrategicoindicadorLabel_conceptualizacion}" for="conceptualizacion" />
+                        <p:inputText id="conceptualizacion" value="#{objetivoestrategicoindicadorController.selected.conceptualizacion}" title="#{bundle.EditObjetivoestrategicoindicadorTitle_conceptualizacion}" />
+                        <p:outputLabel value="#{bundle.EditObjetivoestrategicoindicadorLabel_indicador}" for="indicador" />
+                        <p:selectOneMenu id="indicador" value="#{objetivoestrategicoindicadorController.selected.indicador}" required="true" requiredMessage="#{bundle.EditObjetivoestrategicoindicadorRequiredMessage_indicador}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{indicadorController.itemsAvailableSelectOne}"
+                                           var="indicadorItem"
+                                           itemValue="#{indicadorItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditObjetivoestrategicoindicadorLabel_objetivoestrategico}" for="objetivoestrategico" />
+                        <p:selectOneMenu id="objetivoestrategico" value="#{objetivoestrategicoindicadorController.selected.objetivoestrategico}" required="true" requiredMessage="#{bundle.EditObjetivoestrategicoindicadorRequiredMessage_objetivoestrategico}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{objetivoestrategicoController.itemsAvailableSelectOne}"
+                                           var="objetivoestrategicoItem"
+                                           itemValue="#{objetivoestrategicoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{objetivoestrategicoindicadorController.update}" value="#{bundle.Save}" update="display,:ObjetivoestrategicoindicadorListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ObjetivoestrategicoindicadorEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ObjetivoestrategicoindicadorEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
