@@ -1,0 +1,199 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : 02-sep-2014, 23:43:00
+    Author     : pablo
+*/
+
+body {
+    top: 0px;
+    font-size:0.6em;
+
+    font-weight:normal;
+    margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px ;
+    font-family: Verdana, Geneva, sans-serif;
+
+}
+.panelRedSocial{
+    background-color: #ff1721;
+    height: 40px;
+    margin-top: -10px;
+
+}
+.clearfix:before, .clearfix:after {
+    content: " ";
+    display: table;
+}
+.social_icons {
+    overflow: hidden;
+    padding: 5px;
+    margin-left: 600px;
+    list-style: none;
+    white-space: nowrap;
+
+    z-index: 10;
+}
+.social_icons > li {
+    float: left;
+    cursor: pointer;
+    width: 32px;
+    height: 31px;
+    overflow: hidden;
+    margin-right: 14px;
+}
+.social_icons > li a {
+    width: 32px;
+    height: 31px;
+    overflow: hidden;
+}
+.social_icons > li a img {
+    position: relative;
+    top: 0;
+}
+.social_icons > li a:hover img {
+    position: relative;
+    top: -31px;
+}
+
+.panelBanner {
+    top: 0px;
+    margin-left: 10%;
+    width: 60%;
+    height: 140px;
+    display: block;
+
+}
+.panelLogin{
+    position:absolute;
+    margin-left: 70%;
+    top: 0px;
+    width: 20%;
+    height: 115px;
+    border: none;
+
+}
+.panelLogin.ui-panel, .panelLogin.ui-panel-content {
+
+    border-color:#d4d4fc;
+    border-style: dotted;
+}
+.encabezadosDialog{
+    font-size:  medium;
+    font-weight:  bold;
+    font-size: 12px;
+}
+.panelInformacion{
+    height: 200px;
+    width: 80%;
+    margin: 0 auto 0 auto;
+}
+.panelInformacion.ui-panel, .panelInformacion.ui-panel-content {
+
+}
+.panelBarra{
+    margin-top: 5px;
+    height: 50px;
+
+}
+.butonBarra{
+    margin-top: 0;
+    height: 50px;
+    width: 150px!important;
+}
+.butonBarra .ui-icon{
+    width: 20px;
+    height: 20px;
+    margin: 0 auto;
+}
+.butonBarra.ui-panel{
+    background-color: #cc0000;
+}
+.imagenLogin{
+    width: 70px;
+    height: 80px;
+    border-radius:10px;
+    border-color: #000000;
+
+}
+
+.panelInformacionContalcto {
+    height: 60px;
+    background-color: #b5b5b5;
+    clear: both;
+    overflow: hidden;
+}
+.panelFormulario{
+    width: 80%;
+    margin-left: 10%; margin-top: 0px; 
+    border: 1px;
+    border-style: dotted;
+    border-top-width: 0px; border-top-left-radius: 5px; border-top-right-radius: 5px;
+    border-color: #9999ff;
+    background-color: #ffffff;
+}
+.panelTitulo{
+    background-color:#ececec;
+    font-weight: bold;
+    font-size: 1.2em;
+    border-radius: 5px;
+    height: 20px;
+    font-family: Arial;
+    text-align: center;
+    color:#cc0000;
+    margin:10px auto 10px auto;
+    padding-top: 5px;
+
+}
+.column1Class,.column3Class{
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: right;
+    font-weight: bold;
+    color: #cc0000;
+    width: 250px;
+}
+
+.column2Class,.column4Class{
+    width: 230px;
+}
+.inputText{
+    width: 230px;
+    height: 15px;
+    text-transform: uppercase;
+}
+
+.ui-widget-header{
+    background:#ffffff!important;   
+}
+.ui-shadow{
+    box-shadow:none;
+}
+
+.ui-dialog-content{
+    background-color:#eaf2f3!important; 
+}
+.link{
+    color: #6666ff;
+    font-size: 1.0em;
+}
+.linkBuscaTrabajo{
+    display: block;
+    background-color: #ffffff!important;
+}
+.linkBuscaTrabajo:hover{
+    display: block;
+    background-color:#ececec!important; 
+}
+.dialogo .ui-dialog{
+    font-size: 3.0em;   
+    font-family: serif!important; 
+}
+.dialogo .ui-dialog-titlebar{
+
+}
+.dialogo .ui-dialog-content{
+    background-color: #ffffff!important; 
+}
+

@@ -8,16 +8,20 @@
 
     <ui:composition>
 
-        <p:dialog id="EstrategiaglobalViewDlg" widgetVar="EstrategiaglobalViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEstrategiaglobalTitle}">
+        <p:dialog id="EstrategiaglobalViewDlg" 
+                  widgetVar="EstrategiaglobalViewDialog" 
+                  modal="true" resizable="false" 
+                  appendTo="@(body)" 
+                  header="ESTRATEGIA GLOBAL">
             <h:form id="EstrategiaglobalViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{estrategiaglobalController.selected != null}">
-                        <h:outputText value="#{bundle.ViewEstrategiaglobalLabel_idEstrategiaGlobal}"/>
+                    <h:panelGrid columns="2" rendered="#{estrategiaglobalController.selected != null}">
+                        <h:outputText value="Codigo"/>
                         <h:outputText value="#{estrategiaglobalController.selected.idEstrategiaGlobal}" title="#{bundle.ViewEstrategiaglobalTitle_idEstrategiaGlobal}"/>
                         <h:outputText value="#{bundle.ViewEstrategiaglobalLabel_estrategia}"/>
-                        <h:outputText value="#{estrategiaglobalController.selected.estrategia}" title="#{bundle.ViewEstrategiaglobalTitle_estrategia}"/>
-                    </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="EstrategiaglobalViewDialog.hide()"/>
+                        <h:inputTextarea readonly="true" cols="100" value="#{estrategiaglobalController.selected.estrategia}" title="#{bundle.ViewEstrategiaglobalTitle_estrategia}"/>
+                    </h:panelGrid>
+                    <p:commandButton value="CERRAR" onclick="EstrategiaglobalViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

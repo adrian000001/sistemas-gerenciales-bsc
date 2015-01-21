@@ -27,8 +27,20 @@ public class EstrategiaglobalController implements Serializable {
     private bean.EstrategiaglobalFacade ejbFacade;
     private List<Estrategiaglobal> items = null;
     private Estrategiaglobal selected;
+    private String estrategia;
 
     public EstrategiaglobalController() {
+    }
+    
+    public void guardar(){
+        this.setSelected(new Estrategiaglobal());
+        this.getSelected().setEstrategia(estrategia);
+        this.create();
+    }
+    
+    public void preparaNuevo(){
+        System.out.println("nuevo");
+        estrategia="";
     }
 
     public Estrategiaglobal getSelected() {
@@ -50,12 +62,15 @@ public class EstrategiaglobalController implements Serializable {
     }
 
     public Estrategiaglobal prepareCreate() {
+        
+        System.out.println("dsfds");
         selected = new Estrategiaglobal();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
+        
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("EstrategiaglobalCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -115,6 +130,20 @@ public class EstrategiaglobalController implements Serializable {
 
     public List<Estrategiaglobal> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    /**
+     * @return the estrategia
+     */
+    public String getEstrategia() {
+        return estrategia;
+    }
+
+    /**
+     * @param estrategia the estrategia to set
+     */
+    public void setEstrategia(String estrategia) {
+        this.estrategia = estrategia;
     }
 
     @FacesConverter(forClass = Estrategiaglobal.class)
