@@ -10,14 +10,17 @@
 
 
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListObjetivoestrategicoTitle}"></h:outputText>
+            <h:outputText value="OBJETIVOS ESTRATEGICOS"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
             <h:form id="ObjetivoestrategicoListForm">
-                <p:panel header="#{bundle.ListObjetivoestrategicoTitle}">
-                    <p:dataTable id="datalist" value="#{objetivoestrategicoController.items}" var="item"
-                                 selectionMode="single" selection="#{objetivoestrategicoController.selected}"
+                <p:panel header="OBJETIVOS ESTRATEGICOS">
+                    <p:dataTable id="datalist" 
+                                 value="#{objetivoestrategicoController.items}" 
+                                 var="item"
+                                 selectionMode="single" 
+                                 selection="#{objetivoestrategicoController.selected}"
                                  paginator="true"
                                  rowKey="#{item.idObjetivoEstrategico}"
                                  rows="10"
@@ -29,39 +32,33 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListObjetivoestrategicoTitle_idObjetivoEstrategico}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idObjetivoEstrategico}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListObjetivoestrategicoTitle_numero}"/>
+                                <h:outputText value="NUMERO"/>
                             </f:facet>
                             <h:outputText value="#{item.numero}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListObjetivoestrategicoTitle_nombre}"/>
+                                <h:outputText value="NOMBRE"/>
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListObjetivoestrategicoTitle_idEstrategiaGlobal}"/>
+                                <h:outputText value="ESTRATEGIA GLOBAL"/>
                             </f:facet>
-                            <h:outputText value="#{item.idEstrategiaGlobal}"/>
+                            <h:outputText value="#{item.idEstrategiaGlobal.estrategia}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListObjetivoestrategicoTitle_idPerspectiva}"/>
+                                <h:outputText value="PERSPECTIVA"/>
                             </f:facet>
-                            <h:outputText value="#{item.idPerspectiva}"/>
+                            <h:outputText value="#{item.idPerspectiva.nombre}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{objetivoestrategicoController.prepareCreate}" update=":ObjetivoestrategicoCreateForm" oncomplete="PF('ObjetivoestrategicoCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ObjetivoestrategicoViewForm" oncomplete="PF('ObjetivoestrategicoViewDialog').show()" disabled="#{empty objetivoestrategicoController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ObjetivoestrategicoEditForm" oncomplete="PF('ObjetivoestrategicoEditDialog').show()" disabled="#{empty objetivoestrategicoController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{objetivoestrategicoController.destroy}" update=":growl,datalist" disabled="#{empty objetivoestrategicoController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="NUEVO" actionListener="#{objetivoestrategicoController.preparaNuevo}" update=":ObjetivoestrategicoCreateForm" oncomplete="PF('ObjetivoestrategicoCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="VER" update=":ObjetivoestrategicoViewForm" oncomplete="PF('ObjetivoestrategicoViewDialog').show()" disabled="#{empty objetivoestrategicoController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="EDITAR" update=":ObjetivoestrategicoEditForm" oncomplete="PF('ObjetivoestrategicoEditDialog').show()" disabled="#{empty objetivoestrategicoController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="ELIMINAR" actionListener="#{objetivoestrategicoController.destroy}" update=":growl,datalist" disabled="#{empty objetivoestrategicoController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

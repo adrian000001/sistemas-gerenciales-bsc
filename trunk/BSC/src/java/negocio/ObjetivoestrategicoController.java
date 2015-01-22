@@ -4,8 +4,11 @@ import modelo.Objetivoestrategico;
 import negocio.util.JsfUtil;
 import negocio.util.JsfUtil.PersistAction;
 import bean.ObjetivoestrategicoFacade;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -18,6 +21,9 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import modelo.Indicador;
+import modelo.Objetivoestrategicoindicador;
+import modelo.ObjetivoestrategicoindicadorPK;
 
 @ManagedBean(name = "objetivoestrategicoController")
 @SessionScoped
@@ -27,8 +33,29 @@ public class ObjetivoestrategicoController implements Serializable {
     private bean.ObjetivoestrategicoFacade ejbFacade;
     private List<Objetivoestrategico> items = null;
     private Objetivoestrategico selected;
+    private Objetivoestrategicoindicador metaSeleccionada;
+    private Objetivoestrategicoindicador nuevoObjetivoestrategicoindicador;
+    int idProvisional;
 
     public ObjetivoestrategicoController() {
+    }
+    
+    public Objetivoestrategico preparaNuevo(){
+        idProvisional=0;
+        nuevoObjetivoestrategicoindicador=new Objetivoestrategicoindicador();
+        nuevoObjetivoestrategicoindicador.setObjetivoestrategico(selected);
+        nuevoObjetivoestrategicoindicador.setIndicador(new Indicador());
+        nuevoObjetivoestrategicoindicador.setObjetivoestrategicoindicadorPK(new ObjetivoestrategicoindicadorPK(0, idProvisional));
+        return this.prepareCreate();
+    }
+    
+    public void agregarIndicador(){
+        this.selected.getObjetivoestrategicoindicadorCollection().add(nuevoObjetivoestrategicoindicador);
+        nuevoObjetivoestrategicoindicador=new Objetivoestrategicoindicador();
+        nuevoObjetivoestrategicoindicador.setObjetivoestrategico(selected);
+        nuevoObjetivoestrategicoindicador.setIndicador(new Indicador());
+        idProvisional++;
+        nuevoObjetivoestrategicoindicador.setObjetivoestrategicoindicadorPK(new ObjetivoestrategicoindicadorPK(0, idProvisional));
     }
 
     public Objetivoestrategico getSelected() {
@@ -52,6 +79,7 @@ public class ObjetivoestrategicoController implements Serializable {
     public Objetivoestrategico prepareCreate() {
         selected = new Objetivoestrategico();
         initializeEmbeddableKey();
+        selected.setObjetivoestrategicoindicadorCollection(new ArrayList<>());
         return selected;
     }
 
@@ -115,6 +143,34 @@ public class ObjetivoestrategicoController implements Serializable {
 
     public List<Objetivoestrategico> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    /**
+     * @return the metaSeleccionada
+     */
+    public Objetivoestrategicoindicador getMetaSeleccionada() {
+        return metaSeleccionada;
+    }
+
+    /**
+     * @param metaSeleccionada the metaSeleccionada to set
+     */
+    public void setMetaSeleccionada(Objetivoestrategicoindicador metaSeleccionada) {
+        this.metaSeleccionada = metaSeleccionada;
+    }
+
+    /**
+     * @return the nuevoObjetivoestrategicoindicador
+     */
+    public Objetivoestrategicoindicador getNuevoObjetivoestrategicoindicador() {
+        return nuevoObjetivoestrategicoindicador;
+    }
+
+    /**
+     * @param nuevoObjetivoestrategicoindicador the nuevoObjetivoestrategicoindicador to set
+     */
+    public void setNuevoObjetivoestrategicoindicador(Objetivoestrategicoindicador nuevoObjetivoestrategicoindicador) {
+        this.nuevoObjetivoestrategicoindicador = nuevoObjetivoestrategicoindicador;
     }
 
     @FacesConverter(forClass = Objetivoestrategico.class)

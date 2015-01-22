@@ -12,8 +12,13 @@
             <h:form id="EstrategiaglobalCreateForm">
                 <h:panelGroup id="display">
                     <h:panelGrid columns="1" rendered="#{estrategiaglobalController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateEstrategiaglobalLabel_estrategia}" for="estrategia" />
-                        <p:inputTextarea cols="100" id="estrategia" value="#{estrategiaglobalController.selected.estrategia}" title="#{bundle.CreateEstrategiaglobalTitle_estrategia}" required="true" requiredMessage="#{bundle.CreateEstrategiaglobalRequiredMessage_estrategia}"/>
+                        <p:outputLabel value="Estrategia " for="estrategia" />
+                        <p:inputTextarea cols="100" 
+                                         id="estrategia" 
+                                         value="#{estrategiaglobalController.selected.estrategia}" 
+                                         title="Estrategia" 
+                                         required="true" 
+                                         requiredMessage="Estategia Valor Requerido"/>
                     </h:panelGrid>
                     <p:commandButton actionListener="#{estrategiaglobalController.create}" value="GUARDAR" update="display,:EstrategiaglobalListForm:datalist,:growl" oncomplete="handleSubmit(args,'EstrategiaglobalCreateDialog');"/>
                     <p:commandButton value="CANCELAR" onclick="EstrategiaglobalCreateDialog.hide()"/>
