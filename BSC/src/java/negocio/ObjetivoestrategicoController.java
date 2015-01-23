@@ -1,9 +1,12 @@
 package negocio;
 
+import bean.IndicadorFacade;
 import modelo.Objetivoestrategico;
 import negocio.util.JsfUtil;
 import negocio.util.JsfUtil.PersistAction;
 import bean.ObjetivoestrategicoFacade;
+import bean.ObjetivoestrategicoindicadorFacade;
+import bean.SemaforoFacade;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
 
 import java.io.Serializable;
@@ -24,6 +27,7 @@ import javax.faces.convert.FacesConverter;
 import modelo.Indicador;
 import modelo.Objetivoestrategicoindicador;
 import modelo.ObjetivoestrategicoindicadorPK;
+import modelo.Semaforo;
 
 @ManagedBean(name = "objetivoestrategicoController")
 @SessionScoped
@@ -31,10 +35,19 @@ public class ObjetivoestrategicoController implements Serializable {
 
     @EJB
     private bean.ObjetivoestrategicoFacade ejbFacade;
+    @EJB
+    private SemaforoFacade ejbFacadeSemaforo;
+    @EJB
+    private IndicadorFacade ejbFacadeIndicador;
+    @EJB
+    private ObjetivoestrategicoindicadorFacade ejbFacadeObjEstInd;
     private List<Objetivoestrategico> items = null;
     private Objetivoestrategico selected;
     private Objetivoestrategicoindicador metaSeleccionada;
     private Objetivoestrategicoindicador nuevoObjetivoestrategicoindicador;
+    private Semaforo verde;
+    private Semaforo naranja;
+    private Semaforo rojo;
     int idProvisional;
 
     public ObjetivoestrategicoController() {
@@ -42,20 +55,48 @@ public class ObjetivoestrategicoController implements Serializable {
     
     public Objetivoestrategico preparaNuevo(){
         idProvisional=0;
+        setRojo(new Semaforo());getRojo().setColor('r');getRojo().setIdSemaforo(0);
+        setNaranja(new Semaforo());getNaranja().setColor('n');getNaranja().setIdSemaforo(0);
+        setVerde(new Semaforo());getVerde().setColor('v');getVerde().setIdSemaforo(0);
         nuevoObjetivoestrategicoindicador=new Objetivoestrategicoindicador();
         nuevoObjetivoestrategicoindicador.setObjetivoestrategico(selected);
         nuevoObjetivoestrategicoindicador.setIndicador(new Indicador());
+        nuevoObjetivoestrategicoindicador.getIndicador().setIdIndicador(0);
         nuevoObjetivoestrategicoindicador.setObjetivoestrategicoindicadorPK(new ObjetivoestrategicoindicadorPK(0, idProvisional));
         return this.prepareCreate();
     }
     
     public void agregarIndicador(){
+        List semaforos=new ArrayList<Semaforo>();
+        semaforos.add(getVerde());semaforos.add(getNaranja());semaforos.add(getRojo());
+        nuevoObjetivoestrategicoindicador.getIndicador().setSemaforoCollection(semaforos);
         this.selected.getObjetivoestrategicoindicadorCollection().add(nuevoObjetivoestrategicoindicador);
         nuevoObjetivoestrategicoindicador=new Objetivoestrategicoindicador();
         nuevoObjetivoestrategicoindicador.setObjetivoestrategico(selected);
         nuevoObjetivoestrategicoindicador.setIndicador(new Indicador());
+        nuevoObjetivoestrategicoindicador.getIndicador().setIdIndicador(0);
         idProvisional++;
         nuevoObjetivoestrategicoindicador.setObjetivoestrategicoindicadorPK(new ObjetivoestrategicoindicadorPK(0, idProvisional));
+        setRojo(new Semaforo());getRojo().setColor('r');getRojo().setIdSemaforo(0);
+        setNaranja(new Semaforo());getNaranja().setColor('n');getNaranja().setIdSemaforo(0);
+        setVerde(new Semaforo());getVerde().setColor('v');getVerde().setIdSemaforo(0);
+    }
+    
+    public void eliminarIndicador(){
+        selected.getObjetivoestrategicoindicadorCollection().remove(this.metaSeleccionada);
+    }
+    
+    public void editarIndicador(){
+        selected.getObjetivoestrategicoindicadorCollection().remove(this.metaSeleccionada);
+        nuevoObjetivoestrategicoindicador=metaSeleccionada;
+        for (Semaforo s : metaSeleccionada.getIndicador().getSemaforoCollection()){
+            if (s.getColor()=='v')
+                verde=s;
+            if (s.getColor()=='n')
+                naranja=s;
+            if (s.getColor()=='r')
+                rojo=s;
+        }
     }
 
     public Objetivoestrategico getSelected() {
@@ -84,10 +125,24 @@ public class ObjetivoestrategicoController implements Serializable {
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ObjetivoestrategicoCreated"));
-        if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
+        Collection <Objetivoestrategicoindicador> objEstIndList=selected.getObjetivoestrategicoindicadorCollection();
+        selected.setObjetivoestrategicoindicadorCollection(null);
+        ejbFacade.create(selected);
+        for (Objetivoestrategicoindicador objEstInd : objEstIndList){
+            objEstInd.getIndicador().setIdIndicador(new Integer(3));
+            objEstInd.getIndicador().setObjetivoestrategicoindicadorCollection(null);
+            Collection <Semaforo> semList=objEstInd.getIndicador().getSemaforoCollection();
+            objEstInd.getIndicador().setSemaforoCollection(null);
+            ejbFacadeIndicador.create(objEstInd.getIndicador());
+            objEstInd.setObjetivoestrategicoindicadorPK(new ObjetivoestrategicoindicadorPK(selected.getIdObjetivoEstrategico(),objEstInd.getIndicador().getIdIndicador()));
+            for (Semaforo sem: semList){
+                sem.setIdIndicador(objEstInd.getIndicador());
+                ejbFacadeSemaforo.edit(sem);
+            }
+                
+            ejbFacadeObjEstInd.edit(objEstInd);
         }
+        
     }
 
     public void update() {
@@ -103,9 +158,7 @@ public class ObjetivoestrategicoController implements Serializable {
     }
 
     public List<Objetivoestrategico> getItems() {
-        if (items == null) {
-            items = getFacade().findAll();
-        }
+        items = getFacade().findAll();
         return items;
     }
 
@@ -171,6 +224,48 @@ public class ObjetivoestrategicoController implements Serializable {
      */
     public void setNuevoObjetivoestrategicoindicador(Objetivoestrategicoindicador nuevoObjetivoestrategicoindicador) {
         this.nuevoObjetivoestrategicoindicador = nuevoObjetivoestrategicoindicador;
+    }
+
+    /**
+     * @return the verde
+     */
+    public Semaforo getVerde() {
+        return verde;
+    }
+
+    /**
+     * @param verde the verde to set
+     */
+    public void setVerde(Semaforo verde) {
+        this.verde = verde;
+    }
+
+    /**
+     * @return the naranja
+     */
+    public Semaforo getNaranja() {
+        return naranja;
+    }
+
+    /**
+     * @param naranja the naranja to set
+     */
+    public void setNaranja(Semaforo naranja) {
+        this.naranja = naranja;
+    }
+
+    /**
+     * @return the rojo
+     */
+    public Semaforo getRojo() {
+        return rojo;
+    }
+
+    /**
+     * @param rojo the rojo to set
+     */
+    public void setRojo(Semaforo rojo) {
+        this.rojo = rojo;
     }
 
     @FacesConverter(forClass = Objetivoestrategico.class)
