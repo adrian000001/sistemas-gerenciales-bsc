@@ -51,9 +51,7 @@ public class Indicador implements Serializable {
     @Basic(optional = false)
     @Column(name = "idIndicador")
     private Integer idIndicador;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     @Column(name = "nombre")
     private String nombre;
     @Size(max = 45)
