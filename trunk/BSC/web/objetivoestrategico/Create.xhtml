@@ -15,6 +15,7 @@
                   appendTo="@(body)" 
                   header="NUEVO OBJETIVO ESTRATEGICO">
             <h:form id="ObjetivoestrategicoCreateForm">
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
                 <h:panelGroup id="display">
                     <h:panelGrid columns="6" rendered="#{objetivoestrategicoController.selected != null}">
                         <p:outputLabel value="Nombre" for="nombre" />
@@ -216,28 +217,28 @@
                             METAS-INDICADORES
                         </f:facet>
                         <p:column headerText="META">
-                            <h:outputText value="#{meta.meta}" />
+                            <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.meta}" />
                         </p:column>
                         <p:column headerText="DEFINICION">
-                            <h:outputText value="#{meta.definicion}" />
+                            <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.definicion}" />
                         </p:column>
                         <p:column headerText="ACLARACION">
-                            <h:outputText value="#{meta.aclaracion}" />
+                            <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="3" value="#{meta.aclaracion}" />
                         </p:column>
                         <p:column headerText="CONCPTUALIZACION">
-                            <h:outputText value="#{meta.conceptualizacion}" />
+                            <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="3" value="#{meta.conceptualizacion}" />
                         </p:column>
                         <p:column headerText="INDICADOR">
-                            <h:outputText value="#{meta.indicador.nombre}" />
+                            <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.indicador.nombre}" />
                         </p:column>
                         <p:column headerText="FORMULA">
-                            <h:outputText value="#{meta.indicador.formula}" />
+                            <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="3" value="#{meta.indicador.formula}" />
                         </p:column>
                         <p:column headerText="UNIDADES">
-                            <h:outputText value="#{meta.indicador.unidades}" />
+                            <h:inputTextarea  style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.indicador.unidades}" />
                         </p:column>
                         <p:column headerText="KPI">
-                            <h:outputText value="#{meta.indicador.kpi}" />
+                            <h:inputTextarea  style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.indicador.kpi}" />
                         </p:column>
                     </p:dataTable>
                     <p:commandButton actionListener="#{objetivoestrategicoController.create}" value="GUARDAR" update="display,:ObjetivoestrategicoListForm:datalist,:growl" oncomplete="handleSubmit(args,'ObjetivoestrategicoCreateDialog');"/>

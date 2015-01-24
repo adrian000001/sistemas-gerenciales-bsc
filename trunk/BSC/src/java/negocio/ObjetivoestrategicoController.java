@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -52,50 +53,188 @@ public class ObjetivoestrategicoController implements Serializable {
 
     public ObjetivoestrategicoController() {
     }
-    
-    public Objetivoestrategico preparaNuevo(){
-        idProvisional=0;
-        setRojo(new Semaforo());getRojo().setColor('r');getRojo().setIdSemaforo(0);
-        setNaranja(new Semaforo());getNaranja().setColor('n');getNaranja().setIdSemaforo(0);
-        setVerde(new Semaforo());getVerde().setColor('v');getVerde().setIdSemaforo(0);
-        nuevoObjetivoestrategicoindicador=new Objetivoestrategicoindicador();
+
+    public Objetivoestrategico preparaEdicion() {
+        idProvisional = 0;
+        setRojo(new Semaforo());
+        getRojo().setColor('r');
+        getRojo().setIdSemaforo(0);
+        setNaranja(new Semaforo());
+        getNaranja().setColor('n');
+        getNaranja().setIdSemaforo(0);
+        setVerde(new Semaforo());
+        getVerde().setColor('v');
+        getVerde().setIdSemaforo(0);
+        nuevoObjetivoestrategicoindicador = new Objetivoestrategicoindicador();
+        nuevoObjetivoestrategicoindicador.setObjetivoestrategico(selected);
+        nuevoObjetivoestrategicoindicador.setIndicador(new Indicador());
+        nuevoObjetivoestrategicoindicador.getIndicador().setIdIndicador(0);
+        nuevoObjetivoestrategicoindicador.setObjetivoestrategicoindicadorPK(new ObjetivoestrategicoindicadorPK(0, idProvisional));
+        System.out.println("META " + nuevoObjetivoestrategicoindicador.getMeta());
+        System.out.println("Indicadores " + selected.getObjetivoestrategicoindicadorCollection().size());
+        return selected;
+    }
+
+    public Objetivoestrategico preparaNuevo() {
+        idProvisional = 0;
+        setRojo(new Semaforo());
+        getRojo().setColor('r');
+        getRojo().setIdSemaforo(0);
+        setNaranja(new Semaforo());
+        getNaranja().setColor('n');
+        getNaranja().setIdSemaforo(0);
+        setVerde(new Semaforo());
+        getVerde().setColor('v');
+        getVerde().setIdSemaforo(0);
+        nuevoObjetivoestrategicoindicador = new Objetivoestrategicoindicador();
         nuevoObjetivoestrategicoindicador.setObjetivoestrategico(selected);
         nuevoObjetivoestrategicoindicador.setIndicador(new Indicador());
         nuevoObjetivoestrategicoindicador.getIndicador().setIdIndicador(0);
         nuevoObjetivoestrategicoindicador.setObjetivoestrategicoindicadorPK(new ObjetivoestrategicoindicadorPK(0, idProvisional));
         return this.prepareCreate();
     }
-    
-    public void agregarIndicador(){
-        List semaforos=new ArrayList<Semaforo>();
-        semaforos.add(getVerde());semaforos.add(getNaranja());semaforos.add(getRojo());
+
+    public void agregarIndicador() {
+        List semaforos = new ArrayList<Semaforo>();
+        semaforos.add(getVerde());
+        semaforos.add(getNaranja());
+        semaforos.add(getRojo());
         nuevoObjetivoestrategicoindicador.getIndicador().setSemaforoCollection(semaforos);
         this.selected.getObjetivoestrategicoindicadorCollection().add(nuevoObjetivoestrategicoindicador);
-        nuevoObjetivoestrategicoindicador=new Objetivoestrategicoindicador();
+        nuevoObjetivoestrategicoindicador = new Objetivoestrategicoindicador();
         nuevoObjetivoestrategicoindicador.setObjetivoestrategico(selected);
         nuevoObjetivoestrategicoindicador.setIndicador(new Indicador());
         nuevoObjetivoestrategicoindicador.getIndicador().setIdIndicador(0);
         idProvisional++;
         nuevoObjetivoestrategicoindicador.setObjetivoestrategicoindicadorPK(new ObjetivoestrategicoindicadorPK(0, idProvisional));
-        setRojo(new Semaforo());getRojo().setColor('r');getRojo().setIdSemaforo(0);
-        setNaranja(new Semaforo());getNaranja().setColor('n');getNaranja().setIdSemaforo(0);
-        setVerde(new Semaforo());getVerde().setColor('v');getVerde().setIdSemaforo(0);
+        setRojo(new Semaforo());
+        getRojo().setColor('r');
+        getRojo().setIdSemaforo(0);
+        setNaranja(new Semaforo());
+        getNaranja().setColor('n');
+        getNaranja().setIdSemaforo(0);
+        setVerde(new Semaforo());
+        getVerde().setColor('v');
+        getVerde().setIdSemaforo(0);
+    }
+
+    public void agregarIndicadorEdicion() {
+        List semaforos = new ArrayList<Semaforo>();
+        semaforos.add(getVerde());
+        semaforos.add(getNaranja());
+        semaforos.add(getRojo());
+        nuevoObjetivoestrategicoindicador.getIndicador().setSemaforoCollection(semaforos);
+        nuevoObjetivoestrategicoindicador.getIndicador().setSemaforoCollection(null);
+        ejbFacadeIndicador.create(nuevoObjetivoestrategicoindicador.getIndicador());
+        nuevoObjetivoestrategicoindicador.getIndicador().setSemaforoCollection(semaforos);
+        nuevoObjetivoestrategicoindicador.setObjetivoestrategicoindicadorPK(new ObjetivoestrategicoindicadorPK(
+                selected.getIdObjetivoEstrategico(), 
+                nuevoObjetivoestrategicoindicador.getIndicador().getIdIndicador()));
+        for (int i=0;i<semaforos.size();i++) {
+            Semaforo s=(Semaforo) semaforos.get(i);
+            s.setIdIndicador(nuevoObjetivoestrategicoindicador.getIndicador());
+            System.out.println("Gusrdo semanforo");
+            ejbFacadeSemaforo.create(s);
+        }
+        this.ejbFacadeObjEstInd.create(nuevoObjetivoestrategicoindicador);
+        this.selected.getObjetivoestrategicoindicadorCollection().add(nuevoObjetivoestrategicoindicador);
+        nuevoObjetivoestrategicoindicador = new Objetivoestrategicoindicador();
+        nuevoObjetivoestrategicoindicador.setObjetivoestrategico(selected);
+        nuevoObjetivoestrategicoindicador.setIndicador(new Indicador());
+        nuevoObjetivoestrategicoindicador.getIndicador().setIdIndicador(0);
+        setRojo(new Semaforo());
+        getRojo().setColor('r');
+        getRojo().setIdSemaforo(0);
+        setNaranja(new Semaforo());
+        getNaranja().setColor('n');
+        getNaranja().setIdSemaforo(0);
+        setVerde(new Semaforo());
+        getVerde().setColor('v');
+        getVerde().setIdSemaforo(0);
+        ejbFacade.edit(selected);
+    }
+
+    public void verDetalleObjEst(){
+        for (Semaforo s : nuevoObjetivoestrategicoindicador.getIndicador().getSemaforoCollection()) {
+                if (s.getColor() == 'v') {
+                    verde = s;
+                }
+                if (s.getColor() == 'n') {
+                    naranja = s;
+                }
+                if (s.getColor() == 'r') {
+                    rojo = s;
+                }
+            }
     }
     
-    public void eliminarIndicador(){
-        selected.getObjetivoestrategicoindicadorCollection().remove(this.metaSeleccionada);
+    public void eliminarIndicador() {
+        if (metaSeleccionada != null) {
+            System.out.println("META "+metaSeleccionada);
+            selected.getObjetivoestrategicoindicadorCollection().remove(this.metaSeleccionada);
+        } else {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Seleccione un item de la lista"));
+        }
     }
-    
-    public void editarIndicador(){
-        selected.getObjetivoestrategicoindicadorCollection().remove(this.metaSeleccionada);
-        nuevoObjetivoestrategicoindicador=metaSeleccionada;
-        for (Semaforo s : metaSeleccionada.getIndicador().getSemaforoCollection()){
-            if (s.getColor()=='v')
-                verde=s;
-            if (s.getColor()=='n')
-                naranja=s;
-            if (s.getColor()=='r')
-                rojo=s;
+
+    public void eliminarIndicadorEdicion() {
+        if (metaSeleccionada != null) {
+            System.out.println("META "+metaSeleccionada);
+            System.out.println(metaSeleccionada);
+            selected.getObjetivoestrategicoindicadorCollection().remove(this.metaSeleccionada);
+            ejbFacadeObjEstInd.remove(metaSeleccionada);
+            ejbFacade.edit(selected);
+        } else {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Seleccione un item de la lista"));
+        }
+    }
+
+    public void editarIndicador() {
+        if (metaSeleccionada != null) {
+            System.out.println("META "+metaSeleccionada);
+            selected.getObjetivoestrategicoindicadorCollection().remove(this.metaSeleccionada);
+            nuevoObjetivoestrategicoindicador = metaSeleccionada;
+            for (Semaforo s : metaSeleccionada.getIndicador().getSemaforoCollection()) {
+                if (s.getColor() == 'v') {
+                    verde = s;
+                }
+                if (s.getColor() == 'n') {
+                    naranja = s;
+                }
+                if (s.getColor() == 'r') {
+                    rojo = s;
+                }
+            }
+        } else {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Seleccione un item de la lista"));
+        }
+    }
+
+    public void editarIndicadorEdicion() {
+        if (metaSeleccionada != null) {
+            System.out.println("META "+metaSeleccionada);
+            selected.getObjetivoestrategicoindicadorCollection().remove(this.metaSeleccionada);
+            nuevoObjetivoestrategicoindicador = metaSeleccionada;
+            System.out.println(metaSeleccionada);
+            System.err.println("cuenta "+metaSeleccionada.getIndicador().getSemaforoCollection().size());
+            for (Semaforo s : metaSeleccionada.getIndicador().getSemaforoCollection()) {
+                if (s.getColor() == 'v') {
+                    verde = s;
+                }
+                if (s.getColor() == 'n') {
+                    naranja = s;
+                }
+                if (s.getColor() == 'r') {
+                    rojo = s;
+                }
+            }
+            ejbFacadeObjEstInd.remove(metaSeleccionada);
+        } else {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Seleccione un item de la lista"));
         }
     }
 
@@ -125,24 +264,24 @@ public class ObjetivoestrategicoController implements Serializable {
     }
 
     public void create() {
-        Collection <Objetivoestrategicoindicador> objEstIndList=selected.getObjetivoestrategicoindicadorCollection();
+        Collection<Objetivoestrategicoindicador> objEstIndList = selected.getObjetivoestrategicoindicadorCollection();
         selected.setObjetivoestrategicoindicadorCollection(null);
         ejbFacade.create(selected);
-        for (Objetivoestrategicoindicador objEstInd : objEstIndList){
+        for (Objetivoestrategicoindicador objEstInd : objEstIndList) {
             objEstInd.getIndicador().setIdIndicador(new Integer(3));
             objEstInd.getIndicador().setObjetivoestrategicoindicadorCollection(null);
-            Collection <Semaforo> semList=objEstInd.getIndicador().getSemaforoCollection();
+            Collection<Semaforo> semList = objEstInd.getIndicador().getSemaforoCollection();
             objEstInd.getIndicador().setSemaforoCollection(null);
             ejbFacadeIndicador.create(objEstInd.getIndicador());
-            objEstInd.setObjetivoestrategicoindicadorPK(new ObjetivoestrategicoindicadorPK(selected.getIdObjetivoEstrategico(),objEstInd.getIndicador().getIdIndicador()));
-            for (Semaforo sem: semList){
+            objEstInd.setObjetivoestrategicoindicadorPK(new ObjetivoestrategicoindicadorPK(selected.getIdObjetivoEstrategico(), objEstInd.getIndicador().getIdIndicador()));
+            for (Semaforo sem : semList) {
                 sem.setIdIndicador(objEstInd.getIndicador());
                 ejbFacadeSemaforo.edit(sem);
             }
-                
+
             ejbFacadeObjEstInd.edit(objEstInd);
         }
-        
+
     }
 
     public void update() {
@@ -220,7 +359,8 @@ public class ObjetivoestrategicoController implements Serializable {
     }
 
     /**
-     * @param nuevoObjetivoestrategicoindicador the nuevoObjetivoestrategicoindicador to set
+     * @param nuevoObjetivoestrategicoindicador the
+     * nuevoObjetivoestrategicoindicador to set
      */
     public void setNuevoObjetivoestrategicoindicador(Objetivoestrategicoindicador nuevoObjetivoestrategicoindicador) {
         this.nuevoObjetivoestrategicoindicador = nuevoObjetivoestrategicoindicador;

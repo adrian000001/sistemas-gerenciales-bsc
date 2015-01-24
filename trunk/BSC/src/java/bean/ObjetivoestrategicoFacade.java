@@ -5,9 +5,11 @@
  */
 package bean;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import modelo.Objetivoestrategico;
 
 /**
@@ -28,4 +30,14 @@ public class ObjetivoestrategicoFacade extends AbstractFacade<Objetivoestrategic
         super(Objetivoestrategico.class);
     }
     
+    public Objetivoestrategico getSelected(int  idObjetivoEstrategico) {
+        List<Objetivoestrategico> res;
+        Query query = this.em.createNamedQuery(Objetivoestrategico.findByIdObjetivoEstrategico);
+        query.setParameter("idObjetivoEstrategico",idObjetivoEstrategico);
+        res=query.getResultList();
+        if (res.size()>0)
+            return res.get(0);
+        else
+            return null;
+    }
 }

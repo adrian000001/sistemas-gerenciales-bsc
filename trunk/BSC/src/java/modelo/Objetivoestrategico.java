@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Objetivoestrategico.findByNombre", query = "SELECT o FROM Objetivoestrategico o WHERE o.nombre = :nombre")})
 public class Objetivoestrategico implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static String findByIdObjetivoEstrategico="Objetivoestrategico.findByIdObjetivoEstrategico";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)

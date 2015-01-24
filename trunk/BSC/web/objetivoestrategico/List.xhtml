@@ -31,11 +31,20 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
+                        <p:column style="width:16px">
+                            <p:rowToggler />
+                        </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="NUMERO"/>
+                                <h:outputText value="CODIGO"/>
                             </f:facet>
-                            <h:outputText value="#{item.numero}"/>
+                            <h:outputText value="#{item.idObjetivoEstrategico}"/>
+                        </p:column>                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="PERSPECTIVA"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPerspectiva.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -49,16 +58,44 @@
                             </f:facet>
                             <h:outputText value="#{item.idEstrategiaGlobal.estrategia}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="PERSPECTIVA"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idPerspectiva.nombre}"/>
-                        </p:column>
+                        <p:rowExpansion>
+                            <h:panelGrid columns="1">
+                                <p:dataTable var="meta" 
+                                             value="#{item.objetivoestrategicoindicadorCollection}" 
+                                             selectionMode="single"
+                                             selection="#{objetivoestrategicoController.metaSeleccionada}"
+                                             rowKey="#{meta.objetivoestrategicoindicadorPK}">
+                                    <p:column headerText="META">
+                                        <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.meta}" />
+                                    </p:column>
+                                    <p:column headerText="DEFINICION">
+                                        <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.definicion}" />
+                                    </p:column>
+                                    <p:column headerText="ACLARACION">
+                                        <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="3" value="#{meta.aclaracion}" />
+                                    </p:column>
+                                    <p:column headerText="CONCPTUALIZACION">
+                                        <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="3" value="#{meta.conceptualizacion}" />
+                                    </p:column>
+                                    <p:column headerText="INDICADOR">
+                                        <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.indicador.nombre}" />
+                                    </p:column>
+                                    <p:column headerText="FORMULA">
+                                        <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="3" value="#{meta.indicador.formula}" />
+                                    </p:column>
+                                    <p:column headerText="UNIDADES">
+                                        <h:inputTextarea  style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.indicador.unidades}" />
+                                    </p:column>
+                                    <p:column headerText="KPI">
+                                        <h:inputTextarea  style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.indicador.kpi}" />
+                                    </p:column>
+                                </p:dataTable>
+                            </h:panelGrid>
+                        </p:rowExpansion>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="NUEVO" actionListener="#{objetivoestrategicoController.preparaNuevo}" update=":ObjetivoestrategicoCreateForm" oncomplete="PF('ObjetivoestrategicoCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="VER" update=":ObjetivoestrategicoViewForm" oncomplete="PF('ObjetivoestrategicoViewDialog').show()" disabled="#{empty objetivoestrategicoController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="EDITAR" update=":ObjetivoestrategicoEditForm" oncomplete="PF('ObjetivoestrategicoEditDialog').show()" disabled="#{empty objetivoestrategicoController.selected}"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="VER"  update=":ObjetivoestrategicoViewForm" oncomplete="PF('ObjetivoestrategicoViewDialog').show()" disabled="#{empty objetivoestrategicoController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="EDITAR" actionListener="#{objetivoestrategicoController.preparaEdicion}" update=":ObjetivoestrategicoEditForm" oncomplete="PF('ObjetivoestrategicoEditDialog').show()" disabled="#{empty objetivoestrategicoController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="ELIMINAR" actionListener="#{objetivoestrategicoController.destroy}" update=":growl,datalist" disabled="#{empty objetivoestrategicoController.selected}"/>
                         </f:facet>
                     </p:dataTable>

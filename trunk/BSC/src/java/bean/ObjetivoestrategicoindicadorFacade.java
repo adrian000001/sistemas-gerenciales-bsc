@@ -5,9 +5,11 @@
  */
 package bean;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import modelo.Objetivoestrategicoindicador;
 
 /**
@@ -26,6 +28,12 @@ public class ObjetivoestrategicoindicadorFacade extends AbstractFacade<Objetivoe
 
     public ObjetivoestrategicoindicadorFacade() {
         super(Objetivoestrategicoindicador.class);
+    }
+    
+    public List<Objetivoestrategicoindicador> getItemsMetas(int  idObjetivoEstrategico) {
+        Query query = this.em.createNamedQuery(Objetivoestrategicoindicador.findByIdObjetivoEstrategico);
+        query.setParameter("idObjetivoEstrategico",idObjetivoEstrategico);
+        return query.getResultList();
     }
     
 }

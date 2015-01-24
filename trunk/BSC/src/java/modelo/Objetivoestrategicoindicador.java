@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Objetivoestrategicoindicador.findByConceptualizacion", query = "SELECT o FROM Objetivoestrategicoindicador o WHERE o.conceptualizacion = :conceptualizacion")})
 public class Objetivoestrategicoindicador implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static String findByIdObjetivoEstrategico="Objetivoestrategicoindicador.findByIdObjetivoEstrategico";
     @EmbeddedId
     protected ObjetivoestrategicoindicadorPK objetivoestrategicoindicadorPK;
     @Size(max = 100)
