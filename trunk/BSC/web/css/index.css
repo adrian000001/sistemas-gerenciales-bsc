@@ -36,7 +36,12 @@ body{
     text-decoration: none;
     line-height: 110px;
     background-image: url(../img/fondo-boton.png);
-    background-size: 110px;
+    background-size: 115px;
     color: #ffffff;
     border-radius: 100px;
+}
+
+#menu li a:hover{
+    background-image: url(../img/icono-hover.png);
+    color: #000000;
 }
