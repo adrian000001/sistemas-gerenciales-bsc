@@ -22,9 +22,21 @@ body{
 }
 
 #menu li{
-    display: inline;
-    height: 100px;
-    width: 100px;
-    border-radius: 50px 50px 50px 50px;
-    box-shadow: 10px 10px 10px #888;
+    float: left;
+    list-style: none;
+    margin: 0 auto;
+    padding: 1px;
+}
+
+#menu li a{
+    display: block;
+    height: 115px;
+    width: 115px;
+    text-align: center;
+    text-decoration: none;
+    line-height: 110px;
+    background-image: url(../img/fondo-boton.png);
+    background-size: 110px;
+    color: #ffffff;
+    border-radius: 100px;
 }
