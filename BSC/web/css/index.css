@@ -1,0 +1,21 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 24/01/2015, 9:08:40
+    Author     : VMJorgeA
+*/
+
+body{
+    background: url(../img/fondo.jpg);
+    background-attachment: fixed;
+}
+
+#Cabecera{
+    height: 200px;
+    width: 750px;
+    border-radius: 0px 0px 45px 45px;
+    box-shadow: 2px 2px 10px #999;
+}
