@@ -3,41 +3,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Cuadro de Mando Integral</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
         <link href="css/index.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
+        <ul id="menu">
+            <li><h:link outcome="/actividad/List" value="Actividades"/></li>
+            <li><h:link outcome="/cargo/List" value="Cargos"/></li>
+            <li><h:link outcome="/estrategiaglobal/List" value="Es. Globales"/></li>
+            <li><h:link outcome="/historial/List" value="Historial"/></li>
+            <li><h:link outcome="/indicador/List" value="Indicadores"/></li>
+            <li><h:link outcome="/objetivoestrategico/List" value="Obj. Estrategicos"/></li>
+            <li><h:link outcome="/objetivoestrategicoindicador/List" value="Indicadores"/></li>
+            <li><h:link outcome="/persona/List" value="Personas"/></li>
+            <li><h:link outcome="/perspectiva/List" value="Perspectivas"/></li>
+            <li><h:link outcome="/semaforo/List" value="Semaforos"/></li>
+            <li><h:link outcome="/usuario/List" value="Usuarios"/></li>
+        </ul>        
         <center>
             <div id="Cabecera">
-                <img src="img/Captura.PNG" alt="" height="150"/>
-                <p id="Titulo">Sistema de Gestión del Cuadro de Mando Integral</p>
+                <p><img src="img/Captura.PNG" alt="" height="150"/><img src="img/titulo.png" alt="" height="150"/></p>
             </div>
         </center>
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
-        <br />
-        <h:link outcome="/actividad/List" value="Show All Actividad Items"/>
-        <br />
-        <h:link outcome="/cargo/List" value="Show All Cargo Items"/>
-        <br />
-        <h:link outcome="/estrategiaglobal/List" value="Show All Estrategiaglobal Items"/>
-        <br />
-        <h:link outcome="/historial/List" value="Show All Historial Items"/>
-        <br />
-        <h:link outcome="/indicador/List" value="Show All Indicador Items"/>
-        <br />
-        <h:link outcome="/objetivoestrategico/List" value="Show All Objetivoestrategico Items"/>
-        <br />
-        <h:link outcome="/objetivoestrategicoindicador/List" value="Show All Objetivoestrategicoindicador Items"/>
-        <br />
-        <h:link outcome="/persona/List" value="Show All Persona Items"/>
-        <br />
-        <h:link outcome="/perspectiva/List" value="Show All Perspectiva Items"/>
-        <br />
-        <h:link outcome="/semaforo/List" value="Show All Semaforo Items"/>
-        <br />
-        <h:link outcome="/usuario/List" value="Show All Usuario Items"/>
     </h:body>
 
 
