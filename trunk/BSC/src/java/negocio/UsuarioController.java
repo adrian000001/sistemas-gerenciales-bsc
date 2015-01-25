@@ -29,6 +29,7 @@ public class UsuarioController implements Serializable {
     private Usuario selected;
 
     public UsuarioController() {
+        selected=new Usuario();
     }
 
     public Usuario getSelected() {

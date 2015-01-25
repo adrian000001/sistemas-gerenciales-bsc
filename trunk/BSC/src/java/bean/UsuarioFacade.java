@@ -7,7 +7,9 @@ package bean;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import modelo.Usuario;
 
 /**
@@ -16,6 +18,7 @@ import modelo.Usuario;
  */
 @Stateless
 public class UsuarioFacade extends AbstractFacade<Usuario> {
+
     @PersistenceContext(unitName = "BSCPU")
     private EntityManager em;
 
@@ -27,5 +30,25 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     public UsuarioFacade() {
         super(Usuario.class);
     }
-    
+
+    public Usuario login(String userName, String contrasena, String tipoUsuario) {
+       
+        Query query = this.em.createNamedQuery(Usuario.login);
+        query.setParameter("nombre", userName);
+        query.setParameter("contrasena", contrasena);
+       
+        char cad;
+        cad = tipoUsuario.charAt(0); 
+         System.out.println("joliss"+userName+"  "+contrasena+"  "+cad);
+         query.setParameter("tipoUsuario", cad);
+
+        try {
+            return (Usuario) query.getSingleResult();
+
+        } catch (NoResultException e) {
+            return null;
+        }
+
+    }
+
 }
