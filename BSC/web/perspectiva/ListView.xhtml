@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/templateView.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="PERSPECTIVAS"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="PerspectivaListForm">
+                <p:panel header="PERSPECTIVAS">
+                    <p:dataTable id="datalist" value="#{perspectivaController.items}" var="item"
+                                 selectionMode="single" selection="#{perspectivaController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idPerspectiva}"
+                                 rows="10"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="viewButton"/>
+                        <p:ajax event="rowUnselect" update="viewButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="CODIGO"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPerspectiva}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="PERSPECTIVA"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombre}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="VER" update=":PerspectivaViewForm" oncomplete="PF('PerspectivaViewDialog').show()" disabled="#{empty perspectivaController.selected}"/>
+                              </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+        
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

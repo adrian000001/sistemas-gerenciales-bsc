@@ -1,7 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Cuadro de Mando Integral</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
@@ -18,14 +21,48 @@
             <li><h:link outcome="/objetivoestrategicoindicador/List" value="Indicadores"/></li>
             <li><h:link outcome="/persona/List" value="Personas"/></li>
             <li><h:link outcome="/perspectiva/List" value="Perspectivas"/></li>
-            <li><h:link outcome="/semaforo/List" value="Semaforos"/></li>
-            <li><h:link outcome="/usuario/List" value="Usuarios"/></li>
+            
         </ul>        
         <center>
             <div id="Cabecera">
                 <p><img src="img/Captura.PNG" alt="" height="150"/><img src="img/titulo.png" alt="" height="150"/></p>
             </div>
         </center>
+
+        <p:growl id="mensajes" showDetail="true" life="2000" />
+        <div id ="menu" style="padding-top: 250px; padding-left: 450px; color:white">
+        <h:form>
+            
+            <p:panel header="Login" style="width:300px">
+                <h:panelGrid columns="2" cellpadding="5" >
+                    <h:outputLabel for="username" value="Usuario:" />
+                    <p:inputText value="#{loginController.nombre}" id="username"
+                                 required="true" label="username" />
+                    <h:outputLabel for="password" value="Clave:" />
+                    <p:password value="#{loginController.contrasena}" id="password" required="true"
+                                label="password" />
+                    <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+                        
+                        <p:selectOneRadio id="console" value="#{loginController.tipo}">
+                            <f:selectItem itemLabel="Usuario" itemValue="0" />
+                            <f:selectItem itemLabel="Adminsitrador" itemValue="1" />
+                           
+                        </p:selectOneRadio>
+                    </h:panelGrid>
+                    
+                        <p:commandButton id="loginButton" value="Login"
+                                         actionListener="#{loginController.verficarLogin()}" update=":mensajes"
+                                         oncomplete="manejarLogin(xhr, status, args)" />
+                       
+                        
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+            </div>
+      
+       
+      
+
     </h:body>
 
 
