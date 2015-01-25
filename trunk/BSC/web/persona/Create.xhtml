@@ -8,7 +8,12 @@
 
     <ui:composition>
 
-        <p:dialog id="PersonaCreateDlg" widgetVar="PersonaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePersonaTitle}">
+        <p:dialog id="PersonaCreateDlg" 
+                  widgetVar="PersonaCreateDialog" 
+                  modal="true" 
+                  resizable="false" 
+                  appendTo="@(body)" 
+                  header="#{bundle.CreatePersonaTitle}">
             <h:form id="PersonaCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{personaController.selected != null}">

@@ -74,8 +74,14 @@
                                 rows="2"
                                 value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.conceptualizacion}" 
                                 title="Conceptualizacion" />
-
-                            <p:spacer height="50"/>
+                            <p:outputLabel value="Responsable " for="idPersonaResponsable" />
+                            <p:selectOneMenu id="idPersonaResponsable" value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.idPersonaResponsable}" >
+                                <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                               var="idPersonaResponsableItem"
+                                               itemValue="#{idPersonaResponsableItem}"
+                                               itemLabel ="#{idPersonaResponsableItem.idCargo.nombre}:#{idPersonaResponsableItem.nombre}"/>
+                            </p:selectOneMenu>
+                            <p:spacer height="20"/>
                         </h:panelGrid>
 
 
@@ -200,11 +206,11 @@
                         <p:menuitem value="Editar" 
                                     icon="ui-icon-pencil" 
                                     action="#{objetivoestrategicoController.editarIndicadorEdicion()}"
-                                    update="metasTbl,meta, definicion,aclaracion,conceptualizacion,nombreIndicador,formula,unidades,periodicidad,kpi,glosario,valorBase,valorMeta,verdeMayor, verdeMenor, naranjaMayor,naranjaMenor,rojoMayor,rojoMenor"/>
+                                    update="idPersonaResponsable,metasTbl,meta, definicion,aclaracion,conceptualizacion,nombreIndicador,formula,unidades,periodicidad,kpi,glosario,valorBase,valorMeta,verdeMayor, verdeMenor, naranjaMayor,naranjaMenor,rojoMayor,rojoMenor"/>
                         <p:menuitem value="Eliminar" 
                                     icon="ui-icon-trash" 
                                     action="#{objetivoestrategicoController.eliminarIndicadorEdicion()}"
-                                    update="metasTbl,meta, definicion,aclaracion,conceptualizacion,nombreIndicador,formula,unidades,periodicidad,kpi,glosario,valorBase,valorMeta,verdeMayor, verdeMenor, naranjaMayor,naranjaMenor,rojoMayor,rojoMenor"/>
+                                    update="idPersonaResponsable,metasTbl,meta, definicion,aclaracion,conceptualizacion,nombreIndicador,formula,unidades,periodicidad,kpi,glosario,valorBase,valorMeta,verdeMayor, verdeMenor, naranjaMayor,naranjaMenor,rojoMayor,rojoMenor"/>
                     </p:contextMenu>
                     <p:dataTable id="metasTbl" 
                                  style="width: 1200px"
