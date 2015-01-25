@@ -5,6 +5,7 @@
  */
 package bean;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,5 +28,5 @@ public class SemaforoFacade extends AbstractFacade<Semaforo> {
     public SemaforoFacade() {
         super(Semaforo.class);
     }
-    
+       
 }

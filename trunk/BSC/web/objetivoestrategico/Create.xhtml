@@ -217,28 +217,28 @@
                             METAS-INDICADORES
                         </f:facet>
                         <p:column headerText="META">
-                            <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.meta}" />
+                            <p:inputTextarea style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.meta}" />
                         </p:column>
                         <p:column headerText="DEFINICION">
-                            <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.definicion}" />
+                            <p:inputTextarea style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.definicion}" />
                         </p:column>
                         <p:column headerText="ACLARACION">
-                            <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="3" value="#{meta.aclaracion}" />
+                            <p:inputTextarea style="border: 0" readonly="true" cols="18" rows="3" value="#{meta.aclaracion}" />
                         </p:column>
                         <p:column headerText="CONCPTUALIZACION">
-                            <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="3" value="#{meta.conceptualizacion}" />
+                            <p:inputTextarea style="border: 0" readonly="true" cols="18" rows="3" value="#{meta.conceptualizacion}" />
                         </p:column>
                         <p:column headerText="INDICADOR">
-                            <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.indicador.nombre}" />
+                            <p:inputTextarea style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.indicador.nombre}" />
                         </p:column>
                         <p:column headerText="FORMULA">
-                            <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="3" value="#{meta.indicador.formula}" />
+                            <p:inputTextarea style="border: 0" readonly="true" cols="18" rows="3" value="#{meta.indicador.formula}" />
                         </p:column>
                         <p:column headerText="UNIDADES">
-                            <h:inputTextarea  style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.indicador.unidades}" />
+                            <p:inputTextarea  style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.indicador.unidades}" />
                         </p:column>
                         <p:column headerText="KPI">
-                            <h:inputTextarea  style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.indicador.kpi}" />
+                            <p:inputTextarea  style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.indicador.kpi}" />
                         </p:column>
                     </p:dataTable>
                     <p:commandButton actionListener="#{objetivoestrategicoController.create}" value="GUARDAR" update="display,:ObjetivoestrategicoListForm:datalist,:growl" oncomplete="handleSubmit(args,'ObjetivoestrategicoCreateDialog');"/>

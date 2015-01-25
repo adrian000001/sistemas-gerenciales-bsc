@@ -1,5 +1,6 @@
 package negocio;
 
+import bean.HistorialFacade;
 import bean.IndicadorFacade;
 import modelo.Objetivoestrategico;
 import negocio.util.JsfUtil;
@@ -10,12 +11,15 @@ import bean.SemaforoFacade;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.faces.application.FacesMessage;
@@ -25,10 +29,15 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import modelo.Historial;
 import modelo.Indicador;
 import modelo.Objetivoestrategicoindicador;
 import modelo.ObjetivoestrategicoindicadorPK;
 import modelo.Semaforo;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.DateAxis;
+import org.primefaces.model.chart.LineChartModel;
+import org.primefaces.model.chart.LineChartSeries;
 
 @ManagedBean(name = "objetivoestrategicoController")
 @SessionScoped
@@ -42,6 +51,8 @@ public class ObjetivoestrategicoController implements Serializable {
     private IndicadorFacade ejbFacadeIndicador;
     @EJB
     private ObjetivoestrategicoindicadorFacade ejbFacadeObjEstInd;
+    @EJB
+    private HistorialFacade ejbFacadeHistorial;
     private List<Objetivoestrategico> items = null;
     private Objetivoestrategico selected;
     private Objetivoestrategicoindicador metaSeleccionada;
@@ -50,8 +61,18 @@ public class ObjetivoestrategicoController implements Serializable {
     private Semaforo naranja;
     private Semaforo rojo;
     int idProvisional;
+    private List <Historial> histrorial;
+    private Historial nuevoHistorial;
+    private double nuevoVolorIndocador;
+    private LineChartModel dateModel;
 
     public ObjetivoestrategicoController() {
+    }
+    
+    @PostConstruct
+    public void init() {
+        histrorial=new ArrayList<>();
+        createDateModel();
     }
 
     public Objetivoestrategico preparaEdicion() {
@@ -75,6 +96,21 @@ public class ObjetivoestrategicoController implements Serializable {
         return selected;
     }
 
+    public void preparaHistorial(){
+        nuevoHistorial=new Historial();
+    }
+    
+    public void guardarHistorial(){
+        nuevoHistorial=new Historial();
+        nuevoHistorial.setValor(new BigDecimal(nuevoVolorIndocador));
+        nuevoHistorial.setIdIndicador(metaSeleccionada.getIndicador());
+        nuevoHistorial.setFechaMedicion(new Date());
+        ejbFacadeHistorial.create(nuevoHistorial);
+        ejbFacadeIndicador.edit(metaSeleccionada.getIndicador());
+        ejbFacadeObjEstInd.edit(metaSeleccionada);
+        nuevoVolorIndocador=0;
+    }
+    
     public Objetivoestrategico preparaNuevo() {
         idProvisional = 0;
         setRojo(new Semaforo());
@@ -236,6 +272,36 @@ public class ObjetivoestrategicoController implements Serializable {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage("Seleccione un item de la lista"));
         }
+    }
+    
+    private void createDateModel() {
+        System.out.println("INICIA HISTORIAL");
+        dateModel = new LineChartModel();
+        LineChartSeries series1 = new LineChartSeries();
+        series1.setLabel("Historial");
+ 
+        for (int i=0;i<histrorial.size();i++){
+            String fecha=String.valueOf(histrorial.get(i).getFechaMedicion().getYear()+1900)+"-"+
+                    String.valueOf(histrorial.get(i).getFechaMedicion().getMonth()+1)+"-"+
+                    String.valueOf(histrorial.get(i).getFechaMedicion().getDate());
+            series1.set(fecha, histrorial.get(i).getValor());
+        }        
+ 
+        dateModel.addSeries(series1);
+         
+        dateModel.setTitle("HISTORIAL");
+        dateModel.setZoom(true);
+        dateModel.getAxis(AxisType.Y).setLabel("VALOR");
+        DateAxis axis = new DateAxis("FECHA");
+        axis.setTickAngle(-50);
+        String fecha=String.valueOf(new Date().getYear()+1900)+"-"+
+                    String.valueOf(new Date().getMonth()+1)+"-"+
+                    String.valueOf(new Date().getDate());
+        System.out.println("FECHA LIMITE "+fecha);
+        axis.setMax(fecha);
+        axis.setTickFormat("%#d %b, %y");
+         
+        dateModel.getAxes().put(AxisType.X, axis);
     }
 
     public Objetivoestrategico getSelected() {
@@ -406,6 +472,69 @@ public class ObjetivoestrategicoController implements Serializable {
      */
     public void setRojo(Semaforo rojo) {
         this.rojo = rojo;
+    }
+
+    /**
+     * @return the histrorial
+     */
+    public List <Historial> getHistrorial() {
+        if (metaSeleccionada!=null){
+            System.out.println("INDICADOR "+metaSeleccionada.getIndicador().getIdIndicador());
+            histrorial=ejbFacadeHistorial.getSemaforosIndicador(metaSeleccionada.getIndicador().getIdIndicador());
+            this.createDateModel();
+            return histrorial;
+        }else{
+            return  null;
+        }       
+    }
+
+    /**
+     * @param histrorial the histrorial to set
+     */
+    public void setHistrorial(List <Historial> histrorial) {
+        this.histrorial = histrorial;
+    }
+
+    /**
+     * @return the nuevoHistorial
+     */
+    public Historial getNuevoHistorial() {
+        return nuevoHistorial;
+    }
+
+    /**
+     * @param nuevoHistorial the nuevoHistorial to set
+     */
+    public void setNuevoHistorial(Historial nuevoHistorial) {
+        this.nuevoHistorial = nuevoHistorial;
+    }
+
+    /**
+     * @return the nuevoVolorIndocador
+     */
+    public double getNuevoVolorIndocador() {
+        return nuevoVolorIndocador;
+    }
+
+    /**
+     * @param nuevoVolorIndocador the nuevoVolorIndocador to set
+     */
+    public void setNuevoVolorIndocador(double nuevoVolorIndocador) {
+        this.nuevoVolorIndocador = nuevoVolorIndocador;
+    }
+
+    /**
+     * @return the dateModel
+     */
+    public LineChartModel getDateModel() {
+        return dateModel;
+    }
+
+    /**
+     * @param dateModel the dateModel to set
+     */
+    public void setDateModel(LineChartModel dateModel) {
+        this.dateModel = dateModel;
     }
 
     @FacesConverter(forClass = Objetivoestrategico.class)

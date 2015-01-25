@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IndocadorDlg" 
+                  widgetVar="IndicadorDialog" 
+                  modal="true" 
+                  resizable="false" 
+                  appendTo="@(body)" 
+                  header="HISTORIAL INDICADOR">
+            <h:form id="IndocadorForm">
+                <h:panelGroup id="display">
+                    <h:panelGrid columns="2" >
+                        <f:facet name="header">
+                            <h:outputText value="DATOS INDICADOR"/>
+                            <p:separator/>
+                        </f:facet>
+                        <h:panelGrid columns="2">
+                            <p:outputLabel value="Indicador " for="indicador" />
+                            <h:inputText readonly="true" id="indicador" value="#{objetivoestrategicoController.metaSeleccionada.indicador.nombre} " />
+                            <p:outputLabel value="Indicador clave de rendimiento KPI " for="kpi" />
+                            <p:inputTextarea cols="20" rows="4" readonly="true" id="kpi" value="#{objetivoestrategicoController.metaSeleccionada.indicador.kpi} " />
+                            <p:outputLabel value="Periodicidad " for="periodicidad" />
+                            <h:inputText readonly="true" id="periodicidad" value="#{objetivoestrategicoController.metaSeleccionada.indicador.tiempoMedicion} " />
+                        </h:panelGrid>
+                        <h:panelGrid columns="4">
+                            <p:outputLabel value="Formula " for="formula" />
+                            <h:inputText readonly="true" id="formula"  value="#{objetivoestrategicoController.metaSeleccionada.indicador.formula} " />                            
+                            <p:outputLabel value="Unidades " for="unidades" />
+                            <h:inputText readonly="true" id="unidades" value="#{objetivoestrategicoController.metaSeleccionada.indicador.unidades} " />
+                            <p:outputLabel value="Valor Base " for="base" />
+                            <h:inputText readonly="true" id="base" value="#{objetivoestrategicoController.metaSeleccionada.indicador.base} " />
+                            <p:outputLabel value="Valor Meta " for="meta" />
+                            <h:inputText readonly="true" id="meta" value="#{objetivoestrategicoController.metaSeleccionada.indicador.meta} " />
+                            <p:outputLabel value="Glosario " for="glosario" />
+                            <p:inputTextarea cols="20" rows="4" id="glosario" readonly="true" value="#{objetivoestrategicoController.metaSeleccionada.indicador.glosario} " />
+                        </h:panelGrid>
+
+                    </h:panelGrid> 
+
+                    <h:panelGrid columns="2">
+                        <h:panelGrid columns="1">
+                            <h:panelGrid columns="2">
+                                <f:facet name="header">
+                                    <h:outputText value="INGRESO NUEVO VALOR"/>
+                                    <p:separator/>
+                                </f:facet>
+                                <p:outputLabel value="Glosario " for="nuevoValor" />
+                                <p:inputText id="nuevoValor" value="#{objetivoestrategicoController.nuevoVolorIndocador}" />
+                                <p:commandButton action="#{objetivoestrategicoController.guardarHistorial()}" value="GUARDAR" update="historialTbl,grafico"/>
+                            </h:panelGrid>
+                            <p:dataTable id="historialTbl" 
+                                         var="historial" 
+                                         value="#{objetivoestrategicoController.histrorial}" 
+                                         style="width: 200px"
+                                         >
+                                <p:column headerText="FECHA">
+                                    <p:outputLabel value="#{historial.fechaMedicion}" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </p:outputLabel>
+                                </p:column>
+                                <p:column headerText="VALOR">
+                                    <h:outputLabel value="#{historial.valor}" >
+                                    </h:outputLabel>
+                                </p:column>
+                            </p:dataTable>
+                        </h:panelGrid>
+                        <p:chart id="grafico" type="line" model="#{objetivoestrategicoController.dateModel}" style="height:400px; width: 600px"/>
+                    </h:panelGrid>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
