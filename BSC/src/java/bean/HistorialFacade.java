@@ -5,9 +5,11 @@
  */
 package bean;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import modelo.Historial;
 
 /**
@@ -28,4 +30,9 @@ public class HistorialFacade extends AbstractFacade<Historial> {
         super(Historial.class);
     }
     
+    public List<Historial> getSemaforosIndicador(Integer  idIndicador) {
+        Query query = this.em.createNamedQuery(Historial.findByIdIndicador);
+        query.setParameter("idIndicador",idIndicador);
+        return query.getResultList();
+    }
 }
