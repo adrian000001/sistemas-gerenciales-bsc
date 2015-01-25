@@ -33,6 +33,7 @@ import modelo.Historial;
 import modelo.Indicador;
 import modelo.Objetivoestrategicoindicador;
 import modelo.ObjetivoestrategicoindicadorPK;
+import modelo.Persona;
 import modelo.Semaforo;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.DateAxis;
@@ -73,6 +74,7 @@ public class ObjetivoestrategicoController implements Serializable {
     public void init() {
         histrorial=new ArrayList<>();
         createDateModel();
+        Objetivoestrategico preparaNuevo = preparaNuevo();
     }
 
     public Objetivoestrategico preparaEdicion() {
@@ -89,6 +91,7 @@ public class ObjetivoestrategicoController implements Serializable {
         nuevoObjetivoestrategicoindicador = new Objetivoestrategicoindicador();
         nuevoObjetivoestrategicoindicador.setObjetivoestrategico(selected);
         nuevoObjetivoestrategicoindicador.setIndicador(new Indicador());
+        nuevoObjetivoestrategicoindicador.getIndicador().setIdPersonaResponsable(new Persona());
         nuevoObjetivoestrategicoindicador.getIndicador().setIdIndicador(0);
         nuevoObjetivoestrategicoindicador.setObjetivoestrategicoindicadorPK(new ObjetivoestrategicoindicadorPK(0, idProvisional));
         System.out.println("META " + nuevoObjetivoestrategicoindicador.getMeta());
@@ -125,6 +128,8 @@ public class ObjetivoestrategicoController implements Serializable {
         nuevoObjetivoestrategicoindicador = new Objetivoestrategicoindicador();
         nuevoObjetivoestrategicoindicador.setObjetivoestrategico(selected);
         nuevoObjetivoestrategicoindicador.setIndicador(new Indicador());
+        nuevoObjetivoestrategicoindicador.getIndicador().setIdPersonaResponsable(new Persona());
+        System.out.println(nuevoObjetivoestrategicoindicador.getIndicador().getIdPersonaResponsable());
         nuevoObjetivoestrategicoindicador.getIndicador().setIdIndicador(0);
         nuevoObjetivoestrategicoindicador.setObjetivoestrategicoindicadorPK(new ObjetivoestrategicoindicadorPK(0, idProvisional));
         return this.prepareCreate();
@@ -140,6 +145,7 @@ public class ObjetivoestrategicoController implements Serializable {
         nuevoObjetivoestrategicoindicador = new Objetivoestrategicoindicador();
         nuevoObjetivoestrategicoindicador.setObjetivoestrategico(selected);
         nuevoObjetivoestrategicoindicador.setIndicador(new Indicador());
+        nuevoObjetivoestrategicoindicador.getIndicador().setIdPersonaResponsable(new Persona());
         nuevoObjetivoestrategicoindicador.getIndicador().setIdIndicador(0);
         idProvisional++;
         nuevoObjetivoestrategicoindicador.setObjetivoestrategicoindicadorPK(new ObjetivoestrategicoindicadorPK(0, idProvisional));
@@ -177,6 +183,7 @@ public class ObjetivoestrategicoController implements Serializable {
         nuevoObjetivoestrategicoindicador = new Objetivoestrategicoindicador();
         nuevoObjetivoestrategicoindicador.setObjetivoestrategico(selected);
         nuevoObjetivoestrategicoindicador.setIndicador(new Indicador());
+        nuevoObjetivoestrategicoindicador.getIndicador().setIdPersonaResponsable(new Persona());
         nuevoObjetivoestrategicoindicador.getIndicador().setIdIndicador(0);
         setRojo(new Semaforo());
         getRojo().setColor('r');
