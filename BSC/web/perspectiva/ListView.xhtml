@@ -42,6 +42,11 @@
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="VER" update=":PerspectivaViewForm" oncomplete="PF('PerspectivaViewDialog').show()" disabled="#{empty perspectivaController.selected}"/>
                               </f:facet>
                     </p:dataTable>
+                    <h:commandLink style="padding-left: 1000px">
+                 
+                 <p:graphicImage value="PDF.png" />
+                        <p:dataExporter type="pdf" target="datalist" fileName="Perspectivas" pageOnly="true"/>
+                    </h:commandLink>
                 </p:panel>
             </h:form>
 

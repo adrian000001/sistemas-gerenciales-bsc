@@ -60,7 +60,7 @@
                         </p:column>
                         <p:rowExpansion>
                             <h:panelGrid columns="1">
-                                <p:dataTable var="meta" 
+                                <p:dataTable id="a" var="meta" 
                                              value="#{item.objetivoestrategicoindicadorCollection}" 
                                              selectionMode="single"
                                              selection="#{objetivoestrategicoController.metaSeleccionada}"
@@ -90,6 +90,11 @@
                                         <h:inputTextarea  style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.indicador.kpi}" />
                                     </p:column>
                                 </p:dataTable>
+                                <h:commandLink>
+                 
+                 <p:graphicImage value="PDF.png" />
+                        <p:dataExporter type="pdf" target="a" fileName="Objetivos Estrategicos" pageOnly="true"/>
+                    </h:commandLink>
                             </h:panelGrid>
                         </p:rowExpansion>
                         <f:facet name="footer">
@@ -97,9 +102,14 @@
                              </f:facet>
                     </p:dataTable>
                 </p:panel>
+                <h:commandLink>
+                 
+                 <p:graphicImage value="PDF.png" />
+                        <p:dataExporter type="pdf" target="datalist" fileName="Objetivos Estrategicos" pageOnly="true"/>
+                    </h:commandLink>
             </h:form>
 
-           
+            
             <ui:include src="View.xhtml"/>
         </ui:define>
     </ui:composition>
