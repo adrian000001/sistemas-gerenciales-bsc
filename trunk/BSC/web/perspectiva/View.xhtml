@@ -23,6 +23,63 @@
                         <h:outputText value="Perspectiva"/>
                         <h:outputText value="#{perspectivaController.selected.nombre}" title="#{bundle.ViewPerspectivaTitle_nombre}"/>
                     </h:panelGrid>
+                    <p:dataTable id="metasTibl" 
+                                 style="width: 1200px"
+                                 var="obj" 
+                                 value="#{perspectivaController.selected.objetivoestrategicoCollection}" 
+                                 >
+                       
+                        <f:facet name="header">
+                            OBJETIVOS ESTRATEGICOS
+                        </f:facet>
+                        <p:column style="width:16px">
+                            <p:rowToggler />
+                        </p:column>
+
+                        <p:column headerText="ID">
+                            <p:inputTextarea style="border: 0" readonly="true" cols="18" rows="1" value="#{obj.idObjetivoEstrategico}" />
+                        </p:column>
+                        <p:column headerText="DEFINICION">
+                            <p:inputTextarea style="border: 0" readonly="true" cols="18" rows="1" value="#{obj.nombre}" />
+                        </p:column>
+
+                        <p:rowExpansion>
+                            <h:panelGrid columns="1">
+                                <p:dataTable var="meta" 
+                                             value="#{obj.objetivoestrategicoindicadorCollection}" id="metasTibl2" > 
+
+                                    <p:column headerText="META">
+                                        <p:inputTextarea style="border: 0" readonly="true" cols="15" rows="1" value="#{meta.meta}" />
+                                    </p:column>
+                                    <p:column headerText="DEFINICION">
+                                        <p:inputTextarea style="border: 0" readonly="true" cols="15" rows="1" value="#{meta.definicion}" />
+                                    </p:column>
+                                    <p:column headerText="ACLARACION">
+                                        <p:inputTextarea style="border: 0" readonly="true" cols="15" rows="3" value="#{meta.aclaracion}" />
+                                    </p:column>
+                                    <p:column headerText="CONCPTUALIZACION">
+                                        <p:inputTextarea style="border: 0" readonly="true" cols="15" rows="3" value="#{meta.conceptualizacion}" />
+                                    </p:column>
+                                    <p:column headerText="INDICADOR">
+                                        <p:inputTextarea style="border: 0" readonly="true" cols="15" rows="1" value="#{meta.indicador.nombre}" />
+                                    </p:column>
+                                    <p:column headerText="FORMULA">
+                                        <p:inputTextarea style="border: 0" readonly="true" cols="15" rows="3" value="#{meta.indicador.formula}" />
+                                    </p:column>
+                                    <p:column headerText="UNIDADES">
+                                        <p:inputTextarea  style="border: 0" readonly="true" cols="15" rows="1" value="#{meta.indicador.unidades}" />
+                                    </p:column>
+                                    <p:column style="width:80px;text-align: center">
+                                        <p:commandButton update=":IndocadorForm:historialTbl,:IndocadorForm:indicador,:IndocadorForm:periodicidad,:IndocadorForm:formula,:IndocadorForm:unidades,:IndocadorForm:base,:IndocadorForm:meta,:IndocadorForm:glosario,:IndocadorForm:historialTbl,:IndocadorForm:grafico" 
+                                                         oncomplete="PF('IndicadorDialog').show()" icon="ui-icon-pencil" value="Evaluar">
+                                            <f:setPropertyActionListener value="#{meta}" target="#{objetivoestrategicoController.metaSeleccionada}" />
+                                        </p:commandButton>
+                                    </p:column>
+                                </p:dataTable>
+                            </h:panelGrid>
+                        </p:rowExpansion>
+
+                    </p:dataTable>
                     <p:commandButton value="CERRAR" onclick="PerspectivaViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
