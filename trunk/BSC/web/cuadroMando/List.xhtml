@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+        <style>
+            .buttonCode{
+                color: #ffffff;
+                border-radius: 100px;                
+            }
+        </style>
+
+        <ui:define name="title">
+            <h:outputText value="CUADRO DE MANDO INTEGRAL"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="IndicadorListForm">
+                <p:panel header="CUADRO DE MANDO INTEGRAL" style="width: 1600px">
+                    <p:dataTable id="datalist" 
+                                 value="#{objetivoestrategicoindicadorController.items}" 
+                                 var="item"
+                                 rowKey="#{item.objetivoestrategicoindicadorPK}"
+                                 >                      
+
+                        <p:column sortBy="#{item.objetivoestrategico.idPerspectiva.nombre}">
+                            <f:facet name="header">
+                                <h:outputText value="PERSPECTIVA"/>
+                            </f:facet>
+                            <h:outputText value="#{item.objetivoestrategico.idPerspectiva.nombre}"/>
+                        </p:column>
+                        <p:column style="width: 115px">
+                            <f:facet name="header">
+                                <h:outputText value="OBJETIVO"/>
+                            </f:facet> 
+                            <p:inputTextarea readonly="true" cols="15" rows="3"  value="#{item.objetivoestrategico.nombre}"/>
+                        </p:column>
+                        <p:column style="width: 115px">
+                            <f:facet name="header">
+                                <h:outputText value="INDICADOR"/>
+                            </f:facet>
+                            <p:inputTextarea readonly="true" cols="15" rows="3" value="#{item.indicador.nombre}"/>
+                        </p:column>
+                        <p:column style="width: 115px">
+                            <f:facet name="header">
+                                <h:outputText value="KPI"/>
+                            </f:facet>
+                            <p:inputTextarea readonly="true" cols="15" rows="3" value="#{item.indicador.kpi}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="UNIDADES"/>
+                            </f:facet>
+                            <h:outputText value="#{item.indicador.unidades}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="RESPONSABLE"/>
+                            </f:facet>
+                            <h:outputText value="#{item.indicador.idPersonaResponsable.idCargo.nombre}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="BASE"/>
+                            </f:facet>
+                            <h:outputText value="#{item.indicador.base}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="META"/>
+                            </f:facet>
+                            <h:outputText value="#{item.indicador.meta}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="VALOR"/>
+                            </f:facet>
+                            <h:outputText value="#{item.valorActual}"/>
+                        </p:column>
+                        <p:column style="width: 70px;">
+                            <f:facet name="header">
+                                <h:outputText value="SEMAFORO"/>
+                            </f:facet>
+                            <h:outputLabel>
+                                <p:graphicImage value ="#{item.semaforo}" />
+                            </h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="DESEMPEÑO"/>
+                            </f:facet>
+                            <h:outputText value="#{item.desempeño}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="TIEMPO DE MEDICION"/>
+                            </f:facet>
+                            <h:outputText value="#{item.indicador.tiempoMedicion}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+</html>
