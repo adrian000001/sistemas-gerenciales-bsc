@@ -6,6 +6,7 @@ import negocio.util.JsfUtil.PersistAction;
 import bean.ObjetivoestrategicoindicadorFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -18,6 +19,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import modelo.Indicador;
 
 @ManagedBean(name = "objetivoestrategicoindicadorController")
 @SessionScoped
@@ -77,13 +79,13 @@ public class ObjetivoestrategicoindicadorController implements Serializable {
         }
     }
 
-    public List<Objetivoestrategicoindicador> getItems() {
+        public List<Objetivoestrategicoindicador> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
         return items;
     }
-
+        
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
