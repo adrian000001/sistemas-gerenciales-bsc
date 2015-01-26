@@ -8,32 +8,73 @@
 
     <ui:composition>
 
-        <p:dialog id="ActividadViewDlg" widgetVar="ActividadViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewActividadTitle}">
+        <p:dialog id="ActividadViewDlg" 
+                  widgetVar="ActividadViewDialog" 
+                  modal="true" 
+                  resizable="false" 
+                  appendTo="@(body)" 
+                  header="ACTIVIDAD">
             <h:form id="ActividadViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{actividadController.selected != null}">
-                        <h:outputText value="#{bundle.ViewActividadLabel_idActividad}"/>
-                        <h:outputText value="#{actividadController.selected.idActividad}" title="#{bundle.ViewActividadTitle_idActividad}"/>
-                        <h:outputText value="#{bundle.ViewActividadLabel_nombre}"/>
-                        <h:outputText value="#{actividadController.selected.nombre}" title="#{bundle.ViewActividadTitle_nombre}"/>
-                        <h:outputText value="#{bundle.ViewActividadLabel_control}"/>
-                        <h:outputText value="#{actividadController.selected.control}" title="#{bundle.ViewActividadTitle_control}"/>
-                        <h:outputText value="#{bundle.ViewActividadLabel_fechaInicio}"/>
-                        <h:outputText value="#{actividadController.selected.fechaInicio}" title="#{bundle.ViewActividadTitle_fechaInicio}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
-                        <h:outputText value="#{bundle.ViewActividadLabel_fechaFin}"/>
-                        <h:outputText value="#{actividadController.selected.fechaFin}" title="#{bundle.ViewActividadTitle_fechaFin}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
-                        <h:outputText value="#{bundle.ViewActividadLabel_avance}"/>
-                        <h:outputText value="#{actividadController.selected.avance}" title="#{bundle.ViewActividadTitle_avance}"/>
-                        <h:outputText value="#{bundle.ViewActividadLabel_idObjetivoEstrategico}"/>
-                        <h:outputText value="#{actividadController.selected.idObjetivoEstrategico}" title="#{bundle.ViewActividadTitle_idObjetivoEstrategico}"/>
-                        <h:outputText value="#{bundle.ViewActividadLabel_idPersonaResponsable}"/>
-                        <h:outputText value="#{actividadController.selected.idPersonaResponsable}" title="#{bundle.ViewActividadTitle_idPersonaResponsable}"/>
-                    </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="ActividadViewDialog.hide()"/>
+                    <h:panelGrid columns="4" rendered="#{actividadController.selected != null}">
+                        
+                        <p:outputLabel value="Nombre " for="nombre" />
+                        <p:inputText id="nombre" 
+                                     readonly="true"
+                                     value="#{actividadController.selected.nombre}" 
+                                     title="Nombre" />
+                        <p:outputLabel value="Control " for="control" />
+                        <p:inputText id="control" 
+                                     readonly="true"
+                                     value="#{actividadController.selected.control}" 
+                                     title="Control" />
+                        
+                        <p:outputLabel value="Avance " for="avance" />
+                        <p:inputText id="avance" 
+                                     readonly="true"
+                                     value="#{actividadController.selected.avance}" 
+                                     title="Avance" />
+                        <p:outputLabel value="Objetivo Estrategico " for="idObjetivoEstrategico" />
+                        <p:selectOneMenu id="idObjetivoEstrategico" 
+                                         disabled="true"
+                                         style="width: 200px"
+                                         value="#{actividadController.selected.idObjetivoEstrategico}" 
+                                         required="true" 
+                                         requiredMessage="Objetivo Estrategico Requerido">
+                            <f:selectItems value="#{objetivoestrategicoController.itemsAvailableSelectOne}"
+                                           var="idObjetivoEstrategicoItem"
+                                           itemValue="#{idObjetivoEstrategicoItem}"
+                                           itemLabel="#{idObjetivoEstrategicoItem.nombre}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Responsable " for="idPersonaResponsable" />
+                        <p:selectOneMenu id="idPersonaResponsable"
+                                         disabled="true"
+                                         style="width: 200px"
+                                         value="#{actividadController.selected.idPersonaResponsable}" 
+                                         required="true" 
+                                         requiredMessage="Responsable Requerido">
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="idPersonaResponsableItem"
+                                           itemValue="#{idPersonaResponsableItem}"
+                                           itemLabel="#{idPersonaResponsableItem.idCargo.nombre}:#{idPersonaResponsableItem.nombre}"/>
+                        </p:selectOneMenu>
+                        <p:spacer/>
+                        <p:spacer/>
+                        <p:outputLabel value="Fecha Inicio" for="fechaInicio" />
+                        <p:calendar id="fechaInicio" 
+                                    disabled="true"
+                                    pattern="dd/MM/yyyy" 
+                                    value="#{actividadController.selected.fechaInicio}" 
+                                    title="Fecha Inicio"  showOn="button"/>
+                        <p:outputLabel value="Fecha Fin " for="fechaFin" />
+                        <p:calendar id="fechaFin" 
+                                    disabled="true"
+                                    pattern="dd/MM/yyyy" 
+                                    value="#{actividadController.selected.fechaFin}" 
+                                    title="Fecha Fin "  
+                                    showOn="button"/>
+                    </h:panelGrid>
+                    <p:commandButton value="CERRAR" onclick="ActividadViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
