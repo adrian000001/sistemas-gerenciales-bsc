@@ -6,10 +6,12 @@ import negocio.util.JsfUtil.PersistAction;
 import bean.PerspectivaFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.faces.bean.ManagedBean;
@@ -27,10 +29,25 @@ public class PerspectivaController implements Serializable {
     private bean.PerspectivaFacade ejbFacade;
     private List<Perspectiva> items = null;
     private Perspectiva selected;
-
+    private List<String> itemsNom = null;
     public PerspectivaController() {
     }
 
+    public List<String> getItemsNom() {
+        return itemsNom;
+    }
+
+    public void setItemsNom(List<String> itemsNom) {
+        this.itemsNom = itemsNom;
+    }
+     @PostConstruct
+    public void init(){
+        itemsNom=new ArrayList();
+         if (items == null) {
+            items = getFacade().findAll();
+            getItemsNombre();
+        }
+    }
     public Perspectiva getSelected() {
         return selected;
     }
@@ -80,7 +97,13 @@ public class PerspectivaController implements Serializable {
         }
         return items;
     }
-
+    public void getItemsNombre()
+    {
+        for(int i=0;i<items.size();i++)
+        {
+           itemsNom.add(items.get(i).getNombre());
+        }
+    }
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
