@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fe6f6e69-8b67-4f46-ac46-45cddf6c6b3f">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="282"/>
+	<property name="ireport.y" value="48"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -75,14 +75,12 @@
      indicador.`meta` AS indicador_meta,
      indicador.`tiempoMedicion` AS indicador_tiempoMedicion,
      persona.`nombre` AS persona_nombre,
-     cargo.`nombre` AS cargo_nombre,
-     semaforo.`color` AS semaforo_color
+     cargo.`nombre` AS cargo_nombre
 FROM
      `perspectiva` perspectiva INNER JOIN `objetivoestrategico` objetivoestrategico ON perspectiva.`idPerspectiva` = objetivoestrategico.`idPerspectiva`
      INNER JOIN `objetivoestrategicoindicador` objetivoestrategicoindicador ON objetivoestrategico.`idObjetivoEstrategico` = objetivoestrategicoindicador.`idObjetivoEstrategico`
      INNER JOIN `indicador` indicador ON objetivoestrategicoindicador.`idIndicador` = indicador.`idIndicador`
      INNER JOIN `persona` persona ON indicador.`idPersonaResponsable` = persona.`idPersona`
-     INNER JOIN `semaforo` semaforo ON indicador.`idIndicador` = semaforo.`idIndicador`
      INNER JOIN `cargo` cargo ON persona.`idCargo` = cargo.`idCargo`]]>
 		</queryString>
 		<field name="perspectiva_nombre" class="java.lang.String"/>
@@ -95,7 +93,6 @@ FROM
 		<field name="indicador_tiempoMedicion" class="java.lang.String"/>
 		<field name="persona_nombre" class="java.lang.String"/>
 		<field name="cargo_nombre" class="java.lang.String"/>
-		<field name="semaforo_color" class="java.lang.String"/>
 	</subDataset>
 	<queryString>
 		<![CDATA[SELECT 1 AS DUMMY]]>
@@ -151,7 +148,7 @@ FROM
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="107" uuid="42f1f9a8-ec1f-4c05-a932-902f3cec2806">
+					<jr:column width="129" uuid="42f1f9a8-ec1f-4c05-a932-902f3cec2806">
 						<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="101" height="30" uuid="0de05de4-3ea9-416f-86ec-38bcc8e2968f"/>
@@ -161,12 +158,12 @@ FROM
 						<jr:columnFooter style="table 2_CH" height="30" rowSpan="1"/>
 						<jr:detailCell style="table 2_TD" height="60" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="107" height="60" uuid="7aa1f060-7c89-43bc-ad02-86a0997b5fb4"/>
+								<reportElement x="0" y="0" width="129" height="60" uuid="7aa1f060-7c89-43bc-ad02-86a0997b5fb4"/>
 								<textFieldExpression><![CDATA[$F{objetivoestrategico_nombre}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="96" uuid="29f6fd93-4d40-41a1-aff0-d1911e9abc6a">
+					<jr:column width="103" uuid="29f6fd93-4d40-41a1-aff0-d1911e9abc6a">
 						<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="90" height="30" uuid="47d98a10-dd92-4576-9f35-662c63978e00"/>
@@ -176,12 +173,12 @@ FROM
 						<jr:columnFooter style="table 2_CH" height="30" rowSpan="1"/>
 						<jr:detailCell style="table 2_TD" height="60" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="96" height="60" uuid="05d767cc-4e08-411c-81a4-7bb273f7e331"/>
+								<reportElement x="0" y="0" width="103" height="60" uuid="05d767cc-4e08-411c-81a4-7bb273f7e331"/>
 								<textFieldExpression><![CDATA[$F{objetivoestrategicoindicador_definicion}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="91" uuid="4805f164-1587-437f-9f53-04484a524ad4">
+					<jr:column width="117" uuid="4805f164-1587-437f-9f53-04484a524ad4">
 						<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="90" height="30" uuid="6566a9b7-b87b-43d0-9f4a-197b0539ea73"/>
@@ -191,7 +188,7 @@ FROM
 						<jr:columnFooter style="table 2_CH" height="30" rowSpan="1"/>
 						<jr:detailCell style="table 2_TD" height="60" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="90" height="60" uuid="80af7c80-cfd8-4d35-9eec-ba1eec8be12c"/>
+								<reportElement x="0" y="0" width="117" height="60" uuid="80af7c80-cfd8-4d35-9eec-ba1eec8be12c"/>
 								<textFieldExpression><![CDATA[$F{persona_nombre}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -271,7 +268,7 @@ FROM
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="49" uuid="4141c386-1e08-437e-83c4-9c1fdc24ac80">
+					<jr:column width="56" uuid="4141c386-1e08-437e-83c4-9c1fdc24ac80">
 						<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="48" height="30" uuid="4f177a19-b918-4d16-8fdb-2a0780b06f7e"/>
@@ -281,23 +278,8 @@ FROM
 						<jr:columnFooter style="table 2_CH" height="30" rowSpan="1"/>
 						<jr:detailCell style="table 2_TD" height="60" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="48" height="60" uuid="35d1bedd-6320-4524-a5ac-965e42cefebc"/>
+								<reportElement x="0" y="0" width="56" height="60" uuid="35d1bedd-6320-4524-a5ac-965e42cefebc"/>
 								<textFieldExpression><![CDATA[$F{indicador_unidades}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
-					<jr:column width="63" uuid="633b73a3-46e6-4061-a2a7-0a666fdb47dc">
-						<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
-							<staticText>
-								<reportElement x="3" y="0" width="60" height="30" uuid="e62f2c2a-67b2-452b-8b18-fca0d4e70e09"/>
-								<text><![CDATA[Semaforo]]></text>
-							</staticText>
-						</jr:columnHeader>
-						<jr:columnFooter style="table 2_CH" height="30" rowSpan="1"/>
-						<jr:detailCell style="table 2_TD" height="60" rowSpan="1">
-							<textField>
-								<reportElement x="0" y="0" width="63" height="60" uuid="b4fcb574-1f4b-45bc-961d-9d46315f4474"/>
-								<textFieldExpression><![CDATA[$F{semaforo_color}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
