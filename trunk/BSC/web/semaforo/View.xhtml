@@ -23,7 +23,14 @@
                         <h:outputText value="#{bundle.ViewSemaforoLabel_idIndicador}"/>
                         <h:outputText value="#{semaforoController.selected.idIndicador}" title="#{bundle.ViewSemaforoTitle_idIndicador}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="SemaforoViewDialog.hide()"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             icon="ui-icon-close"
+                                             value="Cerrar" onclick="SemaforoViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

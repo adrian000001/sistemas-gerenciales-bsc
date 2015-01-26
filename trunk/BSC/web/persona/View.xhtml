@@ -23,7 +23,14 @@
                         <h:outputText value="#{bundle.ViewPersonaLabel_usuario}"/>
                         <h:outputText value="#{personaController.selected.usuario}" title="#{bundle.ViewPersonaTitle_usuario}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="PersonaViewDialog.hide()"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             icon="ui-icon-close"
+                                             value="Cerrar" onclick="PersonaViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

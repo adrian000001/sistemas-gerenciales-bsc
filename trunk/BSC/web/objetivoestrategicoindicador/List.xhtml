@@ -71,9 +71,27 @@
                                              border-radius: 50px;
                                              color:#ffffff"
                                              id="createButton" icon="ui-icon-plus"   title="Crear" actionListener="#{objetivoestrategicoindicadorController.prepareCreate}" update=":ObjetivoestrategicoindicadorCreateForm" oncomplete="PF('ObjetivoestrategicoindicadorCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" title="Ver" update=":ObjetivoestrategicoindicadorViewForm" oncomplete="PF('ObjetivoestrategicoindicadorViewDialog').show()" disabled="#{empty objetivoestrategicoindicadorController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" title="Editar" update=":ObjetivoestrategicoindicadorEditForm" oncomplete="PF('ObjetivoestrategicoindicadorEditDialog').show()" disabled="#{empty objetivoestrategicoindicadorController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  title="Eliminar" actionListener="#{objetivoestrategicoindicadorController.destroy}" update=":growl,datalist" disabled="#{empty objetivoestrategicoindicadorController.selected}"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="viewButton"   icon="ui-icon-search" title="Ver" update=":ObjetivoestrategicoindicadorViewForm" oncomplete="PF('ObjetivoestrategicoindicadorViewDialog').show()" disabled="#{empty objetivoestrategicoindicadorController.selected}"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="editButton"   icon="ui-icon-pencil" title="Editar" update=":ObjetivoestrategicoindicadorEditForm" oncomplete="PF('ObjetivoestrategicoindicadorEditDialog').show()" disabled="#{empty objetivoestrategicoindicadorController.selected}"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="deleteButton" icon="ui-icon-trash"  title="Eliminar" actionListener="#{objetivoestrategicoindicadorController.destroy}" update=":growl,datalist" disabled="#{empty objetivoestrategicoindicadorController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
