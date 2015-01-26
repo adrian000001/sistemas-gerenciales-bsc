@@ -86,10 +86,34 @@
 
 
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="NUEVO" actionListener="#{actividadController.prepareCreate}" update=":ActividadCreateForm" oncomplete="PF('ActividadCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="VER" update=":ActividadViewForm" oncomplete="PF('ActividadViewDialog').show()" disabled="#{empty actividadController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="EDITAR" update=":ActividadEditForm" oncomplete="PF('ActividadEditDialog').show()" disabled="#{empty actividadController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="ELIMINAR" actionListener="#{actividadController.destroy}" update=":growl,datalist" disabled="#{empty actividadController.selected}"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="createButton" icon="ui-icon-plus"   title="Nuevo" actionListener="#{actividadController.prepareCreate}" update=":ActividadCreateForm" oncomplete="PF('ActividadCreateDialog').show()"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="viewButton"   icon="ui-icon-search" title="Ver" update=":ActividadViewForm" oncomplete="PF('ActividadViewDialog').show()" disabled="#{empty actividadController.selected}"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="editButton"   icon="ui-icon-pencil" title="Editar" update=":ActividadEditForm" oncomplete="PF('ActividadEditDialog').show()" disabled="#{empty actividadController.selected}"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="deleteButton" icon="ui-icon-trash"  title="Eliminar" actionListener="#{actividadController.destroy}" update=":growl,datalist" disabled="#{empty actividadController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

@@ -22,8 +22,20 @@
                         <p:outputLabel value="#{bundle.EditEstrategiaglobalLabel_estrategia}" for="estrategia" />
                         <p:inputTextarea cols="100" id="estrategia" value="#{estrategiaglobalController.selected.estrategia}" title="#{bundle.EditEstrategiaglobalTitle_estrategia}" required="true" requiredMessage="#{bundle.EditEstrategiaglobalRequiredMessage_estrategia}"/>
                     </h:panelGrid>
-                    <p:commandButton actionListener="#{estrategiaglobalController.update}" value="GUARDAR" update="display,:EstrategiaglobalListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EstrategiaglobalEditDialog');"/>
-                    <p:commandButton value="CANCELAR" onclick="EstrategiaglobalEditDialog.hide()"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             actionListener="#{estrategiaglobalController.update}" title="Guardar" update="display,:EstrategiaglobalListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EstrategiaglobalEditDialog');"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             title="Cancelar" onclick="EstrategiaglobalEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

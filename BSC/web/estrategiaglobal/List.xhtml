@@ -39,10 +39,34 @@
                             <h:outputText value="#{item.estrategia}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="NUEVO" actionListener="#{estrategiaglobalController.prepareCreate}" update=":EstrategiaglobalCreateForm" oncomplete="PF('EstrategiaglobalCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="VER" update=":EstrategiaglobalViewForm" oncomplete="PF('EstrategiaglobalViewDialog').show()" disabled="#{empty estrategiaglobalController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="EDITAR" update=":EstrategiaglobalEditForm" oncomplete="PF('EstrategiaglobalEditDialog').show()" disabled="#{empty estrategiaglobalController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="ELIMINAR" actionListener="#{estrategiaglobalController.destroy}" update=":growl,datalist" disabled="#{empty estrategiaglobalController.selected}"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="createButton" icon="ui-icon-plus"   title="Nuevo" actionListener="#{estrategiaglobalController.prepareCreate}" update=":EstrategiaglobalCreateForm" oncomplete="PF('EstrategiaglobalCreateDialog').show()"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="viewButton"   icon="ui-icon-search" title="Ver" update=":EstrategiaglobalViewForm" oncomplete="PF('EstrategiaglobalViewDialog').show()" disabled="#{empty estrategiaglobalController.selected}"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="editButton"   icon="ui-icon-pencil" title="Editar" update=":EstrategiaglobalEditForm" oncomplete="PF('EstrategiaglobalEditDialog').show()" disabled="#{empty estrategiaglobalController.selected}"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="deleteButton" icon="ui-icon-trash"  title="Eliminar" actionListener="#{estrategiaglobalController.destroy}" update=":growl,datalist" disabled="#{empty estrategiaglobalController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

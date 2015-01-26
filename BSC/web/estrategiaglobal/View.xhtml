@@ -70,8 +70,14 @@
                                         <p:inputTextarea  style="border: 0" readonly="true" cols="15" rows="1" value="#{meta.indicador.unidades}" />
                                     </p:column>
                                     <p:column style="width:80px;text-align: center">
-                                        <p:commandButton update=":IndocadorForm:historialTbl,:IndocadorForm:indicador,:IndocadorForm:periodicidad,:IndocadorForm:formula,:IndocadorForm:unidades,:IndocadorForm:base,:IndocadorForm:meta,:IndocadorForm:glosario,:IndocadorForm:historialTbl,:IndocadorForm:grafico" 
-                                                         oncomplete="PF('IndicadorDialog').show()" icon="ui-icon-pencil" value="Evaluar">
+                                        <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             update=":IndocadorForm:historialTbl,:IndocadorForm:indicador,:IndocadorForm:periodicidad,:IndocadorForm:formula,:IndocadorForm:unidades,:IndocadorForm:base,:IndocadorForm:meta,:IndocadorForm:glosario,:IndocadorForm:historialTbl,:IndocadorForm:grafico" 
+                                                         oncomplete="PF('IndicadorDialog').show()" icon="ui-icon-pencil" title="Evaluar">
                                             <f:setPropertyActionListener value="#{meta}" target="#{objetivoestrategicoController.metaSeleccionada}" />
                                         </p:commandButton>
                                     </p:column>
@@ -80,7 +86,13 @@
                         </p:rowExpansion>
 
                     </p:dataTable>
-                    <p:commandButton value="CERRAR" onclick="EstrategiaglobalViewDialog.hide()"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             icon="ui-icon-close" title="Cerrar" onclick="EstrategiaglobalViewDialog.hide()"/>
                       <h3>Export Page Data Only</h3>
                    
                 </h:panelGroup>

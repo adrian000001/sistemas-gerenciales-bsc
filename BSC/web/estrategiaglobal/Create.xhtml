@@ -20,8 +20,20 @@
                                          required="true" 
                                          requiredMessage="Estategia Valor Requerido"/>
                     </h:panelGrid>
-                    <p:commandButton actionListener="#{estrategiaglobalController.create}" value="GUARDAR" update="display,:EstrategiaglobalListForm:datalist,:growl" oncomplete="handleSubmit(args,'EstrategiaglobalCreateDialog');"/>
-                    <p:commandButton value="CANCELAR" onclick="EstrategiaglobalCreateDialog.hide()"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             actionListener="#{estrategiaglobalController.create}" title="Guardar" update="display,:EstrategiaglobalListForm:datalist,:growl" oncomplete="handleSubmit(args,'EstrategiaglobalCreateDialog');"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             title="Cancelar" onclick="EstrategiaglobalCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

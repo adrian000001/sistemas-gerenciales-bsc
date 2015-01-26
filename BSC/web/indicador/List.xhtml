@@ -100,28 +100,28 @@
                                              background-size: 75px;
                                              border-radius: 50px;
                                              color:#ffffff" 
-                                             id="createButton" icon="ui-icon-plus" title="#{bundle.Create}" actionListener="#{indicadorController.prepareCreate}" update=":IndicadorCreateForm" oncomplete="PF('IndicadorCreateDialog').show()"/>
+                                             id="createButton" icon="ui-icon-plus" title="Crear" actionListener="#{indicadorController.prepareCreate}" update=":IndicadorCreateForm" oncomplete="PF('IndicadorCreateDialog').show()"/>
                             <p:commandButton style="height: 75px;
                                              width: 75px;
                                              background-image: url(../img/fondo-boton.png);
                                              background-size: 75px;
                                              border-radius: 50px;
                                              color:#ffffff"
-                                             id="viewButton"   icon="ui-icon-search" title="#{bundle.View}" update=":IndicadorViewForm" oncomplete="PF('IndicadorViewDialog').show()" disabled="#{empty indicadorController.selected}"/>
+                                             id="viewButton"   icon="ui-icon-search" title="Ver" update=":IndicadorViewForm" oncomplete="PF('IndicadorViewDialog').show()" disabled="#{empty indicadorController.selected}"/>
                             <p:commandButton style="height: 75px;
                                              width: 75px;
                                              background-image: url(../img/fondo-boton.png);
                                              background-size: 75px;
                                              border-radius: 50px;
                                              color:#ffffff"
-                                             id="editButton"   icon="ui-icon-pencil" title="#{bundle.Edit}" update=":IndicadorEditForm" oncomplete="PF('IndicadorEditDialog').show()" disabled="#{empty indicadorController.selected}"/>
+                                             id="editButton"   icon="ui-icon-pencil" title="Editar" update=":IndicadorEditForm" oncomplete="PF('IndicadorEditDialog').show()" disabled="#{empty indicadorController.selected}"/>
                             <p:commandButton style="height: 75px;
                                              width: 75px;
                                              background-image: url(../img/fondo-boton.png);
                                              background-size: 75px;
                                              border-radius: 50px;
                                              color:#ffffff"
-                                             id="deleteButton" icon="ui-icon-trash"  title="#{bundle.Delete}" actionListener="#{indicadorController.destroy}" update=":growl,datalist" disabled="#{empty indicadorController.selected}"/>
+                                             id="deleteButton" icon="ui-icon-trash"  title="Eliminar" actionListener="#{indicadorController.destroy}" update=":growl,datalist" disabled="#{empty indicadorController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

@@ -25,7 +25,13 @@
                         <h:outputText value="#{bundle.ViewObjetivoestrategicoindicadorLabel_objetivoestrategico}"/>
                         <h:outputText value="#{objetivoestrategicoindicadorController.selected.objetivoestrategico}" title="#{bundle.ViewObjetivoestrategicoindicadorTitle_objetivoestrategico}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="ObjetivoestrategicoindicadorViewDialog.hide()"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             title="Cerrar" onclick="ObjetivoestrategicoindicadorViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

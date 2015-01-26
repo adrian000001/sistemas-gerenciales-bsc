@@ -240,7 +240,13 @@
                             <p:inputTextarea  style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.indicador.kpi}" />
                         </p:column>
                     </p:dataTable>
-                    <p:commandButton value="CERRAR" onclick="ObjetivoestrategicoViewDialog.hide()"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             title="Cerrar" onclick="ObjetivoestrategicoViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

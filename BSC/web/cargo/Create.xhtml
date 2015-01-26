@@ -17,8 +17,20 @@
                         <p:outputLabel value="#{bundle.CreateCargoLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{cargoController.selected.nombre}" title="#{bundle.CreateCargoTitle_nombre}" required="true" requiredMessage="#{bundle.CreateCargoRequiredMessage_nombre}"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{cargoController.create}" value="#{bundle.Save}" update="display,:CargoListForm:datalist,:growl" oncomplete="handleSubmit(args,'CargoCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="CargoCreateDialog.hide()"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             actionListener="#{cargoController.create}" title="Guardar" update="display,:CargoListForm:datalist,:growl" oncomplete="handleSubmit(args,'CargoCreateDialog');"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             title="Cancelar" onclick="CargoCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

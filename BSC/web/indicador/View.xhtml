@@ -33,7 +33,13 @@
                         <h:outputText value="#{bundle.ViewIndicadorLabel_idPersonaResponsable}"/>
                         <h:outputText value="#{indicadorController.selected.idPersonaResponsable}" title="#{bundle.ViewIndicadorTitle_idPersonaResponsable}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="IndicadorViewDialog.hide()"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             title="Cerrar" onclick="IndicadorViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

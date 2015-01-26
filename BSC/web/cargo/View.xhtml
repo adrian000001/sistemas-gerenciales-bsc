@@ -17,7 +17,7 @@
                         <h:outputText value="#{bundle.ViewCargoLabel_nombre}"/>
                         <h:outputText value="#{cargoController.selected.nombre}" title="#{bundle.ViewCargoTitle_nombre}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="CargoViewDialog.hide()"/>
+                    <p:commandButton title="Cerrar" onclick="CargoViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
