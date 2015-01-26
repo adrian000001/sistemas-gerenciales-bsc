@@ -71,7 +71,8 @@
                                 </p:column>
                             </p:dataTable>
                         </h:panelGrid>
-                        <p:outputLabel id="grafico" />
+                        <p:chart id="grafico" type="line" model="#{objetivoestrategicoController.dateModel}" style="height:400px; width: 600px"/>
+
                     </h:panelGrid>
                 </h:panelGroup>
             </h:form>
