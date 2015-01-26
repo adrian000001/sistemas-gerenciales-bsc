@@ -10,12 +10,12 @@
 
 
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListActividadTitle}"></h:outputText>
+            <h:outputText value="LISTA DE ACTIVIDADES"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
             <h:form id="ActividadListForm">
-                <p:panel header="#{bundle.ListActividadTitle}">
+                <p:panel header="LISTA DE ACTIVIDADES">
                     <p:dataTable id="datalist" value="#{actividadController.items}" var="item"
                                  selectionMode="single" selection="#{actividadController.selected}"
                                  paginator="true"
@@ -29,61 +29,58 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListActividadTitle_idActividad}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idActividad}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListActividadTitle_nombre}"/>
+                                <h:outputText value="ACTIVIDAD"/>
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>
                         </p:column>
+                        <p:column sortBy="#{item.idObjetivoEstrategico.nombre}">
+                            <f:facet name="header">
+                                <h:outputText value="OBJETIVO ESTRATEGICO"/>
+                            </f:facet>
+                            <p:inputTextarea cols="15" rows="3" readonly="true" value="#{item.idObjetivoEstrategico.nombre}"/>
+                        </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListActividadTitle_control}"/>
+                                <h:outputText value="RESPONSABLE"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPersonaResponsable.nombre}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="CONTROL"/>
                             </f:facet>
                             <h:outputText value="#{item.control}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListActividadTitle_fechaInicio}"/>
+                                <h:outputText value="FECHA INICIO"/>
                             </f:facet>
                             <h:outputText value="#{item.fechaInicio}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListActividadTitle_fechaFin}"/>
+                                <h:outputText value="FECHA FIN"/>
                             </f:facet>
                             <h:outputText value="#{item.fechaFin}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>
                         </p:column>
+                        
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListActividadTitle_avance}"/>
+                                <h:outputText value="AVANCE"/>
                             </f:facet>
-                            <h:outputText value="#{item.avance}"/>
+                            <p:progressBar value="#{item.avance}" labelTemplate="#{item.avance}%" displayOnly="true"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListActividadTitle_idObjetivoEstrategico}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idObjetivoEstrategico}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListActividadTitle_idPersonaResponsable}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idPersonaResponsable}"/>
-                        </p:column>
+                        
+                        
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{actividadController.prepareCreate}" update=":ActividadCreateForm" oncomplete="PF('ActividadCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ActividadViewForm" oncomplete="PF('ActividadViewDialog').show()" disabled="#{empty actividadController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ActividadEditForm" oncomplete="PF('ActividadEditDialog').show()" disabled="#{empty actividadController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{actividadController.destroy}" update=":growl,datalist" disabled="#{empty actividadController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="NUEVO" actionListener="#{actividadController.prepareCreate}" update=":ActividadCreateForm" oncomplete="PF('ActividadCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="VER" update=":ActividadViewForm" oncomplete="PF('ActividadViewDialog').show()" disabled="#{empty actividadController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="EDITAR" update=":ActividadEditForm" oncomplete="PF('ActividadEditDialog').show()" disabled="#{empty actividadController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="ELIMINAR" actionListener="#{actividadController.destroy}" update=":growl,datalist" disabled="#{empty actividadController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
