@@ -28,8 +28,22 @@
                                            itemValue="#{idIndicadorItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{semaforoController.update}" value="#{bundle.Save}" update="display,:SemaforoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SemaforoEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="SemaforoEditDialog.hide()"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             icon="ui-icon-disk"
+                                             actionListener="#{semaforoController.update}" title="Guardar" update="display,:SemaforoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SemaforoEditDialog');"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             icon="ui-icon-close"
+                                             title="Cancelar" onclick="SemaforoEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

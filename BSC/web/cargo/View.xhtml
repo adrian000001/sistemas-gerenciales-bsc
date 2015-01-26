@@ -17,7 +17,14 @@
                         <h:outputText value="#{bundle.ViewCargoLabel_nombre}"/>
                         <h:outputText value="#{cargoController.selected.nombre}" title="#{bundle.ViewCargoTitle_nombre}"/>
                     </p:panelGrid>
-                    <p:commandButton title="Cerrar" onclick="CargoViewDialog.hide()"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             icon="ui-icon-close"
+                                             title="Cerrar" onclick="CargoViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

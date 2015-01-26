@@ -39,10 +39,34 @@
                             <h:outputText value="#{item.nombre}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="NUEVO" actionListener="#{perspectivaController.prepareCreate}" update=":PerspectivaCreateForm" oncomplete="PF('PerspectivaCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="VER" update=":PerspectivaViewForm" oncomplete="PF('PerspectivaViewDialog').show()" disabled="#{empty perspectivaController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="EDITAR" update=":PerspectivaEditForm" oncomplete="PF('PerspectivaEditDialog').show()" disabled="#{empty perspectivaController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="ELIMINAR" actionListener="#{perspectivaController.destroy}" update=":growl,datalist" disabled="#{empty perspectivaController.selected}"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="createButton" icon="ui-icon-plus"   title="Nuevo" actionListener="#{perspectivaController.prepareCreate}" update=":PerspectivaCreateForm" oncomplete="PF('PerspectivaCreateDialog').show()"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="viewButton"   icon="ui-icon-search" title="Ver" update=":PerspectivaViewForm" oncomplete="PF('PerspectivaViewDialog').show()" disabled="#{empty perspectivaController.selected}"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="editButton"   icon="ui-icon-pencil" title="Editar" update=":PerspectivaEditForm" oncomplete="PF('PerspectivaEditDialog').show()" disabled="#{empty perspectivaController.selected}"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="deleteButton" icon="ui-icon-trash"  title="Eliminar" actionListener="#{perspectivaController.destroy}" update=":growl,datalist" disabled="#{empty perspectivaController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

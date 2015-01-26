@@ -58,10 +58,34 @@
                             <h:outputText value="#{item.usuario}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{personaController.prepareCreate}" update=":PersonaCreateForm" oncomplete="PF('PersonaCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PersonaViewForm" oncomplete="PF('PersonaViewDialog').show()" disabled="#{empty personaController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PersonaEditForm" oncomplete="PF('PersonaEditDialog').show()" disabled="#{empty personaController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{personaController.destroy}" update=":growl,datalist" disabled="#{empty personaController.selected}"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="createButton" icon="ui-icon-plus"   title="Crear" actionListener="#{personaController.prepareCreate}" update=":PersonaCreateForm" oncomplete="PF('PersonaCreateDialog').show()"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="viewButton"   icon="ui-icon-search" title="Ver" update=":PersonaViewForm" oncomplete="PF('PersonaViewDialog').show()" disabled="#{empty personaController.selected}"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="editButton"   icon="ui-icon-pencil" title="Editar" update=":PersonaEditForm" oncomplete="PF('PersonaEditDialog').show()" disabled="#{empty personaController.selected}"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="deleteButton" icon="ui-icon-trash"  title="Eliminar" actionListener="#{personaController.destroy}" update=":growl,datalist" disabled="#{empty personaController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

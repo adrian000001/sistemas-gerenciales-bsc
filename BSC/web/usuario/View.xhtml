@@ -23,7 +23,14 @@
                         <h:outputText value="#{bundle.ViewUsuarioLabel_persona}"/>
                         <h:outputText value="#{usuarioController.selected.persona}" title="#{bundle.ViewUsuarioTitle_persona}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="UsuarioViewDialog.hide()"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             icon="ui-icon-close"
+                                             value="Cancelar" onclick="UsuarioViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
