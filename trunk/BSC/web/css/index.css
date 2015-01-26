@@ -14,11 +14,8 @@ body{
 }
 
 #Cabecera{
-    height: 150px;
+    height: 250px;
     width: 750px;
-    border-radius: 0px 0px 45px 45px;
-    box-shadow: 2px 2px 10px #999;
-
 }
 
 #menu li{

@@ -11,58 +11,43 @@
         <link href="css/index.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
-        <ul id="menu">
-            <li><h:link outcome="/actividad/List" value="Actividades"/></li>
-            <li><h:link outcome="/cargo/List" value="Cargos"/></li>
-            <li><h:link outcome="/estrategiaglobal/List" value="Es. Globales"/></li>
-            <li><h:link outcome="/historial/List" value="Historial"/></li>
-            <li><h:link outcome="/indicador/List" value="Indicadores"/></li>
-            <li><h:link outcome="/objetivoestrategico/List" value="Obj. Estrategicos"/></li>
-            <li><h:link outcome="/objetivoestrategicoindicador/List" value="Indicadores"/></li>
-            <li><h:link outcome="/persona/List" value="Personas"/></li>
-            <li><h:link outcome="/perspectiva/List" value="Perspectivas"/></li>
-            
-        </ul>        
         <center>
             <div id="Cabecera">
-                <p><img src="img/Captura.PNG" alt="" height="150"/><img src="img/titulo.png" alt="" height="150"/></p>
+                <p><img src="img/Captura.PNG" height="200px"/></p>
             </div>
         </center>
-
         <p:growl id="mensajes" showDetail="true" life="2000" />
-        <div id ="menu" style="padding-top: 250px; padding-left: 450px; color:white">
-        <h:form>
-            
-            <p:panel header="Login" style="width:300px">
-                <h:panelGrid columns="2" cellpadding="5" >
-                    <h:outputLabel for="username" value="Usuario:" />
-                    <p:inputText value="#{loginController.nombre}" id="username"
-                                 required="true" label="username" />
-                    <h:outputLabel for="password" value="Clave:" />
-                    <p:password value="#{loginController.contrasena}" id="password" required="true"
-                                label="password" />
-                    <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
-                        
-                        <p:selectOneRadio id="console" value="#{loginController.tipo}">
-                            <f:selectItem itemLabel="Usuario" itemValue="0" />
-                            <f:selectItem itemLabel="Adminsitrador" itemValue="1" />
-                           
-                        </p:selectOneRadio>
-                    </h:panelGrid>
-                    
+        <div>
+            <h:form style="padding-left: 515px">
+                <p:panel header="Bienvenido" style="width: 300px;
+                         height: 175px;
+                         background-image: url(img/header.jpg);
+                         background-size: cover;">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputLabel for="username" value="Usuario:" style="color: #ffffff;"/>
+                        <p:inputText value="#{loginController.nombre}" id="username"
+                                     required="true" label="username" />
+                        <h:outputLabel for="password" value="Clave:" style="color: #ffffff;"/>
+                        <p:password value="#{loginController.contrasena}" id="password" required="true"
+                                    label="password" />
                         <p:commandButton id="loginButton" value="Login"
                                          actionListener="#{loginController.verficarLogin()}" update=":mensajes"
-                                         oncomplete="manejarLogin(xhr, status, args)" />
-                       
-                        
-                </h:panelGrid>
-            </p:panel>
-        </h:form>
-            </div>
-      
-       
-      
-
+                                         oncomplete="manejarLogin(xhr, status, args)" style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff" />
+                        <h:panelGrid>
+                            <p:selectOneRadio id="console" value="#{loginController.tipo}" style="color: #ffffff;">
+                                <f:selectItem itemLabel="Usuario" itemValue="0" />
+                                <f:selectItem itemLabel="Adminsitrador" itemValue="1" />
+                            </p:selectOneRadio>
+                        </h:panelGrid>
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+        </div>
     </h:body>
 
 
