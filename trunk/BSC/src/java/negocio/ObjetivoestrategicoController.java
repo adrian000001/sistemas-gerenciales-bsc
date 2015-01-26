@@ -66,7 +66,15 @@ public class ObjetivoestrategicoController implements Serializable {
     private Historial nuevoHistorial;
     private double nuevoVolorIndocador;
     private LineChartModel dateModel;
+ private List<String> noms = null;
 
+    public List<String> getNoms() {
+        return noms;
+    }
+
+    public void setNoms(List<String> noms) {
+        this.noms = noms;
+    }
     public ObjetivoestrategicoController() {
     }
     
@@ -75,8 +83,19 @@ public class ObjetivoestrategicoController implements Serializable {
         histrorial=new ArrayList<>();
         createDateModel();
         Objetivoestrategico preparaNuevo = preparaNuevo();
+        noms=new ArrayList();
+         if (items == null) {
+            items = getFacade().findAll();
+            getItemsNombre();
+        }
     }
-
+ public void getItemsNombre()
+    {
+        for(int i=0;i<items.size();i++)
+        {
+           noms.add(items.get(i).getNombre());
+        }
+    }
     public Objetivoestrategico preparaEdicion() {
         idProvisional = 0;
         setRojo(new Semaforo());

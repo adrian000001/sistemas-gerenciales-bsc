@@ -6,10 +6,12 @@ import negocio.util.JsfUtil.PersistAction;
 import bean.CargoFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.faces.bean.ManagedBean;
@@ -27,10 +29,33 @@ public class CargoController implements Serializable {
     private bean.CargoFacade ejbFacade;
     private List<Cargo> items = null;
     private Cargo selected;
+     private List<String> noms = null;
 
     public CargoController() {
     }
+    @PostConstruct
+    public void init(){
+        noms=new ArrayList();
+         if (items == null) {
+            items = getFacade().findAll();
+            getItemsNombre();
+        }
+    }
 
+    public List<String> getNoms() {
+        return noms;
+    }
+
+    public void setNoms(List<String> noms) {
+        this.noms = noms;
+    }
+     public void getItemsNombre()
+    {
+        for(int i=0;i<items.size();i++)
+        {
+           noms.add(items.get(i).getNombre());
+        }
+    }
     public Cargo getSelected() {
         return selected;
     }

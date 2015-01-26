@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/templateView.xhtml">
+
+        <style>
+            .buttonCode{
+                color: #ffffff;
+                border-radius: 100px;                
+            }
+        </style>
+
+        <ui:define name="title">
+            <h:outputText value="CUADRO DE MANDO INTEGRAL"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="IndicadorListForm">
+                <p:panel header="CUADRO DE MANDO INTEGRAL" style="width: 1600px">
+                    <p:dataTable id="datalist" 
+                                 value="#{objetivoestrategicoindicadorController.items}" 
+                                 var="item"
+                                 rowKey="#{item.objetivoestrategicoindicadorPK}" widgetVar="objTable"
+                                 >                      
+
+
+
+
+                        <p:column filterBy="#{item.objetivoestrategico.idPerspectiva.nombre}" headerText="PERSPECTIVA" footerText="exact" filterMatchMode="exact">
+                            <f:facet name="filter">
+                                <p:selectOneMenu onchange="PF('objTable').filter()" >
+                                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
+                                    <f:selectItems value="#{perspectivaController.itemsNom}" />
+                                </p:selectOneMenu>
+                            </f:facet>
+                            <h:outputText value="#{item.objetivoestrategico.idPerspectiva.nombre}" />
+                        </p:column>
+                        
+                        <p:column filterBy="#{item.objetivoestrategico.nombre}" headerText="OBJETIVO" footerText="exact" filterMatchMode="exact">
+                            <f:facet name="filter">
+                                <p:selectOneMenu onchange="PF('objTable').filter()" >
+                                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
+                                    <f:selectItems value="#{objetivoestrategicoController.noms}" />
+                                </p:selectOneMenu>
+                            </f:facet>
+                            <h:outputText value="#{item.objetivoestrategico.nombre}" />
+                        </p:column>
+                        
+                        
+                        <p:column style="width: 115px">
+                            <f:facet name="header">
+                                <h:outputText value="INDICADOR"/>
+                            </f:facet>
+                            <p:inputTextarea readonly="true" cols="15" rows="3" value="#{item.indicador.nombre}"/>
+                        </p:column>
+                        <p:column style="width: 115px">
+                            <f:facet name="header">
+                                <h:outputText value="KPI"/>
+                            </f:facet>
+                            <p:inputTextarea readonly="true" cols="15" rows="3" value="#{item.indicador.kpi}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="UNIDADES"/>
+                            </f:facet>
+                            <h:outputText value="#{item.indicador.unidades}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.indicador.idPersonaResponsable.idCargo.nombre}" headerText="RESPONSABLE" footerText="exact" filterMatchMode="exact">
+                            <f:facet name="filter">
+                                <p:selectOneMenu onchange="PF('objTable').filter()" >
+                                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
+                                    <f:selectItems value="#{cargoController.noms}" />
+                                </p:selectOneMenu>
+                            </f:facet>
+                            <h:outputText value="#{item.indicador.idPersonaResponsable.idCargo.nombre}" />
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="BASE"/>
+                            </f:facet>
+                            <h:outputText value="#{item.indicador.base}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="META"/>
+                            </f:facet>
+                            <h:outputText value="#{item.indicador.meta}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="VALOR"/>
+                            </f:facet>
+                            <h:outputText value="#{item.valorActual}"/>
+                        </p:column>
+
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="TIEMPO DE MEDICION"/>
+                            </f:facet>
+                            <h:outputText value="#{item.indicador.tiempoMedicion}"/>
+                        </p:column>
+                        <p:column style="width:16px">
+                            <p:rowToggler />
+                        </p:column>
+                        <p:rowExpansion>
+                            <h:panelGrid columns="1">
+                                <p:dataTable var="semafo" 
+                                             value="#{item.semaforoIndicador}" id="metasTibl2" > 
+
+                                    <p:column headerText="COLOR">
+
+                                        <p:graphicImage value ="#{semafo.color}" />
+                                    </p:column>
+                                    <p:column headerText="LIMITE SUPERIOR">
+
+                                        <h:outputText value="#{semafo.ls}"/>
+                                    </p:column>
+                                    <p:column headerText="LIMITE INFERIOR">
+
+                                        <h:outputText value="#{semafo.li}"/>
+                                    </p:column>
+
+                                </p:dataTable>
+                            </h:panelGrid>
+                        </p:rowExpansion>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

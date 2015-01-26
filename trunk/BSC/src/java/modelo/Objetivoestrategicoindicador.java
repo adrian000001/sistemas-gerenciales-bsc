@@ -7,6 +7,8 @@ package modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -146,6 +148,33 @@ public class Objetivoestrategicoindicador implements Serializable {
                 }
             }
         return res;
+    }                          
+
+     public  List<Semaforo2> getSemaforoIndicador(){
+       ArrayList<Semaforo2> listaColor =new ArrayList();
+      
+            for (Semaforo s:indicador.getSemaforoCollection()){
+                Semaforo2 s2=new Semaforo2();
+                if(s.getColor()=='v'){
+                    s2.setColor("/resources/images/verde.png");
+                    
+                }
+                if(s.getColor()=='n')
+                {
+                     s2.setColor("/resources/images/naranja.png");
+                }
+                if(s.getColor()=='r')
+                {
+                     s2.setColor("/resources/images/rojo.png");
+                }
+                System.out.println("SEMAINF " +s.getLimiteInferior());
+                System.out.println("SEMASUP " +s.getLimiteSuperior());
+                s2.setLi(String.valueOf(s.getLimiteInferior()));
+                s2.setLs(String.valueOf(s.getLimiteSuperior()));
+                listaColor.add(s2);
+                
+            }
+        return listaColor;
     }
     
     public double getDesempeño(){

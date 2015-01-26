@@ -6,10 +6,12 @@ import negocio.util.JsfUtil.PersistAction;
 import bean.PersonaFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.faces.bean.ManagedBean;
@@ -26,11 +28,15 @@ public class PersonaController implements Serializable {
     @EJB
     private bean.PersonaFacade ejbFacade;
     private List<Persona> items = null;
+    
     private Persona selected;
 
     public PersonaController() {
     }
+     
 
+   
+   
     public Persona getSelected() {
         return selected;
     }
