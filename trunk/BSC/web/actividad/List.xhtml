@@ -16,8 +16,12 @@
         <ui:define name="body">
             <h:form id="ActividadListForm">
                 <p:panel header="LISTA DE ACTIVIDADES">
-                    <p:dataTable id="datalist" value="#{actividadController.items}" var="item"
-                                 selectionMode="single" selection="#{actividadController.selected}"
+                    <p:dataTable id="datalist" 
+                                 value="#{actividadController.items}" 
+                                 var="item"
+                                 selectionMode="single" 
+                                 selection="#{actividadController.selected}"
+                                 widgetVar="tablaActividades"
                                  paginator="true"
                                  rowKey="#{item.idActividad}"
                                  rows="10"
@@ -33,7 +37,12 @@
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>
                         </p:column>
-                        <p:column sortBy="#{item.idObjetivoEstrategico.nombre}">
+                        <p:column sortBy="#{item.idObjetivoEstrategico.nombre}" filterBy="#{item.idObjetivoEstrategico.nombre}" filterMatchMode="in" >
+                            <f:facet name="filter">
+                                <p:selectCheckboxMenu label="Seleccione" onchange="PF('tablaActividades').filter()" style="width: 140px" >
+                                    <f:selectItems value="#{objetivoestrategicoController.items}" var="it" itemValue="#{it.nombre}" itemLabel="#{it.nombre}"/>
+                                </p:selectCheckboxMenu>
+                            </f:facet>
                             <f:facet name="header">
                                 <h:outputText value="OBJETIVO ESTRATEGICO"/>
                             </f:facet>
@@ -67,15 +76,15 @@
                                 <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>
                         </p:column>
-                        
+
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="AVANCE"/>
                             </f:facet>
                             <p:progressBar style="color: yellowgreen; background-color: black; text-emphasis-color: red" value="#{item.avance}" labelTemplate="#{item.avance}%" displayOnly="true"/>
                         </p:column>
-                        
-                        
+
+
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="NUEVO" actionListener="#{actividadController.prepareCreate}" update=":ActividadCreateForm" oncomplete="PF('ActividadCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="VER" update=":ActividadViewForm" oncomplete="PF('ActividadViewDialog').show()" disabled="#{empty actividadController.selected}"/>
