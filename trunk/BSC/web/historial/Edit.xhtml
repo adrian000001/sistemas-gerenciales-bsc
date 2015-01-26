@@ -26,8 +26,20 @@
                                            itemValue="#{idIndicadorItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{historialController.update}" value="#{bundle.Save}" update="display,:HistorialListForm:datalist,:growl" oncomplete="handleSubmit(args, 'HistorialEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="HistorialEditDialog.hide()"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             actionListener="#{historialController.update}" title="Guardar" update="display,:HistorialListForm:datalist,:growl" oncomplete="handleSubmit(args, 'HistorialEditDialog');"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             title="Cancelar" onclick="HistorialEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

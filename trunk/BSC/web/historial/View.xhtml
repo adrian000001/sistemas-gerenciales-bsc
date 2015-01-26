@@ -23,7 +23,13 @@
                         <h:outputText value="#{bundle.ViewHistorialLabel_idIndicador}"/>
                         <h:outputText value="#{historialController.selected.idIndicador}" title="#{bundle.ViewHistorialTitle_idIndicador}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="HistorialViewDialog.hide()"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             title="Cerrar" onclick="HistorialViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -35,8 +35,20 @@
                                            itemValue="#{objetivoestrategicoItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{objetivoestrategicoindicadorController.update}" value="#{bundle.Save}" update="display,:ObjetivoestrategicoindicadorListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ObjetivoestrategicoindicadorEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="ObjetivoestrategicoindicadorEditDialog.hide()"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             actionListener="#{objetivoestrategicoindicadorController.update}" title="Guardar" update="display,:ObjetivoestrategicoindicadorListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ObjetivoestrategicoindicadorEditDialog');"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             title="Cancelar" onclick="ObjetivoestrategicoindicadorEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

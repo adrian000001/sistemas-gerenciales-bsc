@@ -40,10 +40,34 @@
                             <h:outputText value="#{item.nombre}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{cargoController.prepareCreate}" update=":CargoCreateForm" oncomplete="PF('CargoCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CargoViewForm" oncomplete="PF('CargoViewDialog').show()" disabled="#{empty cargoController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CargoEditForm" oncomplete="PF('CargoEditDialog').show()" disabled="#{empty cargoController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{cargoController.destroy}" update=":growl,datalist" disabled="#{empty cargoController.selected}"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="createButton" icon="ui-icon-plus"   title="Crear" actionListener="#{cargoController.prepareCreate}" update=":CargoCreateForm" oncomplete="PF('CargoCreateDialog').show()"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="viewButton"   icon="ui-icon-search" title="Ver" update=":CargoViewForm" oncomplete="PF('CargoViewDialog').show()" disabled="#{empty cargoController.selected}"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="editButton"   icon="ui-icon-pencil" title="Editar" update=":CargoEditForm" oncomplete="PF('CargoEditDialog').show()" disabled="#{empty cargoController.selected}"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="deleteButton" icon="ui-icon-trash"  title="Eliminar" actionListener="#{cargoController.destroy}" update=":growl,datalist" disabled="#{empty cargoController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

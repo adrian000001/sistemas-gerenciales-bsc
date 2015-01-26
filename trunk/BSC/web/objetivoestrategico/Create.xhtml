@@ -197,7 +197,13 @@
                                 </h:panelGrid>
                             </h:panelGrid>
                         </h:panelGrid>
-                        <p:commandButton value="AGREGAR" 
+                        <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             title="Agregar" 
                                          action ="#{objetivoestrategicoController.agregarIndicador()}"
                                          update="metasTbl,meta, definicion,aclaracion,conceptualizacion,nombreIndicador,formula,unidades,periodicidad,kpi,glosario,valorBase,valorMeta,verdeMayor, verdeMenor, naranjaMayor,naranjaMenor,rojoMayor,rojoMenor"/>
                     </h:panelGrid>
@@ -247,8 +253,20 @@
                             <p:inputTextarea  style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.indicador.kpi}" />
                         </p:column>
                     </p:dataTable>
-                    <p:commandButton actionListener="#{objetivoestrategicoController.create}" value="GUARDAR" update="display,:ObjetivoestrategicoListForm:datalist,:growl" oncomplete="handleSubmit(args,'ObjetivoestrategicoCreateDialog');"/>
-                    <p:commandButton value="CANCELAR" onclick="ObjetivoestrategicoCreateDialog.hide()"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             actionListener="#{objetivoestrategicoController.create}" title="Guardar" update="display,:ObjetivoestrategicoListForm:datalist,:growl" oncomplete="handleSubmit(args,'ObjetivoestrategicoCreateDialog');"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             title="Cancelar" onclick="ObjetivoestrategicoCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

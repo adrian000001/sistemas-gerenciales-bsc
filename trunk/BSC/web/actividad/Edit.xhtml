@@ -67,8 +67,20 @@
                                     title="Fecha Fin "  
                                     showOn="button"/>
                     </h:panelGrid>
-                    <p:commandButton actionListener="#{actividadController.update}" value="GUARDAR" update="display,:ActividadListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ActividadEditDialog');"/>
-                    <p:commandButton value="CANCELAR" onclick="ActividadEditDialog.hide()"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             actionListener="#{actividadController.update}" title="Guardar" update="display,:ActividadListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ActividadEditDialog');"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             title="Cancelar" onclick="ActividadEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

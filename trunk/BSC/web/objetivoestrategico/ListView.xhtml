@@ -98,7 +98,13 @@
                             </h:panelGrid>
                         </p:rowExpansion>
                         <f:facet name="footer">
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="VER"  update=":ObjetivoestrategicoViewForm" oncomplete="PF('ObjetivoestrategicoViewDialog').show()" disabled="#{empty objetivoestrategicoController.selected}"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="viewButton"   icon="ui-icon-search" alt="Ver"  update=":ObjetivoestrategicoViewForm" oncomplete="PF('ObjetivoestrategicoViewDialog').show()" disabled="#{empty objetivoestrategicoController.selected}"/>
                              </f:facet>
                     </p:dataTable>
                 </p:panel>

@@ -31,7 +31,13 @@
                     <h:outputText value="#{item.estrategia}"/>
                 </p:column>
                 <f:facet name="footer">
-                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="VER" update=":EstrategiaglobalViewForm" oncomplete="PF('EstrategiaglobalViewDialog').show()" disabled="#{empty estrategiaglobalController.selected}"/>
+                    <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="viewButton" icon="ui-icon-search" title="Ver" update=":EstrategiaglobalViewForm" oncomplete="PF('EstrategiaglobalViewDialog').show()" disabled="#{empty estrategiaglobalController.selected}"/>
                 </f:facet>
             </p:dataTable>
             <h:commandLink style="padding-left: 1000px">
