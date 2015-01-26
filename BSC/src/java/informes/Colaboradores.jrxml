@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a647c757-3680-4b05-b76a-1c69534fa01a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#BFBFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#E6E6FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#517DA2">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Colaboradore" uuid="3641478d-1b28-4045-85cd-7bc91ec933de">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     cargo.`nombre` AS cargo_nombre,
+     persona.`cedula` AS persona_cedula,
+     persona.`nombre` AS persona_nombre
+FROM
+     `cargo` cargo INNER JOIN `persona` persona ON cargo.`idCargo` = persona.`idCargo`]]>
+		</queryString>
+		<field name="cargo_nombre" class="java.lang.String"/>
+		<field name="persona_cedula" class="java.lang.String"/>
+		<field name="persona_nombre" class="java.lang.String"/>
+	</subDataset>
+	<queryString>
+		<![CDATA[SELECT 1 AS DUMMY]]>
+	</queryString>
+	<field name="DUMMY" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="90" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-21" y="-20" width="595" height="110" forecolor="#000000" backcolor="#0066FF" uuid="22d38278-8de1-4589-a2ac-bb495c60a360"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="41" y="0" width="470" height="39" forecolor="#FFFFFF" uuid="68f37192-1481-40ba-89bc-b9469274f512"/>
+				<textElement>
+					<font size="28"/>
+				</textElement>
+				<text><![CDATA[Unidad Educativa Misioneros Oblatos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="361" y="70" width="194" height="20" forecolor="#FFFFFF" uuid="e95ff3e6-1e59-4429-8ff1-09193c043093"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Colaboradores de la empresa]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="33" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="159" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table 1" style="table 1" x="0" y="0" width="555" height="159" uuid="880255c2-1097-4474-a9ef-541366a104c5"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Colaboradore" uuid="c2f0788d-4019-4829-8d64-17e74a67fbdb">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="177" uuid="b2f6a6d3-7866-4fed-a190-3bbf7a440b93">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="9976348c-d113-4587-8bb9-3c766aa77a68"/>
+								<text><![CDATA[Cedula]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="25" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="0cf3ec55-776f-4d8b-8add-0c1d13231233"/>
+								<textFieldExpression><![CDATA[$F{persona_cedula}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="174" uuid="a872548b-a054-4683-a744-e51f2369d19f">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="b98d1015-8403-466c-97eb-a29c712df374"/>
+								<text><![CDATA[Nombre y Apellido]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="25" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="37d8f4d1-e5b1-4420-87f2-9a886e00297a"/>
+								<textFieldExpression><![CDATA[$F{persona_nombre}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="203" uuid="1d443c1a-95ec-4114-baf8-b293632d26b2">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="ca64a60a-dcd1-4eb8-a8f2-fe2b2f6542ed"/>
+								<text><![CDATA[Cargo]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="25" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="f61ea410-c090-4072-818e-2f9d4205d1b8"/>
+								<textFieldExpression><![CDATA[$F{cargo_nombre}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="95" splitType="Stretch">
+			<staticText>
+				<reportElement x="138" y="36" width="285" height="20" uuid="1f0787ed-611a-4432-b21d-b4867122f37b"/>
+				<text><![CDATA[Se listan todas las presonas que trabajan en la empresa]]></text>
+			</staticText>
+			<image>
+				<reportElement x="455" y="0" width="100" height="93" uuid="0990f210-b71b-4309-97e0-df350e9af03f"/>
+				<imageExpression><![CDATA["C:\\Users\\Oak\\Documents\\NetBeansProjects\\trunk\\BSC\\src\\java\\informes\\img\\logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="22" width="100" height="20" uuid="b5892bfa-1b50-4a3c-832b-5a335c783205"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="22" width="100" height="20" uuid="05797acf-048c-4bdd-a425-2b1fdb0b5ea0"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

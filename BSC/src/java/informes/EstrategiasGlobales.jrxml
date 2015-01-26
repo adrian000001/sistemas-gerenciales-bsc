@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="347a52ee-4afe-4e5b-bc74-a0079cbf1690">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#87CEFA">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE7FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#6495ED">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFD6FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="EstrategiasGlobales" uuid="76d6b280-a1d9-43bc-9f16-fdec1a7f992f">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     estrategiaglobal.`idEstrategiaGlobal` AS estrategiaglobal_idEstrategiaGlobal,
+     estrategiaglobal.`estrategia` AS estrategiaglobal_estrategia
+FROM
+     `estrategiaglobal` estrategiaglobal]]>
+		</queryString>
+		<field name="estrategiaglobal_idEstrategiaGlobal" class="java.lang.Integer"/>
+		<field name="estrategiaglobal_estrategia" class="java.lang.String"/>
+	</subDataset>
+	<queryString>
+		<![CDATA[SELECT 1 AS DUMMY]]>
+	</queryString>
+	<field name="DUMMY" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="98" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-19" y="-19" width="840" height="115" backcolor="#0066FF" uuid="da3014d5-099f-4a0b-b2c1-8d8a4e768a95"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="138" y="0" width="470" height="39" forecolor="#FFFFFF" uuid="befd514a-b26d-4383-9dcf-1af320110add"/>
+				<textElement>
+					<font size="28"/>
+				</textElement>
+				<text><![CDATA[Unidad Educativa Misioneros Oblatos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="666" y="55" width="136" height="20" forecolor="#FFFFFF" uuid="411582c5-13ce-4384-bcc7-c9d1fd368cd4"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Estrategias Globales]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="38" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="137" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table 2" style="table 2" x="115" y="0" width="573" height="137" uuid="600f250c-995e-41ee-9758-766f71fd9f51"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="EstrategiasGlobales" uuid="eaaf457c-686c-4192-818e-b8be9ac88c9f">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="22f12d47-4ab1-403e-ac90-9dce700edad7">
+						<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="71d991e2-4d8c-46ee-9d04-94619eeed207"/>
+								<text><![CDATA[            ID]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 2_CH" height="37" rowSpan="1"/>
+						<jr:detailCell style="table 2_TD" height="32" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30" uuid="40c9b37c-2e0c-4c4d-bfec-b3c35f2a730f"/>
+								<textFieldExpression><![CDATA[$F{estrategiaglobal_idEstrategiaGlobal}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="479" uuid="6061509e-0752-4525-b602-c7889b1c95c0">
+						<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="173" y="0" width="90" height="30" uuid="e23aa290-9c58-4b1e-aca6-d7e20677fbf8"/>
+								<text><![CDATA[      Estrategia]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 2_CH" height="37" rowSpan="1"/>
+						<jr:detailCell style="table 2_TD" height="32" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="479" height="30" uuid="4d3ae340-11bc-43f2-87bc-a2d0a81d541e"/>
+								<textFieldExpression><![CDATA[$F{estrategiaglobal_estrategia}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="93" splitType="Stretch">
+			<staticText>
+				<reportElement x="291" y="34" width="234" height="20" uuid="99fedeb7-7d66-4442-a270-515c05db46aa"/>
+				<text><![CDATA[Se presentan las estrategias globales propuestas]]></text>
+			</staticText>
+			<image>
+				<reportElement x="702" y="0" width="100" height="93" uuid="d702cb29-9f4d-46c6-9407-c5226a158719"/>
+				<imageExpression><![CDATA["C:\\Users\\Oak\\Documents\\NetBeansProjects\\trunk\\BSC\\src\\java\\informes\\img\\logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="22" width="100" height="20" uuid="fcb15d91-cd44-4a66-8d9d-0cf0fcbdf73b"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="702" y="22" width="100" height="20" uuid="a58e6782-fbb8-4326-a28c-4e70d68a49a7"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="63d830ea-227f-4ca1-8986-fa4536e500f7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="196"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#6495ED">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFD6FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Actividades" uuid="7867b928-aa82-4c0f-8e9c-e1b3b5480be2">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     actividad.`nombre` AS actividad_nombre,
+     actividad.`control` AS actividad_control,
+     actividad.`fechaInicio` AS actividad_fechaInicio,
+     actividad.`fechaFin` AS actividad_fechaFin,
+     actividad.`avance` AS actividad_avance,
+     objetivoestrategico.`nombre` AS objetivoestrategico_nombre
+FROM
+     `objetivoestrategico` objetivoestrategico INNER JOIN `actividad` actividad ON objetivoestrategico.`idObjetivoEstrategico` = actividad.`idObjetivoEstrategico`]]>
+		</queryString>
+		<field name="objetivoestrategico_nombre" class="java.lang.String"/>
+		<field name="actividad_nombre" class="java.lang.String"/>
+		<field name="actividad_control" class="java.lang.String"/>
+		<field name="actividad_fechaInicio" class="java.sql.Date"/>
+		<field name="actividad_fechaFin" class="java.sql.Date"/>
+		<field name="actividad_avance" class="java.math.BigDecimal"/>
+		<group name="objetivoestrategico_nombre">
+			<groupExpression><![CDATA[$F{objetivoestrategico_nombre}]]></groupExpression>
+		</group>
+	</subDataset>
+	<queryString>
+		<![CDATA[SELECT 1 AS DYMMY]]>
+	</queryString>
+	<field name="DYMMY" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="98" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-20" y="-18" width="840" height="115" backcolor="#0066FF" uuid="007ff80c-888e-4061-9a0b-5287c03195d2"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="137" y="1" width="470" height="39" forecolor="#FFFFFF" uuid="87c1763d-7d9c-4093-81ef-39578c019762"/>
+				<textElement>
+					<font size="28"/>
+				</textElement>
+				<text><![CDATA[Unidad Educativa Misioneros Oblatos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="665" y="56" width="136" height="20" forecolor="#FFFFFF" uuid="20c72fcb-b500-4ec9-82b6-1e61dc1fc78e"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Actividades]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="26" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="222" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="table" x="0" y="0" width="802" height="222" uuid="da645271-50c2-417c-87fb-56f2ea7429f5"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Actividades" uuid="3826c3bf-ad84-4821-bd42-00332e3eaaf7">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="174" uuid="d602a647-9d39-4298-95c3-b004c48e5408">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="38" y="0" width="101" height="30" uuid="b25fe306-1356-4d7b-af9f-c224f436a646"/>
+								<text><![CDATA[Objetivo Estrategico]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="174" height="20" uuid="34df6225-a77c-4a86-90fc-6e7d40d34ec2"/>
+								<textFieldExpression><![CDATA[$F{objetivoestrategico_nombre}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="179" uuid="98bfe845-e7fd-4de6-9089-bcfd10157431">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="51" y="0" width="52" height="30" uuid="4249e139-0217-4907-b1ea-7b5528a87627"/>
+								<text><![CDATA[Actividad]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="179" height="20" uuid="fde556e6-108c-4fdd-a74a-b722fe2cd4f7"/>
+								<textFieldExpression><![CDATA[$F{actividad_nombre}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="189" uuid="90cc85ac-65b8-4fe5-a252-7f145e933a2b">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="67" y="0" width="40" height="30" uuid="4d078ed9-560a-4ec6-b84e-0a2e3efc6166"/>
+								<text><![CDATA[Control]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="189" height="20" uuid="bf5f233e-b532-4d64-ba23-00c0f8a9bf4f"/>
+								<textFieldExpression><![CDATA[$F{actividad_control}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="7c0cb16a-b4ba-4e26-976d-e94075b77def">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="76" height="30" uuid="017242e9-0b7e-4ab8-9c76-26588f70a1dc"/>
+								<text><![CDATA[Fecha Incio]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="80" height="20" uuid="31d35871-25af-4c85-8774-977709bc57a6"/>
+								<textFieldExpression><![CDATA[$F{actividad_fechaInicio}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="81" uuid="15562016-979b-4f99-80e4-f32dcfb7910c">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="22" y="0" width="50" height="30" uuid="a803d9fe-8cd4-4fc0-b4dc-f29fee80df86"/>
+								<text><![CDATA[Fecha Fin]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="81" height="20" uuid="ff4d6523-ef80-4051-a755-cead0b5180d1"/>
+								<textFieldExpression><![CDATA[$F{actividad_fechaFin}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="98" uuid="1a3112d6-e311-4a99-ab8e-1e8e96b861eb">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="966b4f05-7bda-48b6-adfd-6a987ae8a77c"/>
+								<text><![CDATA[Avance]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="98" height="20" uuid="0ed93e7f-9e4e-4f98-815f-a8cdd3f12864"/>
+								<textFieldExpression><![CDATA[$F{actividad_avance}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="95" splitType="Stretch">
+			<staticText>
+				<reportElement x="319" y="36" width="178" height="20" uuid="a3c450e5-e0e4-47a8-97a2-b7e9eceb3386"/>
+				<text><![CDATA[Tareas por cada objetivo estrategico]]></text>
+			</staticText>
+			<image>
+				<reportElement x="701" y="0" width="100" height="93" uuid="6ec5be28-c557-4226-88b5-b1e70375df87"/>
+				<imageExpression><![CDATA["C:\\Users\\Oak\\Documents\\NetBeansProjects\\trunk\\BSC\\src\\java\\informes\\img\\logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="22" width="100" height="20" uuid="40a9f851-f43e-444c-9bfc-683998782ef7"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="701" y="22" width="100" height="20" uuid="e3d61d7e-4601-4e17-854d-49e06978087b"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

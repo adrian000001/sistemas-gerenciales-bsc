@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a3041fc-13c3-4475-8be5-71ac4a0a00df">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="32"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#6495ED">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFD6FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="ObjetivosEstrategicos" uuid="6666c8bb-cc55-43b2-9122-c6800748dceb">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     objetivoestrategicoindicador.`meta` AS objetivoestrategicoindicador_meta,
+     perspectiva.`nombre` AS perspectiva_nombre,
+     estrategiaglobal.`estrategia` AS estrategiaglobal_estrategia,
+     objetivoestrategico.`nombre` AS objetivoestrategico_nombre
+FROM
+     `estrategiaglobal` estrategiaglobal INNER JOIN `objetivoestrategico` objetivoestrategico ON estrategiaglobal.`idEstrategiaGlobal` = objetivoestrategico.`idEstrategiaGlobal`
+     INNER JOIN `perspectiva` perspectiva ON objetivoestrategico.`idPerspectiva` = perspectiva.`idPerspectiva`
+     INNER JOIN `objetivoestrategicoindicador` objetivoestrategicoindicador ON objetivoestrategico.`idObjetivoEstrategico` = objetivoestrategicoindicador.`idObjetivoEstrategico`]]>
+		</queryString>
+		<field name="objetivoestrategicoindicador_meta" class="java.lang.String"/>
+		<field name="perspectiva_nombre" class="java.lang.String"/>
+		<field name="estrategiaglobal_estrategia" class="java.lang.String"/>
+		<field name="objetivoestrategico_nombre" class="java.lang.String"/>
+	</subDataset>
+	<queryString>
+		<![CDATA[SELECT 1 AS DUMMY]]>
+	</queryString>
+	<field name="DUMMY" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="92" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-21" y="-19" width="595" height="110" forecolor="#000000" backcolor="#0066FF" uuid="c8024922-1fe9-4f5f-9bef-1c65c887fcbe"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="48" y="0" width="470" height="39" forecolor="#FFFFFF" uuid="2bb39f11-7f2b-44d9-ad0f-9a78137d7abd"/>
+				<textElement>
+					<font size="28"/>
+				</textElement>
+				<text><![CDATA[Unidad Educativa Misioneros Oblatos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="414" y="60" width="141" height="20" forecolor="#FFFFFF" uuid="147a9a4b-b627-43db-9522-1305fc9634a4"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Objetivos Estrategicos]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="29" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="163" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table 1" style="table 1" x="0" y="0" width="555" height="163" uuid="4a69d626-45af-4f8d-a7cb-d8064d128985"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="ObjetivosEstrategicos" uuid="6630cb91-90fc-43ee-918e-e782e004b1a4">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="152" uuid="449f2c6d-2e2d-4320-8fca-f6868b1b8c09">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="27" y="0" width="97" height="30" uuid="0ad01c48-8929-4468-9377-1dbf3f07debf"/>
+								<text><![CDATA[Objetivo Estratefico]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="37" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="152" height="37" uuid="56e3b660-33b4-4ad5-91f1-1f193e649ab3"/>
+								<textFieldExpression><![CDATA[$F{objetivoestrategico_nombre}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="168" uuid="ce94449b-b201-43e9-91c5-2c117e74ca61">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="72" y="0" width="25" height="30" uuid="18e2bdd4-a8b3-480f-b397-d18a64291faf"/>
+								<text><![CDATA[Meta]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="37" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="168" height="37" uuid="a06d9a44-f252-45fe-80ca-8243a7e46872"/>
+								<textFieldExpression><![CDATA[$F{objetivoestrategicoindicador_meta}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="144" uuid="7dab2308-b74b-4d4f-a5a3-1e5c87eb5990">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="29" y="0" width="90" height="30" uuid="d3e2ea3e-87ec-4f1a-9f13-da11955cf471"/>
+								<text><![CDATA[Estrategia Global]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="37" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="144" height="37" uuid="41fefc52-cf72-4625-9d80-e65fab6aa24e"/>
+								<textFieldExpression><![CDATA[$F{estrategiaglobal_estrategia}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="af0204e6-aeba-4a2a-9a6c-946ec6b6e80e">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="6db2c196-c5f3-4a5e-97d6-9e77094fbb6e"/>
+								<text><![CDATA[Perspectiva]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="37" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="37" uuid="dc75907a-cc93-4b18-9a16-f8ed7bb1d4ca"/>
+								<textFieldExpression><![CDATA[$F{perspectiva_nombre}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="93" splitType="Stretch">
+			<staticText>
+				<reportElement x="199" y="19" width="161" height="20" uuid="1b0cd93a-f83b-43dd-9086-f0c22f25be9d"/>
+				<text><![CDATA[Lista de los objetivos estrategicos]]></text>
+			</staticText>
+			<image>
+				<reportElement x="455" y="0" width="100" height="93" uuid="6123abac-ff15-4ba4-8301-28ec6453da2b"/>
+				<imageExpression><![CDATA["C:\\Users\\Oak\\Documents\\NetBeansProjects\\trunk\\BSC\\src\\java\\informes\\img\\logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="22" width="100" height="20" uuid="a17c0aa7-3d02-46b0-86cd-1363ec129e91"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="22" width="100" height="20" uuid="89cef6ee-6b46-4484-a3f9-e91e1d4bd5a2"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
