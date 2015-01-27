@@ -49,14 +49,9 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPersonaTitle_idCargo}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idCargo}"/>
+                            <h:outputText value="#{item.idCargo.nombre}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPersonaTitle_usuario}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.usuario}"/>
-                        </p:column>
+                       
                         <f:facet name="footer">
                             <p:commandButton style="height: 75px;
                                              width: 75px;
