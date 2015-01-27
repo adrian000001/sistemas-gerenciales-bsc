@@ -46,7 +46,7 @@ public class Objetivoestrategico implements Serializable {
     private Integer idObjetivoEstrategico;
     @Column(name = "numero")
     private Integer numero;
-    @Size(max = 150)
+    @Size(max = 1000)
     @Column(name = "nombre")
     private String nombre;
     @JoinColumn(name = "idEstrategiaGlobal", referencedColumnName = "idEstrategiaGlobal")

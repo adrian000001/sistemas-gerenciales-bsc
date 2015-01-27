@@ -52,10 +52,10 @@ public class Indicador implements Serializable {
     @Basic(optional = false)
     @Column(name = "idIndicador")
     private Integer idIndicador;
-    @Size(max = 45)
+    @Size(max = 250)
     @Column(name = "nombre")
     private String nombre;
-    @Size(max = 45)
+    @Size(max = 250)
     @Column(name = "formula")
     private String formula;
     @Size(max = 20)

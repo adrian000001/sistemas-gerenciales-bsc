@@ -40,7 +40,7 @@ public class Objetivoestrategicoindicador implements Serializable {
     public static String findByIdObjetivoEstrategico="Objetivoestrategicoindicador.findByIdObjetivoEstrategico";
     @EmbeddedId
     protected ObjetivoestrategicoindicadorPK objetivoestrategicoindicadorPK;
-    @Size(max = 100)
+    @Size(max = 250)
     @Column(name = "meta")
     private String meta;
     @Size(max = 100)
