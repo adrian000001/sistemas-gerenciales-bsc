@@ -29,7 +29,8 @@
                             <f:selectItems value="#{estrategiaglobalController.itemsAvailableSelectOne}"
                                            var="idEstrategiaGlobalItem"
                                            itemValue="#{idEstrategiaGlobalItem}"
-                                           itemLabel="#{idEstrategiaGlobalItem.estrategia}"/>
+                                           itemLabel="#{idEstrategiaGlobalItem.idEstrategiaGlobal}"
+                                           itemDescription="#{idEstrategiaGlobalItem.estrategia}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="Perspectiva" 
                                        style="width: 500px"

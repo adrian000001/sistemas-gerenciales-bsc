@@ -32,19 +32,25 @@
                 </p:column>
                 <f:facet name="footer">
                     <p:commandButton style="height: 75px;
-                                             width: 75px;
-                                             background-image: url(../img/fondo-boton.png);
-                                             background-size: 75px;
-                                             border-radius: 50px;
-                                             color:#ffffff"
-                                             id="viewButton" icon="ui-icon-search" title="Ver" update=":EstrategiaglobalViewForm" oncomplete="PF('EstrategiaglobalViewDialog').show()" disabled="#{empty estrategiaglobalController.selected}"/>
+                                     width: 75px;
+                                     background-image: url(../img/fondo-boton.png);
+                                     background-size: 75px;
+                                     border-radius: 50px;
+                                     color:#ffffff"
+                                     id="viewButton" icon="ui-icon-search" title="Ver" update=":EstrategiaglobalViewForm" oncomplete="PF('EstrategiaglobalViewDialog').show()" disabled="#{empty estrategiaglobalController.selected}"/>
+                    <p:commandButton style="height: 75px;
+                                   width: 75px;
+                                   background-image: url(../img/fondo-boton.png);
+                                   background-size: 75px;
+                                   border-radius: 50px;
+                                   color:#ffffff"
+                                   icon="ui-icon-print"
+                                   ajax="false"
+                                   title="Generar Reporte">
+                        <p:dataExporter type="pdf" target="datalist" fileName="Estrategias Globales" pageOnly="true"/>
+                    </p:commandButton>
                 </f:facet>
             </p:dataTable>
-            <h:commandLink style="padding-left: 1000px">
-                 
-                 <p:graphicImage value="PDF.png" />
-                        <p:dataExporter type="pdf" target="datalist" fileName="Estrategias Globales" pageOnly="true"/>
-                    </h:commandLink>
         </p:panel>
     </h:form>
 
