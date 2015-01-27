@@ -35,9 +35,18 @@ public class LoginController implements Serializable {
     private HttpServletRequest httpServletRequest;
     private FacesContext faceContext;
     private FacesMessage facesMessage;
+    private Usuario userSession;
 
     public String getTipo() {
         return tipo;
+    }
+
+    public Usuario getUserSession() {
+        return userSession;
+    }
+
+    public void setUserSession(Usuario userSession) {
+        this.userSession = userSession;
     }
 
     public void setTipo(String tipo) {
@@ -69,15 +78,20 @@ public class LoginController implements Serializable {
     }
 
     public void verficarLogin() {
+
+        System.out.println("holisss" + nombre + "pass" + contrasena);
+
         faceContext = FacesContext.getCurrentInstance();
         httpServletRequest = (HttpServletRequest) faceContext.getExternalContext().getRequest();
         Usuario user = this.getEjbFacade().login(nombre, contrasena, tipo);
+
         if (tipo.equals("0")) {
             if (user != null) {
                 try {
                     httpServletRequest.getSession().setAttribute("sessionUsuario", nombre);
                     httpServletRequest.getSession().setAttribute("tipoSession", "Usuario");
                     facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Acceso Correcto", null);
+                    this.userSession = user;
                     faceContext.addMessage(null, facesMessage);
                     FacesContext.getCurrentInstance().getExternalContext().redirect("/BSC/faces/estrategiaglobal/inicio.xhtml");
 
@@ -85,8 +99,8 @@ public class LoginController implements Serializable {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
-                    facesMessage=new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o contraseña incorrecto", null);
-            faceContext.addMessage(null, facesMessage);
+                facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o contraseña incorrecto", null);
+                faceContext.addMessage(null, facesMessage);
             }
         } else {
             if (user != null) {
@@ -102,13 +116,25 @@ public class LoginController implements Serializable {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
-                    facesMessage=new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o contraseña incorrecto", null);
-            faceContext.addMessage(null, facesMessage);
+                facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o contraseña incorrecto", null);
+                faceContext.addMessage(null, facesMessage);
             }
         }
     }
-    public void Login() {
+    public void Logout() {
+
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+            faceContext.addMessage(null, facesMessage);
+            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
     }
+
+
+
     public LoginController() {
     }
 

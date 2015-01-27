@@ -88,6 +88,12 @@
                                              id="deleteButton" icon="ui-icon-trash"  title="Eliminar" actionListener="#{usuarioController.destroy}" update=":growl,datalist" disabled="#{empty usuarioController.selected}"/>
                         </f:facet>
                     </p:dataTable>
+                                        <h:commandLink>
+
+                     <p:graphicImage value="../resources/images/PDF.png" />
+                        <p:dataExporter type="pdf" target="datalist" fileName="Usuarios" pageOnly="true"/>
+                    </h:commandLink>
+                
                 </p:panel>
             </h:form>
 

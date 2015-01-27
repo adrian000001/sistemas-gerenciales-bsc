@@ -131,6 +131,11 @@
                             </h:panelGrid>
                         </p:rowExpansion>
                     </p:dataTable>
+                    <h:commandLink style="padding-left: 1000px">
+                     <p:graphicImage value="../resources/images/PDF.png" />
+                        <p:dataExporter type="pdf" target="datalist" fileName="Indicadores" pageOnly="true"/>
+                    </h:commandLink>
+               
                 </p:panel>
             </h:form>
 
