@@ -13,9 +13,10 @@
                   modal="true" 
                   resizable="false" 
                   appendTo="@(body)" 
+                  closeOnEscape="true"
                   header="VER OBJETIVO ESTRATEGICO">
             <h:form id="ObjetivoestrategicoViewForm">
-                <h:panelGroup id="display">
+                <h:panelGroup id="display" style="width: 1100px">
                     <h:panelGrid columns="6" rendered="#{objetivoestrategicoController.selected != null}">
                         <p:outputLabel value="Nombre" for="nombre" />
                         <h:inputText readonly="true" id="nombre" 

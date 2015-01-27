@@ -93,8 +93,9 @@
                                              background-size: 75px;
                                              border-radius: 50px;
                                              color:#ffffff"
-                                             update=":IndocadorForm:historialTbl,:IndocadorForm:indicador,:IndocadorForm:periodicidad,:IndocadorForm:formula,:IndocadorForm:unidades,:IndocadorForm:base,:IndocadorForm:meta,:IndocadorForm:glosario,:IndocadorForm:historialTbl,:IndocadorForm:grafico" 
-                                                         oncomplete="PF('IndicadorDialog').show()" icon="ui-icon-pencil" title="Evaluar">
+                                             action ="#{objetivoestrategicoController.evaluar()}"
+                                             update="" 
+                                             icon="ui-icon-pencil" title="Evaluar">
                                             <f:setPropertyActionListener value="#{meta}" target="#{objetivoestrategicoController.metaSeleccionada}" />
                                         </p:commandButton>
                                     </p:column>
@@ -138,7 +139,6 @@
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
-            <ui:include src="Indicador.xhtml"/>
         </ui:define>
     </ui:composition>
 

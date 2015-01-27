@@ -9,6 +9,7 @@ import bean.ObjetivoestrategicoFacade;
 import bean.ObjetivoestrategicoindicadorFacade;
 import bean.SemaforoFacade;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
+import java.io.IOException;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -89,6 +90,21 @@ public class ObjetivoestrategicoController implements Serializable {
             getItemsNombre();
         }
     }
+      
+    public void evaluar(){
+        System.out.println("cargo");
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/BSC/faces/objetivoestrategico/Evaluar.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(ObjetivoestrategicoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void Evaluar(){
+        System.out.println("cargo ");
+        
+    }
+    
  public void getItemsNombre()
     {
         for(int i=0;i<items.size();i++)
