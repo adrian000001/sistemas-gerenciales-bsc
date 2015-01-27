@@ -389,7 +389,8 @@ public class ObjetivoestrategicoController implements Serializable {
 
             ejbFacadeObjEstInd.edit(objEstInd);
         }
-
+        selected.setObjetivoestrategicoindicadorCollection(objEstIndList);
+        ejbFacade.edit(selected);
     }
 
     public void update() {
