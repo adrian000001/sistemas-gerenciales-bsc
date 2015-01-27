@@ -69,11 +69,9 @@ public class LoginController implements Serializable {
     }
 
     public void verficarLogin() {
-        System.out.println("holisss"+nombre +"pass"+contrasena);
         faceContext = FacesContext.getCurrentInstance();
         httpServletRequest = (HttpServletRequest) faceContext.getExternalContext().getRequest();
         Usuario user = this.getEjbFacade().login(nombre, contrasena, tipo);
-        
         if (tipo.equals("0")) {
             if (user != null) {
                 try {
@@ -107,14 +105,10 @@ public class LoginController implements Serializable {
                     facesMessage=new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o contraseña incorrecto", null);
             faceContext.addMessage(null, facesMessage);
             }
-
         }
     }
-
     public void Login() {
-
     }
-
     public LoginController() {
     }
 
