@@ -99,7 +99,7 @@ public class LoginController implements Serializable {
                     httpServletRequest.getSession().setAttribute("tipoSession", "Administrador");
                     facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Acceso Correcto", null);
                     faceContext.addMessage(null, facesMessage);
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("AdministradorPrincipal.xhtml");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("/BSC/faces/estrategiaglobal/List.xhtml");
                 } catch (IOException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
