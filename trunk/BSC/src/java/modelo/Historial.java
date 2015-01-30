@@ -7,6 +7,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -18,10 +19,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -53,6 +56,8 @@ public class Historial implements Serializable {
     @JoinColumn(name = "idIndicador", referencedColumnName = "idIndicador")
     @ManyToOne(optional = false)
     private Indicador idIndicador;
+    @OneToMany(mappedBy = "idhistorial")
+    private Collection<Detallehistorial> detallehistorialCollection;
 
     public Historial() {
     }
@@ -116,6 +121,15 @@ public class Historial implements Serializable {
     @Override
     public String toString() {
         return "modelo.Historial[ idHistorial=" + idHistorial + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Detallehistorial> getDetallehistorialCollection() {
+        return detallehistorialCollection;
+    }
+
+    public void setDetallehistorialCollection(Collection<Detallehistorial> detallehistorialCollection) {
+        this.detallehistorialCollection = detallehistorialCollection;
     }
     
 }
