@@ -84,6 +84,8 @@ public class Indicador implements Serializable {
     private Collection<Objetivoestrategicoindicador> objetivoestrategicoindicadorCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idIndicador",fetch = FetchType.LAZY)
     private Collection<Semaforo> semaforoCollection;
+    @OneToMany(mappedBy = "idindicador")
+    private Collection<Componenteformla> componenteformlaCollection;
 
     public Indicador() {
     }
@@ -227,6 +229,15 @@ public class Indicador implements Serializable {
     @Override
     public String toString() {
         return "modelo.Indicador[ idIndicador=" + idIndicador + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Componenteformla> getComponenteformlaCollection() {
+        return componenteformlaCollection;
+    }
+
+    public void setComponenteformlaCollection(Collection<Componenteformla> componenteformlaCollection) {
+        this.componenteformlaCollection = componenteformlaCollection;
     }
     
 }
