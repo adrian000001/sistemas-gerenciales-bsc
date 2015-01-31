@@ -30,12 +30,15 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import modelo.Componenteformla;
 import modelo.Historial;
 import modelo.Indicador;
 import modelo.Objetivoestrategicoindicador;
 import modelo.ObjetivoestrategicoindicadorPK;
 import modelo.Persona;
 import modelo.Semaforo;
+import negocio.util.Arbol;
+import negocio.util.Validacion;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.DateAxis;
 import org.primefaces.model.chart.LineChartModel;
@@ -63,11 +66,12 @@ public class ObjetivoestrategicoController implements Serializable {
     private Semaforo naranja;
     private Semaforo rojo;
     int idProvisional;
-    private List <Historial> histrorial;
+    private List<Historial> histrorial;
     private Historial nuevoHistorial;
     private double nuevoVolorIndocador;
     private LineChartModel dateModel;
- private List<String> noms = null;
+    private List<String> noms = null;
+    Arbol arbol;
 
     public List<String> getNoms() {
         return noms;
@@ -76,22 +80,23 @@ public class ObjetivoestrategicoController implements Serializable {
     public void setNoms(List<String> noms) {
         this.noms = noms;
     }
+
     public ObjetivoestrategicoController() {
     }
-    
+
     @PostConstruct
     public void init() {
-        histrorial=new ArrayList<>();
+        histrorial = new ArrayList<>();
         createDateModel();
         Objetivoestrategico preparaNuevo = preparaNuevo();
-        noms=new ArrayList();
-         if (items == null) {
+        noms = new ArrayList();
+        if (items == null) {
             items = getFacade().findAll();
             getItemsNombre();
         }
     }
-      
-    public void evaluar(){
+
+    public void evaluar() {
         System.out.println("cargo");
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/BSC/faces/objetivoestrategico/Evaluar.xhtml");
@@ -99,19 +104,57 @@ public class ObjetivoestrategicoController implements Serializable {
             Logger.getLogger(ObjetivoestrategicoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void Evaluar(){
+
+    public void Evaluar() {
         System.out.println("cargo ");
-        
+
     }
-    
- public void getItemsNombre()
-    {
-        for(int i=0;i<items.size();i++)
-        {
-           noms.add(items.get(i).getNombre());
+
+    public void obtieneComponentes() {
+        if (nuevoObjetivoestrategicoindicador.getIndicador().getFormula() != null) {
+            if (!nuevoObjetivoestrategicoindicador.getIndicador().getFormula().equals("")) {
+                String formula = nuevoObjetivoestrategicoindicador.getIndicador().getFormula().replaceAll("\\s", "").trim();
+                Validacion cadena = new Validacion(formula);
+                if (cadena.Exp_Valida()) {
+                    String Exp = formula.trim();
+                    //Borra parentesis del inicio y fin si toda la expresion esta entre parentesis
+                    if (Exp.charAt(0) == '(' && Exp.charAt(Exp.length() - 1) == ')') {
+                        int p = 1, i = 1;
+                        while (p != 0) {
+                            if (Exp.charAt(i) == '(') {
+                                p++;
+                            }
+                            if (Exp.charAt(i) == ')') {
+                                p--;
+                            }
+                            i++;
+                        }
+                        if (i == Exp.length()) {
+                            Exp = Exp.substring(1, Exp.length() - 1);
+                        }
+                    }
+                    arbol = new Arbol(Exp);
+                    arbol.Formar_Arbol();
+                    List term=arbol.listarTerminos();
+                    nuevoObjetivoestrategicoindicador.getIndicador().setComponenteformlaCollection(new ArrayList());
+                    for (int i=0;i<term.size();i++){
+                        System.out.println("term "+term.get(i));
+                        Componenteformla c=new Componenteformla();
+                        c.setDescripcion((String) term.get(i));
+                        c.setIdindicador(nuevoObjetivoestrategicoindicador.getIndicador());
+                        nuevoObjetivoestrategicoindicador.getIndicador().getComponenteformlaCollection().add(c);
+                    }
+                }
+            }
         }
     }
+
+    public void getItemsNombre() {
+        for (int i = 0; i < items.size(); i++) {
+            noms.add(items.get(i).getNombre());
+        }
+    }
+
     public Objetivoestrategico preparaEdicion() {
         idProvisional = 0;
         setRojo(new Semaforo());
@@ -134,21 +177,21 @@ public class ObjetivoestrategicoController implements Serializable {
         return selected;
     }
 
-    public void preparaHistorial(){
-        nuevoHistorial=new Historial();
+    public void preparaHistorial() {
+        nuevoHistorial = new Historial();
     }
-    
-    public void guardarHistorial(){
-        nuevoHistorial=new Historial();
+
+    public void guardarHistorial() {
+        nuevoHistorial = new Historial();
         nuevoHistorial.setValor(new BigDecimal(nuevoVolorIndocador));
         nuevoHistorial.setIdIndicador(metaSeleccionada.getIndicador());
         nuevoHistorial.setFechaMedicion(new Date());
         ejbFacadeHistorial.create(nuevoHistorial);
         ejbFacadeIndicador.edit(metaSeleccionada.getIndicador());
         ejbFacadeObjEstInd.edit(metaSeleccionada);
-        nuevoVolorIndocador=0;
+        nuevoVolorIndocador = 0;
     }
-    
+
     public Objetivoestrategico preparaNuevo() {
         idProvisional = 0;
         setRojo(new Semaforo());
@@ -205,10 +248,10 @@ public class ObjetivoestrategicoController implements Serializable {
         ejbFacadeIndicador.create(nuevoObjetivoestrategicoindicador.getIndicador());
         nuevoObjetivoestrategicoindicador.getIndicador().setSemaforoCollection(semaforos);
         nuevoObjetivoestrategicoindicador.setObjetivoestrategicoindicadorPK(new ObjetivoestrategicoindicadorPK(
-                selected.getIdObjetivoEstrategico(), 
+                selected.getIdObjetivoEstrategico(),
                 nuevoObjetivoestrategicoindicador.getIndicador().getIdIndicador()));
-        for (int i=0;i<semaforos.size();i++) {
-            Semaforo s=(Semaforo) semaforos.get(i);
+        for (int i = 0; i < semaforos.size(); i++) {
+            Semaforo s = (Semaforo) semaforos.get(i);
             s.setIdIndicador(nuevoObjetivoestrategicoindicador.getIndicador());
             System.out.println("Gusrdo semanforo");
             ejbFacadeSemaforo.create(s);
@@ -232,23 +275,23 @@ public class ObjetivoestrategicoController implements Serializable {
         ejbFacade.edit(selected);
     }
 
-    public void verDetalleObjEst(){
+    public void verDetalleObjEst() {
         for (Semaforo s : nuevoObjetivoestrategicoindicador.getIndicador().getSemaforoCollection()) {
-                if (s.getColor() == 'v') {
-                    verde = s;
-                }
-                if (s.getColor() == 'n') {
-                    naranja = s;
-                }
-                if (s.getColor() == 'r') {
-                    rojo = s;
-                }
+            if (s.getColor() == 'v') {
+                verde = s;
             }
+            if (s.getColor() == 'n') {
+                naranja = s;
+            }
+            if (s.getColor() == 'r') {
+                rojo = s;
+            }
+        }
     }
-    
+
     public void eliminarIndicador() {
         if (metaSeleccionada != null) {
-            System.out.println("META "+metaSeleccionada);
+            System.out.println("META " + metaSeleccionada);
             selected.getObjetivoestrategicoindicadorCollection().remove(this.metaSeleccionada);
         } else {
             FacesContext context = FacesContext.getCurrentInstance();
@@ -258,7 +301,7 @@ public class ObjetivoestrategicoController implements Serializable {
 
     public void eliminarIndicadorEdicion() {
         if (metaSeleccionada != null) {
-            System.out.println("META "+metaSeleccionada);
+            System.out.println("META " + metaSeleccionada);
             System.out.println(metaSeleccionada);
             selected.getObjetivoestrategicoindicadorCollection().remove(this.metaSeleccionada);
             ejbFacadeObjEstInd.remove(metaSeleccionada);
@@ -271,7 +314,7 @@ public class ObjetivoestrategicoController implements Serializable {
 
     public void editarIndicador() {
         if (metaSeleccionada != null) {
-            System.out.println("META "+metaSeleccionada);
+            System.out.println("META " + metaSeleccionada);
             selected.getObjetivoestrategicoindicadorCollection().remove(this.metaSeleccionada);
             nuevoObjetivoestrategicoindicador = metaSeleccionada;
             for (Semaforo s : metaSeleccionada.getIndicador().getSemaforoCollection()) {
@@ -293,11 +336,11 @@ public class ObjetivoestrategicoController implements Serializable {
 
     public void editarIndicadorEdicion() {
         if (metaSeleccionada != null) {
-            System.out.println("META "+metaSeleccionada);
+            System.out.println("META " + metaSeleccionada);
             selected.getObjetivoestrategicoindicadorCollection().remove(this.metaSeleccionada);
             nuevoObjetivoestrategicoindicador = metaSeleccionada;
             System.out.println(metaSeleccionada);
-            System.err.println("cuenta "+metaSeleccionada.getIndicador().getSemaforoCollection().size());
+            System.err.println("cuenta " + metaSeleccionada.getIndicador().getSemaforoCollection().size());
             for (Semaforo s : metaSeleccionada.getIndicador().getSemaforoCollection()) {
                 if (s.getColor() == 'v') {
                     verde = s;
@@ -315,34 +358,34 @@ public class ObjetivoestrategicoController implements Serializable {
             context.addMessage(null, new FacesMessage("Seleccione un item de la lista"));
         }
     }
-    
+
     private void createDateModel() {
         System.out.println("INICIA HISTORIAL");
         dateModel = new LineChartModel();
         LineChartSeries series1 = new LineChartSeries();
         series1.setLabel("Historial");
- 
-        for (int i=0;i<histrorial.size();i++){
-            String fecha=String.valueOf(histrorial.get(i).getFechaMedicion().getYear()+1900)+"-"+
-                    String.valueOf(histrorial.get(i).getFechaMedicion().getMonth()+1)+"-"+
-                    String.valueOf(histrorial.get(i).getFechaMedicion().getDate());
+
+        for (int i = 0; i < histrorial.size(); i++) {
+            String fecha = String.valueOf(histrorial.get(i).getFechaMedicion().getYear() + 1900) + "-"
+                    + String.valueOf(histrorial.get(i).getFechaMedicion().getMonth() + 1) + "-"
+                    + String.valueOf(histrorial.get(i).getFechaMedicion().getDate());
             series1.set(fecha, histrorial.get(i).getValor());
-        }        
- 
+        }
+
         dateModel.addSeries(series1);
-         
+
         dateModel.setTitle("HISTORIAL");
         dateModel.setZoom(true);
         dateModel.getAxis(AxisType.Y).setLabel("VALOR");
         DateAxis axis = new DateAxis("FECHA");
         axis.setTickAngle(-50);
-        String fecha=String.valueOf(new Date().getYear()+1900)+"-"+
-                    String.valueOf(new Date().getMonth()+1)+"-"+
-                    String.valueOf(new Date().getDate());
-        System.out.println("FECHA LIMITE "+fecha);
+        String fecha = String.valueOf(new Date().getYear() + 1900) + "-"
+                + String.valueOf(new Date().getMonth() + 1) + "-"
+                + String.valueOf(new Date().getDate());
+        System.out.println("FECHA LIMITE " + fecha);
         axis.setMax(fecha);
         axis.setTickFormat("%#d %b, %y");
-         
+
         dateModel.getAxes().put(AxisType.X, axis);
     }
 
@@ -380,13 +423,18 @@ public class ObjetivoestrategicoController implements Serializable {
             objEstInd.getIndicador().setObjetivoestrategicoindicadorCollection(null);
             Collection<Semaforo> semList = objEstInd.getIndicador().getSemaforoCollection();
             objEstInd.getIndicador().setSemaforoCollection(null);
+            Collection <Componenteformla> componentes=objEstInd.getIndicador().getComponenteformlaCollection();
+            objEstInd.getIndicador().setComponenteformlaCollection(null);
             ejbFacadeIndicador.create(objEstInd.getIndicador());
+            objEstInd.getIndicador().setComponenteformlaCollection(componentes);
+            ejbFacadeIndicador.edit(objEstInd.getIndicador());
             objEstInd.setObjetivoestrategicoindicadorPK(new ObjetivoestrategicoindicadorPK(selected.getIdObjetivoEstrategico(), objEstInd.getIndicador().getIdIndicador()));
             for (Semaforo sem : semList) {
                 sem.setIdIndicador(objEstInd.getIndicador());
                 ejbFacadeSemaforo.edit(sem);
             }
-
+            objEstInd.getIndicador().setSemaforoCollection(semList);
+            objEstInd.setObjetivoestrategico(selected);
             ejbFacadeObjEstInd.edit(objEstInd);
         }
         selected.setObjetivoestrategicoindicadorCollection(objEstIndList);
@@ -520,21 +568,21 @@ public class ObjetivoestrategicoController implements Serializable {
     /**
      * @return the histrorial
      */
-    public List <Historial> getHistrorial() {
-        if (metaSeleccionada!=null){
-            System.out.println("INDICADOR "+metaSeleccionada.getIndicador().getIdIndicador());
-            histrorial=ejbFacadeHistorial.getSemaforosIndicador(metaSeleccionada.getIndicador().getIdIndicador());
+    public List<Historial> getHistrorial() {
+        if (metaSeleccionada != null) {
+            System.out.println("INDICADOR " + metaSeleccionada.getIndicador().getIdIndicador());
+            histrorial = ejbFacadeHistorial.getSemaforosIndicador(metaSeleccionada.getIndicador().getIdIndicador());
             this.createDateModel();
             return histrorial;
-        }else{
-            return  null;
-        }       
+        } else {
+            return null;
+        }
     }
 
     /**
      * @param histrorial the histrorial to set
      */
-    public void setHistrorial(List <Historial> histrorial) {
+    public void setHistrorial(List<Historial> histrorial) {
         this.histrorial = histrorial;
     }
 
