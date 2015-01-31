@@ -80,9 +80,7 @@ public class ObjetivoestrategicoindicadorController implements Serializable {
     }
 
         public List<Objetivoestrategicoindicador> getItems() {
-        if (items == null) {
-            items = getFacade().findAll();
-        }
+        items = getFacade().findAll();
         return items;
     }
         

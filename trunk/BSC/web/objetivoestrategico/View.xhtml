@@ -29,7 +29,8 @@
                             <f:selectItems value="#{estrategiaglobalController.itemsAvailableSelectOne}"
                                            var="idEstrategiaGlobalItem"
                                            itemValue="#{idEstrategiaGlobalItem}"
-                                           itemLabel="#{idEstrategiaGlobalItem.estrategia}"/>
+                                           itemLabel="#{idEstrategiaGlobalItem.idEstrategiaGlobal}"
+                                           itemDescription="#{idEstrategiaGlobalItem.estrategia}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="Perspectiva" 
                                        style="width: 500px"
@@ -130,7 +131,7 @@
                                                  value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.glosario}" 
                                                  title="Glosario" />
                             </h:panelGrid>
-                            <h:panelGrid columns="2">
+                            <h:panelGrid columns="3">
                                 <h:panelGrid columns="2">
                                     <p:outputLabel value="Valor Base " for="valorBase" />
                                     <h:inputText readonly="true"   
@@ -195,6 +196,23 @@
                                                  value="#{objetivoestrategicoController.rojo.limiteSuperior}" 
                                                  title="Limite Superior" />
                                 </h:panelGrid>
+                                <h:panelGrid columns="1">
+                                    <p:dataTable id="componentesTbl" style="width: 400px" var="comp" value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.componenteformlaCollection}" editable="true" editMode="cell" widgetVar="cellComponentes">
+                                        <f:facet name="header">
+                                            COMPONENTES FORMULA
+                                        </f:facet>
+                                        <p:column headerText="Descripcion">                                            
+                                                <h:outputText value="#{comp.descripcion}" />                                           
+                                        </p:column>
+                                        <p:column headerText="Unidades">
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{comp.unidad}" /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{comp.unidad}" style="width: 200px"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+                                        
+                                    </p:dataTable>
+                                </h:panelGrid>
                             </h:panelGrid>
                         </h:panelGrid>
                     </h:panelGrid>
@@ -203,11 +221,11 @@
                         <p:menuitem value="Ver Detalle" 
                                     icon="ui-icon-search" 
                                     action="#{objetivoestrategicoController.verDetalleObjEst()}"
-                                    update="idPersonaResponsable,metasTbl,meta, definicion,aclaracion,conceptualizacion,nombreIndicador,formula,unidades,periodicidad,kpi,glosario,valorBase,valorMeta,verdeMayor, verdeMenor, naranjaMayor,naranjaMenor,rojoMayor,rojoMenor"/>
+                                    update="componentesTbl,idPersonaResponsable,metasTbl,meta, definicion,aclaracion,conceptualizacion,nombreIndicador,formula,unidades,periodicidad,kpi,glosario,valorBase,valorMeta,verdeMayor, verdeMenor, naranjaMayor,naranjaMenor,rojoMayor,rojoMenor"/>
 
                     </p:contextMenu>
                     <p:dataTable id="metasTbl" 
-                                 style="width: 1200px"
+                                 style="width: 1300px"
                                  var="meta" 
                                  value="#{objetivoestrategicoController.selected.objetivoestrategicoindicadorCollection}" 
                                  selectionMode="single"

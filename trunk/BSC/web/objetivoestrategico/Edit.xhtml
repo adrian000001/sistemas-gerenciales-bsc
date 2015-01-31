@@ -103,7 +103,9 @@
                                     id="formula"
                                     size="45"
                                     value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.formula}" 
-                                    title="Formula" />
+                                    title="Formula" >
+                                    <p:ajax event="blur" update="componentesTbl" listener="#{objetivoestrategicoController.obtieneComponentes()}" />
+                                </p:inputText>
                                 <p:outputLabel value="Unidades " for="unidades" />
                                 <p:inputText  
                                     id="unidades"
@@ -131,7 +133,7 @@
                                     value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.glosario}" 
                                     title="Glosario" />
                             </h:panelGrid>
-                            <h:panelGrid columns="2">
+                            <h:panelGrid columns="3">
                                 <h:panelGrid columns="2">
                                     <p:outputLabel value="Valor Base " for="valorBase" />
                                     <p:inputText  
@@ -196,6 +198,25 @@
                                         value="#{objetivoestrategicoController.rojo.limiteSuperior}" 
                                         title="Limite Superior" />
                                 </h:panelGrid>
+                                
+                                <h:panelGrid columns="1">
+                                    <p:dataTable id="componentesTbl" style="width: 400px" var="comp" value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.componenteformlaCollection}" editable="true" editMode="cell" widgetVar="cellComponentes">
+                                        <f:facet name="header">
+                                            COMPONENTES FORMULA
+                                        </f:facet>
+                                        <p:column headerText="Descripcion">                                            
+                                                <h:outputText value="#{comp.descripcion}" />                                           
+                                        </p:column>
+                                        <p:column headerText="Unidades">
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{comp.unidad}" /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{comp.unidad}" style="width: 200px"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+                                        
+                                    </p:dataTable>
+                                </h:panelGrid>
+                                
                             </h:panelGrid>
                         </h:panelGrid>
                         <p:commandButton style="height: 75px;
@@ -207,21 +228,21 @@
                                              icon="ui-icon-disk"
                                              title="Agregar" 
                                          action ="#{objetivoestrategicoController.agregarIndicadorEdicion()}"
-                                         update=":ObjetivoestrategicoListForm:datalist, metasTbl,meta, definicion,aclaracion,conceptualizacion,nombreIndicador,formula,unidades,periodicidad,kpi,glosario,valorBase,valorMeta,verdeMayor, verdeMenor, naranjaMayor,naranjaMenor,rojoMayor,rojoMenor"/>
+                                         update="componentesTbl,:ObjetivoestrategicoListForm:datalist, metasTbl,meta, definicion,aclaracion,conceptualizacion,nombreIndicador,formula,unidades,periodicidad,kpi,glosario,valorBase,valorMeta,verdeMayor, verdeMenor, naranjaMayor,naranjaMenor,rojoMayor,rojoMenor"/>
                     </h:panelGrid>
 
                     <p:contextMenu for="metasTbl">
                         <p:menuitem value="Editar" 
                                     icon="ui-icon-pencil" 
                                     action="#{objetivoestrategicoController.editarIndicadorEdicion()}"
-                                    update="idPersonaResponsable,metasTbl,meta, definicion,aclaracion,conceptualizacion,nombreIndicador,formula,unidades,periodicidad,kpi,glosario,valorBase,valorMeta,verdeMayor, verdeMenor, naranjaMayor,naranjaMenor,rojoMayor,rojoMenor"/>
+                                    update="componentesTbl,idPersonaResponsable,metasTbl,meta, definicion,aclaracion,conceptualizacion,nombreIndicador,formula,unidades,periodicidad,kpi,glosario,valorBase,valorMeta,verdeMayor, verdeMenor, naranjaMayor,naranjaMenor,rojoMayor,rojoMenor"/>
                         <p:menuitem value="Eliminar" 
                                     icon="ui-icon-trash" 
                                     action="#{objetivoestrategicoController.eliminarIndicadorEdicion()}"
                                     update="idPersonaResponsable,metasTbl,meta, definicion,aclaracion,conceptualizacion,nombreIndicador,formula,unidades,periodicidad,kpi,glosario,valorBase,valorMeta,verdeMayor, verdeMenor, naranjaMayor,naranjaMenor,rojoMayor,rojoMenor"/>
                     </p:contextMenu>
                     <p:dataTable id="metasTbl" 
-                                 style="width: 1200px"
+                                 style="width: 1300px"
                                  var="meta" 
                                  value="#{objetivoestrategicoController.selected.objetivoestrategicoindicadorCollection}" 
                                  selectionMode="single"
