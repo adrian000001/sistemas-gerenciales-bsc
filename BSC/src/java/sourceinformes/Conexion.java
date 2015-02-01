@@ -40,9 +40,9 @@ public class Conexion {
             String rutaInforme = ruta;
             JasperPrint informe = JasperFillManager.fillReport(rutaInforme, null, conexion);
             JasperExportManager.exportReportToPdfFile(informe, "../temp/" + nombre + ".pdf");
-            JasperViewer ventanavisor = new JasperViewer(informe, false);
-            ventanavisor.setTitle("INFORME");
-            ventanavisor.setVisible(false);
+            //JasperViewer ventanavisor = new JasperViewer(informe, false);
+            //ventanavisor.setTitle("INFORME");
+            //ventanavisor.setVisible(false);
         } catch (JRException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
