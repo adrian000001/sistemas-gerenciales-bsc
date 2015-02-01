@@ -34,8 +34,7 @@ public class Conexion {
 
         }
     }
-
-    //METODO PARA EXPORTAR A PDF UN REPORTE   
+  
     public void resportesPDF(String ruta, String nombre) {
         try {
             String rutaInforme = ruta;
