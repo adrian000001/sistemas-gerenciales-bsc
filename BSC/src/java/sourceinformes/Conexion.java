@@ -39,7 +39,7 @@ public class Conexion {
         try {
             String rutaInforme = ruta;
             JasperPrint informe = JasperFillManager.fillReport(rutaInforme, null, conexion);
-            JasperExportManager.exportReportToPdfFile(informe, "../temp/" + nombre + ".pdf");
+            JasperExportManager.exportReportToPdfFile(informe, "web/pdf/" + nombre + ".pdf");
             //JasperViewer ventanavisor = new JasperViewer(informe, false);
             //ventanavisor.setTitle("INFORME");
             //ventanavisor.setVisible(false);

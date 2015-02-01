@@ -51,7 +51,7 @@
                             </f:facet>
                             <h:outputText value="#{item.idCargo.nombre}"/>
                         </p:column>
-                       
+
                         <f:facet name="footer">
                             <p:commandButton style="height: 75px;
                                              width: 75px;
@@ -81,6 +81,9 @@
                                              border-radius: 50px;
                                              color:#ffffff"
                                              id="deleteButton" icon="ui-icon-trash"  title="Eliminar" actionListener="#{personaController.destroy}" update=":growl,datalist" disabled="#{empty personaController.selected}"/>
+                            <h3>Generar Informe</h3><object type="application/pdf" data="../pdf/Colaboradores.pdf?pfdrid_c=true" height="300px" width="100%">
+                                No se puede mostrar PDF, <a href="../pdf/Colaboradores.pdf">click</a> para descargar.</object>
+
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
