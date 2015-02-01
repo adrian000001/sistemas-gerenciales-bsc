@@ -33,10 +33,7 @@ public class PersonaController implements Serializable {
 
     public PersonaController() {
     }
-     
-
-   
-   
+ 
     public Persona getSelected() {
         return selected;
     }

@@ -36,5 +36,8 @@ public class Guardar {
         String fuente = System.getProperty("user.dir") + "/src/java/informes/Actividades.jasper";
         conexion.resportesPDF(fuente, "Actividades");
     }
-
+//    public static void main(String[] args) {
+//        Guardar guardar = new Guardar();
+//        guardar.saveObjetivosEstrategicos();
+//    }
 }
