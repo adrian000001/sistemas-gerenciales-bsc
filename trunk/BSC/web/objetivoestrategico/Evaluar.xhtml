@@ -46,21 +46,51 @@
 
                     <h:panelGrid columns="2">
                         <h:panelGrid columns="1">
-                            <h:panelGrid columns="2">
+                            <h:panelGrid columns="1">
                                 <f:facet name="header">
-                                    <h:outputText value="INGRESO NUEVO VALOR"/>
+                                    <h:outputText value="VALORES DEL INDICADOR"/>
                                     <p:separator/>
                                 </f:facet>
-                                <p:outputLabel value="Glosario " for="nuevoValor" />
-                                <p:inputText id="nuevoValor" value="#{objetivoestrategicoController.nuevoVolorIndocador}" />
+                                <p:dataTable id="componentesTbl" style="width: 400px" var="comp" value="#{objetivoestrategicoController.itemsdetalle}" editable="true" editMode="cell" widgetVar="cellComponentes">
+                                    <f:facet name="header">
+                                        COMPONENTES FORMULA
+                                    </f:facet>
+                                    <p:column headerText="Descripcion" style="width: 250px">                                            
+                                        <h:outputText value="#{comp.idcomponenteformula.descripcion}" />                                           
+                                    </p:column>
+                                    <p:column headerText="Unidades">
+                                        <h:outputText value="#{comp.idcomponenteformula.unidad}" />
+                                        
+                                    </p:column>
+                                    <p:column headerText="Valor">                                        
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{comp.valor}" /></f:facet>
+                                            <f:facet name="input">
+                                                <p:inputText value="#{comp.valor}" style="width: 125px">
+                                                <p:ajax event="blur" update=":IndocadorForm:nuevoValor" listener="#{objetivoestrategicoController.calculaIndicador()}" />
+                                                </p:inputText>
+                                            </f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                </p:dataTable>
+                            </h:panelGrid>
+                            <h:panelGrid columns="2">
+                                <p:outputLabel value="Valor Indicador " for="nuevoValor" />
+                                <p:inputText  readonly="true" id="nuevoValor" value="#{objetivoestrategicoController.nuevoVolorIndocador}" />
+                                <p:outputLabel value="Fecha " for="fecha" />
+                                <p:calendar id="fecha" 
+                                    pattern="dd/MM/yyyy" 
+                                    value="#{objetivoestrategicoController.fecha}" 
+                                    title="Fecha Inicio"  showOn="button"/>
                                 <p:commandButton style="height: 75px;
-                                             width: 75px;
-                                             background-image: url(../img/fondo-boton.png);
-                                             background-size: 75px;
-                                             border-radius: 50px;
-                                             color:#ffffff"
-                                             icon="ui-icon-disk"
-                                             action="#{objetivoestrategicoController.guardarHistorial()}" title="Guardar" update="historialTbl,grafico"/>
+                                                 width: 75px;
+                                                 background-image: url(../img/fondo-boton.png);
+                                                 background-size: 75px;
+                                                 border-radius: 50px;
+                                                 color:#ffffff"
+                                                 icon="ui-icon-disk"
+                                                 action="#{objetivoestrategicoController.guardarHistorial()}" title="Guardar" update="historialTbl,grafico"/>
                             </h:panelGrid>
                             <p:dataTable id="historialTbl" 
                                          var="historial" 
