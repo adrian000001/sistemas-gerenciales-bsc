@@ -4,12 +4,16 @@ import modelo.Actividad;
 import negocio.util.JsfUtil;
 import negocio.util.JsfUtil.PersistAction;
 import bean.ActividadFacade;
+import bean.ObjetivoestrategicoFacade;
+import informes.InformeActividad;
+import informes.InformeObjEs;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.faces.bean.ManagedBean;
@@ -18,6 +22,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import modelo.Objetivoestrategico;
 
 @ManagedBean(name = "actividadController")
 @SessionScoped
@@ -25,12 +30,37 @@ public class ActividadController implements Serializable {
 
     @EJB
     private bean.ActividadFacade ejbFacade;
+    @EJB
+    private bean.ObjetivoestrategicoFacade ejbFacade1;
     private List<Actividad> items = null;
+     private List<Objetivoestrategico> items2 = null;
     private Actividad selected;
+
+    public ObjetivoestrategicoFacade getEjbFacade1() {
+        return ejbFacade1;
+    }
+
+    public void setEjbFacade1(ObjetivoestrategicoFacade ejbFacade1) {
+        this.ejbFacade1 = ejbFacade1;
+    }
 
     public ActividadController() {
     }
-
+    @PostConstruct
+    public void init() {
+        if (items == null) {
+            items = getFacade().findAll();
+        }
+        
+    }
+    
+public void generarReporte()
+    {
+        items2 = getEjbFacade1().findAll();
+        
+        InformeActividad inf=new InformeActividad("ACTIVIDADES",items2);
+       inf.generarInforme();
+    }
     public Actividad getSelected() {
         return selected;
     }
@@ -115,6 +145,10 @@ public class ActividadController implements Serializable {
 
     public List<Actividad> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    private Object getEjbFacade() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @FacesConverter(forClass = Actividad.class)

@@ -95,10 +95,10 @@
                                              id="viewButton"   icon="ui-icon-search" title="Ver" update=":ActividadViewForm" oncomplete="PF('ActividadViewDialog').show()" disabled="#{empty actividadController.selected}"/>
                              </f:facet>
                     </p:dataTable>
-                    <h:commandLink style="padding-left: 1000px">
-                     <p:graphicImage value="../resources/images/PDF.png" />
-                        <p:dataExporter type="pdf" target="datalist" fileName="Actividades" pageOnly="true"/>
-                    </h:commandLink>
+                    <h:commandLink style="padding-left: 1000px" action="#{actividadController.generarReporte()}">
+                 
+                 <p:graphicImage value="../resources/images/PDF.png" />
+                       </h:commandLink>
              
                 </p:panel>
             </h:form>
