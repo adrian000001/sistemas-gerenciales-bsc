@@ -150,6 +150,24 @@ public class Objetivoestrategicoindicador implements Serializable {
         return res;
     }                          
 
+        public String getSemaforoString(){
+        String res = null;
+        double valorActual=this.getValorActual();
+        System.out.println("VALOR SEM " +valorActual);
+            for (Semaforo s:indicador.getSemaforoCollection()){
+                System.out.println("SEMAINF " +s.getLimiteInferior());
+                System.out.println("SEMASUP " +s.getLimiteSuperior());
+                if (valorActual>=s.getLimiteInferior().doubleValue() && valorActual<=s.getLimiteSuperior().doubleValue()){
+                    if (s.getColor()=='v') res="Verde";else
+                        if (s.getColor()=='n') res="Naranja"; else
+                            res="Rojo";
+                    break;
+                }
+            }
+        return res;
+    }            
+    
+    
      public  List<Semaforo2> getSemaforoIndicador(){
        ArrayList<Semaforo2> listaColor =new ArrayList();
       

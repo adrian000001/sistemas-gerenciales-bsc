@@ -29,7 +29,7 @@ public class CargoController implements Serializable {
     private bean.CargoFacade ejbFacade;
     private List<Cargo> items = null;
     private Cargo selected;
-     private List<String> noms = null;
+    private List<String> noms = null;
 
     public CargoController() {
     }
