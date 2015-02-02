@@ -5,10 +5,12 @@
  */
 package modelo;
 
+import bean.HistorialFacade;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -116,16 +118,18 @@ public class Objetivoestrategicoindicador implements Serializable {
     }
     
     public double getValorActual(){
+        
         Historial res=null;
         int con=0;
-        for (Historial h:indicador.getHistorialCollection())
+        for (Historial h:indicador.getHistorialCollection()){
+            System.out.println("Valor Historial "+h.getValor() );
             if (con==0){
                 res=h;
             }else{
                 if (h.getFechaMedicion().after(res.getFechaMedicion()))
                     res=h;
             }
-        
+        }
         if (res!=null){
             return res.getValor().doubleValue();
         
@@ -138,8 +142,6 @@ public class Objetivoestrategicoindicador implements Serializable {
         double valorActual=this.getValorActual();
         System.out.println("VALOR SEM " +valorActual);
             for (Semaforo s:indicador.getSemaforoCollection()){
-                System.out.println("SEMAINF " +s.getLimiteInferior());
-                System.out.println("SEMASUP " +s.getLimiteSuperior());
                 if (valorActual>=s.getLimiteInferior().doubleValue() && valorActual<=s.getLimiteSuperior().doubleValue()){
                     if (s.getColor()=='v') res="/resources/images/verde.png";else
                         if (s.getColor()=='n') res="/resources/images/naranja.png"; else

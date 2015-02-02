@@ -1,5 +1,6 @@
 package negocio;
 
+import bean.HistorialFacade;
 import modelo.Objetivoestrategicoindicador;
 import negocio.util.JsfUtil;
 import negocio.util.JsfUtil.PersistAction;
@@ -20,6 +21,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import modelo.Historial;
 import modelo.Indicador;
 
 @ManagedBean(name = "objetivoestrategicoindicadorController")
@@ -28,6 +30,8 @@ public class ObjetivoestrategicoindicadorController implements Serializable {
 
     @EJB
     private bean.ObjetivoestrategicoindicadorFacade ejbFacade;
+    @EJB
+    private HistorialFacade ejbFacadeHistorial;
     private List<Objetivoestrategicoindicador> items = null;
     private Objetivoestrategicoindicador selected;
 
@@ -89,8 +93,13 @@ public class ObjetivoestrategicoindicadorController implements Serializable {
         }
     }
 
-        public List<Objetivoestrategicoindicador> getItems() {
+    public List<Objetivoestrategicoindicador> getItems() {
+        System.out.println("ACTUALIZO DATOS");
         items = getFacade().findAll();
+        for (int i=0;i<items.size();i++){
+            List <Historial> histrorial = ejbFacadeHistorial.getSemaforosIndicador(items.get(i).getIndicador().getIdIndicador());
+            items.get(i).getIndicador().setHistorialCollection(histrorial);
+        }
         return items;
     }
         

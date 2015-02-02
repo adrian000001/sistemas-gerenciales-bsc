@@ -282,10 +282,10 @@ public void generarReporte()
             itemsdetalle.get(i).setIddetallehistorial(0);
             ejbFacadeDeta.create(itemsdetalle.get(i));
         }
-        ejbFacadeIndicador.edit(metaSeleccionada.getIndicador());
-        ejbFacadeObjEstInd.edit(metaSeleccionada);
         metaSeleccionada.getIndicador().setHistorialCollection(histrorial);
         ejbFacadeIndicador.edit(metaSeleccionada.getIndicador());
+        ejbFacadeObjEstInd.edit(metaSeleccionada);
+        ejbFacade.edit(metaSeleccionada.getObjetivoestrategico());
         nuevoVolorIndocador = 0;
     }
 
