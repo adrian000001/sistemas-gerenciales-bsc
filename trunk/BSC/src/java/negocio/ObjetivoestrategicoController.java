@@ -11,6 +11,7 @@ import bean.ObjetivoestrategicoFacade;
 import bean.ObjetivoestrategicoindicadorFacade;
 import bean.SemaforoFacade;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
+import informes.InformeObjEs;
 import java.io.IOException;
 
 import java.io.Serializable;
@@ -39,6 +40,7 @@ import modelo.Indicador;
 import modelo.Objetivoestrategicoindicador;
 import modelo.ObjetivoestrategicoindicadorPK;
 import modelo.Persona;
+import modelo.Perspectiva;
 import modelo.Semaforo;
 import negocio.util.Arbol;
 import negocio.util.Validacion;
@@ -52,9 +54,19 @@ import org.primefaces.model.chart.LineChartSeries;
 public class ObjetivoestrategicoController implements Serializable {
 
     @EJB
+    private bean.ObjetivoestrategicoindicadorFacade ejbFacade1;
+    @EJB
     private bean.ObjetivoestrategicoFacade ejbFacade;
     @EJB
     private SemaforoFacade ejbFacadeSemaforo;
+
+    public ObjetivoestrategicoindicadorFacade getEjbFacade1() {
+        return ejbFacade1;
+    }
+
+    public void setEjbFacade1(ObjetivoestrategicoindicadorFacade ejbFacade1) {
+        this.ejbFacade1 = ejbFacade1;
+    }
     @EJB
     private IndicadorFacade ejbFacadeIndicador;
     @EJB
@@ -66,6 +78,7 @@ public class ObjetivoestrategicoController implements Serializable {
     @EJB
     private DetallehistorialFacade ejbFacadeDeta;
     private List<Objetivoestrategico> items = null;
+    private List<Objetivoestrategicoindicador> items2 = null;
     private Objetivoestrategico selected;
     private Objetivoestrategicoindicador metaSeleccionada;
     private Objetivoestrategicoindicador nuevoObjetivoestrategicoindicador;
@@ -82,6 +95,9 @@ public class ObjetivoestrategicoController implements Serializable {
     Arbol arbol;
     private List<Detallehistorial> itemsdetalle;
 
+    
+    
+    
     public List<String> getNoms() {
         return noms;
     }
@@ -105,7 +121,14 @@ public class ObjetivoestrategicoController implements Serializable {
         }
         fecha=new Date();
     }
-
+public void generarReporte()
+    {
+        
+        System.out.println("holissssaaaaawww");
+       items2 = getEjbFacade1().findAll();
+       InformeObjEs inf=new InformeObjEs("Objetivos Estrategicos",items2);
+       inf.generarInforme();
+    }
     public void evaluar() {
         itemsdetalle = new ArrayList<Detallehistorial>();
         Detallehistorial det;
@@ -121,7 +144,14 @@ public class ObjetivoestrategicoController implements Serializable {
             Logger.getLogger(ObjetivoestrategicoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+ public void evaluarInd() {
+        System.out.println("cargo");
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/BSC/faces/objetivoestrategico/EvaluarInd.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(ObjetivoestrategicoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public void Evaluar() {
         System.out.println("cargo ");
 
@@ -257,6 +287,8 @@ public class ObjetivoestrategicoController implements Serializable {
         }
         ejbFacadeIndicador.edit(metaSeleccionada.getIndicador());
         ejbFacadeObjEstInd.edit(metaSeleccionada);
+        metaSeleccionada.getIndicador().setHistorialCollection(histrorial);
+        ejbFacadeIndicador.edit(metaSeleccionada.getIndicador());
         nuevoVolorIndocador = 0;
     }
 

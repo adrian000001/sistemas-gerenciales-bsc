@@ -19,7 +19,7 @@
         <p:growl id="mensajes" showDetail="true" life="2000" />
         <div>
             <h:form style="padding-left: 515px">
-                <p:panel header="Bienvenido" style="width: 300px;
+                <p:panel header="Bienvenido" style="width: 500px;
                          height: 175px;
                          background-image: url(img/header.jpg);
                          background-size: cover;">
@@ -42,13 +42,17 @@
                             <p:selectOneRadio id="console" value="#{loginController.tipo}" style="color: #ffffff;">
                                 <f:selectItem itemLabel="Usuario" itemValue="0" />
                                 <f:selectItem itemLabel="Adminsitrador" itemValue="1" />
+                                <f:selectItem itemLabel="GestorIndicadores" itemValue="2" />
                             </p:selectOneRadio>
                         </h:panelGrid>
                     </h:panelGrid>
                 </p:panel>
             </h:form>
         </div>
+        <br />
+      
     </h:body>
+
 
 
 

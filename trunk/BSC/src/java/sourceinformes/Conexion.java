@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -34,12 +36,13 @@ public class Conexion {
 
         }
     }
-  
+  private ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
     public void resportesPDF(String ruta, String nombre) {
         try {
+            String ruta2 = ec.getRealPath("img");
             String rutaInforme = ruta;
             JasperPrint informe = JasperFillManager.fillReport(rutaInforme, null, conexion);
-            JasperExportManager.exportReportToPdfFile(informe, "web/pdf/" + nombre + ".pdf");
+            JasperExportManager.exportReportToPdfFile(informe, ruta2 + nombre + ".pdf");
             //JasperViewer ventanavisor = new JasperViewer(informe, false);
             //ventanavisor.setTitle("INFORME");
             //ventanavisor.setVisible(false);

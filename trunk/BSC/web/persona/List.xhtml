@@ -82,7 +82,8 @@
                                              color:#ffffff"
                                              id="deleteButton" icon="ui-icon-trash"  title="Eliminar" actionListener="#{personaController.destroy}" update=":growl,datalist" disabled="#{empty personaController.selected}"/>
 
-                  
+                            <p:commandButton value="Ajax Submit" id="ajax" action="#{personaController.generarInforme()}" ajax="false" styleClass="ui-priority-primary" />
+                 
                             <h3>Generar Informe</h3><object type="application/pdf" data="../pdf/Colaboradores.pdf?pfdrid_c=true" height="300px" width="100%">
                                 No se puede mostrar PDF, <a href="../pdf/Colaboradores.pdf">click</a> para descargar.</object>
 

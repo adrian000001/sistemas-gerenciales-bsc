@@ -4,6 +4,7 @@ import modelo.Objetivoestrategicoindicador;
 import negocio.util.JsfUtil;
 import negocio.util.JsfUtil.PersistAction;
 import bean.ObjetivoestrategicoindicadorFacade;
+import informes.Informe;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,6 +31,15 @@ public class ObjetivoestrategicoindicadorController implements Serializable {
     private List<Objetivoestrategicoindicador> items = null;
     private Objetivoestrategicoindicador selected;
 
+   
+    public void generarReporte()
+    {
+        System.out.println("holissssaaaaawww");
+       items = getFacade().findAll();
+       Informe inf=new Informe("Cuadro mando Integral",items);
+       inf.generarInforme();
+    }
+    
     public ObjetivoestrategicoindicadorController() {
     }
 

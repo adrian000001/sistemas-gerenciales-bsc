@@ -38,7 +38,11 @@ public class PersonaController implements Serializable {
     public Persona getSelected() {
         return selected;
     }
-
+    public void generarInforme()
+    {
+        Guardar guardar = new Guardar();
+        guardar.saveColaboradores();
+    }
     public void setSelected(Persona selected) {
         this.selected = selected;
     }

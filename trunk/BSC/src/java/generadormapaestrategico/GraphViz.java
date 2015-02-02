@@ -40,6 +40,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 /**
  * <dl>
@@ -82,6 +84,7 @@ public class GraphViz
     */
    //private static String TEMP_DIR = "C://tmp";	// Linux
   private static String TEMP_DIR = "c:/temp";	// Windows
+   //private ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 
    /**
     * Where is your dot program located? It will be called externally.
@@ -174,11 +177,12 @@ public class GraphViz
     */
    public int writeGraphToFile(byte[] img, File to)
    {
+       
       try {
          FileOutputStream fos = new FileOutputStream(to);
          fos.write(img);
          fos.close();
-      } catch (java.io.IOException ioe) { return -1; }
+      } catch (java.io.IOException ioe) {System.out.println("aquiiiiiiiiiiiiiiiiiiiiiiiiiiii"); return -1; }
       return 1;
    }
 
@@ -280,6 +284,7 @@ public class GraphViz
 		   DataInputStream dis = new DataInputStream(fis);
 		   BufferedReader br = new BufferedReader(new InputStreamReader(dis));
 		   String line;
+                   System.out.println("inputttttt"+input);
 		   while ((line = br.readLine()) != null) {
 			   sb.append(line);
 		   }

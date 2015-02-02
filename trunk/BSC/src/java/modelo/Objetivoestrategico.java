@@ -35,9 +35,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Objetivoestrategico.findAll", query = "SELECT o FROM Objetivoestrategico o"),
     @NamedQuery(name = "Objetivoestrategico.findByIdObjetivoEstrategico", query = "SELECT o FROM Objetivoestrategico o WHERE o.idObjetivoEstrategico = :idObjetivoEstrategico"),
     @NamedQuery(name = "Objetivoestrategico.findByNumero", query = "SELECT o FROM Objetivoestrategico o WHERE o.numero = :numero"),
-    @NamedQuery(name = "Objetivoestrategico.findByNombre", query = "SELECT o FROM Objetivoestrategico o WHERE o.nombre = :nombre")})
+  })
 public class Objetivoestrategico implements Serializable {
     private static final long serialVersionUID = 1L;
+     public static final String nodos="Objetivoestrategico.findByNodo";
     public static String findByIdObjetivoEstrategico="Objetivoestrategico.findByIdObjetivoEstrategico";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
