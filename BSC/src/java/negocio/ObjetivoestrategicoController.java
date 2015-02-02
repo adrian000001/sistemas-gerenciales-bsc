@@ -94,9 +94,6 @@ public class ObjetivoestrategicoController implements Serializable {
     private List<String> noms = null;
     Arbol arbol;
     private List<Detallehistorial> itemsdetalle;
-
-    
-    
     
     public List<String> getNoms() {
         return noms;

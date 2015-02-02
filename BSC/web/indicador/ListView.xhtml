@@ -40,7 +40,7 @@
                             </f:facet>
                             <h:outputText value="#{item.objetivoestrategico.idPerspectiva.nombre}" />
                         </p:column>
-                        
+
                         <p:column filterBy="#{item.objetivoestrategico.nombre}" headerText="OBJETIVO" footerText="exact" filterMatchMode="exact">
                             <f:facet name="filter">
                                 <p:selectOneMenu onchange="PF('objTable').filter()" >
@@ -50,8 +50,8 @@
                             </f:facet>
                             <h:outputText value="#{item.objetivoestrategico.nombre}" />
                         </p:column>
-                        
-                        
+
+
                         <p:column style="width: 115px">
                             <f:facet name="header">
                                 <h:outputText value="INDICADOR"/>
@@ -79,7 +79,7 @@
                             </f:facet>
                             <h:outputText value="#{item.indicador.idPersonaResponsable.idCargo.nombre}" />
                         </p:column>
-                        
+
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="BASE"/>
@@ -98,14 +98,44 @@
                             </f:facet>
                             <h:outputText value="#{item.valorActual}"/>
                         </p:column>
-
-
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="TIEMPO DE MEDICION"/>
                             </f:facet>
                             <h:outputText value="#{item.indicador.tiempoMedicion}"/>
                         </p:column>
+
+
+
+                        <p:column filterBy="#{item.indicador.idPersonaResponsable.idCargo.nombre}" headerText="RESPONSABLE" footerText="exact" filterMatchMode="exact">
+                            <f:facet name="filter">
+                                <p:selectOneMenu onchange="PF('objTable').filter()" >
+                                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
+                                    <f:selectItems value="#{cargoController.noms}" />
+                                </p:selectOneMenu>
+                            </f:facet>
+                            <h:outputText value="#{item.indicador.idPersonaResponsable.idCargo.nombre}" />
+                        </p:column>
+
+
+
+                        <p:column filterBy="#{item.semaforoString}" headerText="ESTADO" footerText="exact" filterMatchMode="exact">
+                            <f:facet name="filter">
+                                <p:selectOneMenu onchange="PF('objTable').filter()" >
+                                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
+                                    <f:selectItem itemLabel="Naranja" itemValue="Naranja" />
+                                    <f:selectItem itemLabel="Verde" itemValue="Verde" />
+                                    <f:selectItem itemLabel="Rojo" itemValue="Rojo" />
+                                </p:selectOneMenu>
+                            </f:facet>
+                            <h:outputText value="#{item.semaforoString}"/>
+                        </p:column>                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="COLOR"/>
+                            </f:facet>
+                            <p:graphicImage value="#{item.semaforo}"/>
+                        </p:column>                                                
                         <p:column style="width:16px">
                             <p:rowToggler />
                         </p:column>
@@ -132,10 +162,10 @@
                         </p:rowExpansion>
                     </p:dataTable>
                     <h:commandLink style="padding-left: 1000px">
-                     <p:graphicImage value="../resources/images/PDF.png" />
+                        <p:graphicImage value="../resources/images/PDF.png" />
                         <p:dataExporter type="pdf" target="datalist" fileName="Indicadores" pageOnly="true"/>
                     </h:commandLink>
-               
+
                 </p:panel>
             </h:form>
 
