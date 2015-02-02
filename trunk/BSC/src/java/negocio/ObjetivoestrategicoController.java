@@ -519,11 +519,11 @@ public class ObjetivoestrategicoController implements Serializable {
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ObjetivoestrategicoUpdated"));
+        persist(PersistAction.UPDATE, "Actualizado");
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("ObjetivoestrategicoDeleted"));
+        persist(PersistAction.DELETE, "Eliminado");
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.

@@ -56,18 +56,18 @@ public class ComponenteformlaController implements Serializable {
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ComponenteformlaCreated"));
+        persist(PersistAction.CREATE, "Componente Creado");
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ComponenteformlaUpdated"));
+        persist(PersistAction.UPDATE, "Componente Actualizado");
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("ComponenteformlaDeleted"));
+        persist(PersistAction.DELETE, "Componente Eliminado");
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.

@@ -71,18 +71,18 @@ public class EstrategiaglobalController implements Serializable {
 
     public void create() {
         
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("EstrategiaglobalCreated"));
+        persist(PersistAction.CREATE, "Estrategia Global Guardada");
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("EstrategiaglobalUpdated"));
+        persist(PersistAction.UPDATE, "Estrategia Global Actualizado");
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("EstrategiaglobalDeleted"));
+        persist(PersistAction.DELETE, "Estrategia Global Eliminada");
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
