@@ -103,6 +103,10 @@ public class LoginController implements Serializable {
                 faceContext.addMessage(null, facesMessage);
             }
         } else {
+            if(tipo.equals("1"))
+            {
+                
+            
             if (user != null) {
                 try {
                     facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o contraseña incorrecto", null);
@@ -118,6 +122,28 @@ public class LoginController implements Serializable {
             } else {
                 facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o contraseña incorrecto", null);
                 faceContext.addMessage(null, facesMessage);
+            }
+            }
+            else
+            {
+                
+            
+            if (user != null) {
+                try {
+                    facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o contraseña incorrecto", null);
+                    faceContext.addMessage(null, facesMessage);
+                    httpServletRequest.getSession().setAttribute("sessionUsuario", nombre);
+                    httpServletRequest.getSession().setAttribute("tipoSession", "AdminInd");
+                    facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Acceso Correcto", null);
+                    faceContext.addMessage(null, facesMessage);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("/BSC/faces/objetivoestrategico/ListInd.xhtml");
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o contraseña incorrecto", null);
+                faceContext.addMessage(null, facesMessage);
+            }
             }
         }
     }

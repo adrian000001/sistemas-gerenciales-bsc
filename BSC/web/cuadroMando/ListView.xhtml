@@ -103,11 +103,10 @@
                             <h:outputText value="#{item.indicador.tiempoMedicion}"/>
                         </p:column>
                     </p:dataTable>
-                     <h:commandLink style="padding-left: 1000px">
+                    <h:commandLink style="padding-left: 1000px" action="#{objetivoestrategicoindicadorController.generarReporte()}">
                  
                  <p:graphicImage value="../resources/images/PDF.png" />
-                        <p:dataExporter type="pdf" target="datalist" fileName="Cuadro de Mando Integral" pageOnly="true"/>
-                    </h:commandLink>
+                       </h:commandLink>
                 </p:panel>
             </h:form>
 

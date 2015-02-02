@@ -6,14 +6,17 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/templateView.xhtml">
+    <ui:composition template="/templateInd.xhtml">
+
+
         <ui:define name="title">
             <h:outputText value="OBJETIVOS ESTRATEGICOS"></h:outputText>
         </ui:define>
+
         <ui:define name="body">
             <h:form id="ObjetivoestrategicoListForm">                
                 <p:growl id="growl" showDetail="true" sticky="true" />
-                <p:panel header="OBJETIVOS ESTRATEGICOS">
+                <p:panel header="VALORES INDICADORES">
                     <p:dataTable id="datalist" 
                                  value="#{objetivoestrategicoController.items}" 
                                  var="item"
@@ -25,9 +28,7 @@
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
 
-                        <p:ajax event="rowSelect"   update="viewButton"/>
-                        <p:ajax event="rowUnselect" update="viewButton"/>
-
+                        
                         <p:column style="width:16px">
                             <p:rowToggler />
                         </p:column>
@@ -57,70 +58,56 @@
                         </p:column>
                         <p:rowExpansion>
                             <h:panelGrid columns="1">
-                                <p:dataTable id="a" var="meta" 
+                                <p:dataTable var="meta" 
                                              value="#{item.objetivoestrategicoindicadorCollection}" 
                                              selectionMode="single"
                                              selection="#{objetivoestrategicoController.metaSeleccionada}"
                                              rowKey="#{meta.objetivoestrategicoindicadorPK}">
                                     <p:column headerText="META">
-                                        <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.meta}" />
+                                        <p:inputTextarea style="border: 0" readonly="true" cols="15" rows="1" value="#{meta.meta}" />
                                     </p:column>
                                     <p:column headerText="DEFINICION">
-                                        <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.definicion}" />
+                                        <p:inputTextarea style="border: 0" readonly="true" cols="15" rows="1" value="#{meta.definicion}" />
                                     </p:column>
                                     <p:column headerText="ACLARACION">
-                                        <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="3" value="#{meta.aclaracion}" />
+                                        <p:inputTextarea style="border: 0" readonly="true" cols="15" rows="3" value="#{meta.aclaracion}" />
                                     </p:column>
                                     <p:column headerText="CONCPTUALIZACION">
-                                        <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="3" value="#{meta.conceptualizacion}" />
+                                        <p:inputTextarea style="border: 0" readonly="true" cols="15" rows="3" value="#{meta.conceptualizacion}" />
                                     </p:column>
                                     <p:column headerText="INDICADOR">
-                                        <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.indicador.nombre}" />
+                                        <p:inputTextarea style="border: 0" readonly="true" cols="15" rows="1" value="#{meta.indicador.nombre}" />
                                     </p:column>
                                     <p:column headerText="FORMULA">
-                                        <h:inputTextarea style="border: 0" readonly="true" cols="18" rows="3" value="#{meta.indicador.formula}" />
+                                        <p:inputTextarea style="border: 0" readonly="true" cols="15" rows="3" value="#{meta.indicador.formula}" />
                                     </p:column>
                                     <p:column headerText="UNIDADES">
-                                        <h:inputTextarea  style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.indicador.unidades}" />
+                                        <p:inputTextarea  style="border: 0" readonly="true" cols="15" rows="1" value="#{meta.indicador.unidades}" />
                                     </p:column>
-                                    <p:column headerText="KPI">
-                                        <h:inputTextarea  style="border: 0" readonly="true" cols="18" rows="1" value="#{meta.indicador.kpi}" />
+                                    <p:column style="width:80px;text-align: center">
+                                        <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             action ="#{objetivoestrategicoController.evaluarInd()}"
+                                             update="" 
+                                             icon="ui-icon-pencil" title="Evaluar">
+                                            <f:setPropertyActionListener value="#{meta}" target="#{objetivoestrategicoController.metaSeleccionada}" />
+                                        </p:commandButton>
                                     </p:column>
                                 </p:dataTable>
-                                <h:commandLink>
-
-                                    <p:graphicImage value="PDF.png" />
-                                    <p:dataExporter type="pdf" target="a" fileName="Objetivos Estrategicos" pageOnly="true"/>
-                                </h:commandLink>
                             </h:panelGrid>
                         </p:rowExpansion>
-                        <f:facet name="footer">
-                            <p:commandButton style="height: 75px;
-                                             width: 75px;
-                                             background-image: url(../img/fondo-boton.png);
-                                             background-size: 75px;
-                                             border-radius: 50px;
-                                             color:#ffffff"
-                                             id="viewButton"   icon="ui-icon-search" title="Ver"  update=":ObjetivoestrategicoViewForm" oncomplete="PF('ObjetivoestrategicoViewDialog').show()" disabled="#{empty objetivoestrategicoController.selected}"/>
-                            <p:commandButton style="height: 75px;
-                                             width: 75px;
-                                             background-image: url(../img/fondo-boton.png);
-                                             background-size: 75px;
-                                             border-radius: 50px;
-                                             color:#ffffff"
-                                             icon="ui-icon-print"
-                                             ajax="false"
-                                             title="Generar Reporte">
-                                <p:dataExporter type="pdf" target="datalist" fileName="Objetivos Estrategicos" pageOnly="true"/>
-                            </p:commandButton>                            
-                        </f:facet>
+       
+                            
                     </p:dataTable>
-                    <h:commandLink style="padding-left: 1000px" action="#{objetivoestrategicoController.generarReporte()}">
-                 
-                 <p:graphicImage value="../resources/images/PDF.png" />
-                       </h:commandLink>
                 </p:panel>
             </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
         </ui:define>
     </ui:composition>

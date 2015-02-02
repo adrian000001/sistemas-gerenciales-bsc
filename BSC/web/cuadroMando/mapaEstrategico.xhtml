@@ -21,7 +21,17 @@
 
         <ui:define name="body">
             
-<p:graphicImage value="../resources/images/arbol.gif" />
+   <h:form>
+   
+               #{nodosobjController.generarArbol()}
+                <p:graphicImage value="../img/arbol.png" />
+        
+           
+           </h:form>
+ 
+    
+    
+ 
         </ui:define>
     </ui:composition>
 
