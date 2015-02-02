@@ -20,6 +20,7 @@ public class Guardar {
     }
 
     public void saveColaboradores() {
+        System.out.println("guardando colaboradores");
         Conexion conexion = new Conexion();
         String fuente = System.getProperty("user.dir") + "/src/java/informes/Colaboradores.jasper";
         conexion.resportesPDF(fuente, "Colaboradores");
@@ -38,6 +39,6 @@ public class Guardar {
     }
 //    public static void main(String[] args) {
 //        Guardar guardar = new Guardar();
-//        guardar.saveObjetivosEstrategicos();
+//        guardar.saveColaboradores();
 //    }
 }
