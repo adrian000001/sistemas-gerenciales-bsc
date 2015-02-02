@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DetallehistorialCreateDlg" widgetVar="DetallehistorialCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDetallehistorialTitle}">
+            <h:form id="DetallehistorialCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{detallehistorialController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDetallehistorialLabel_iddetallehistorial}" for="iddetallehistorial" />
+                        <p:inputText id="iddetallehistorial" value="#{detallehistorialController.selected.iddetallehistorial}" title="#{bundle.CreateDetallehistorialTitle_iddetallehistorial}" required="true" requiredMessage="#{bundle.CreateDetallehistorialRequiredMessage_iddetallehistorial}"/>
+                        <p:outputLabel value="#{bundle.CreateDetallehistorialLabel_valor}" for="valor" />
+                        <p:inputText id="valor" value="#{detallehistorialController.selected.valor}" title="#{bundle.CreateDetallehistorialTitle_valor}" />
+                        <p:outputLabel value="#{bundle.CreateDetallehistorialLabel_idcomponenteformula}" for="idcomponenteformula" />
+                        <p:selectOneMenu id="idcomponenteformula" value="#{detallehistorialController.selected.idcomponenteformula}" >
+                            <f:selectItems value="#{componenteformlaController.itemsAvailableSelectOne}"
+                                           var="idcomponenteformulaItem"
+                                           itemValue="#{idcomponenteformulaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDetallehistorialLabel_idhistorial}" for="idhistorial" />
+                        <p:selectOneMenu id="idhistorial" value="#{detallehistorialController.selected.idhistorial}" >
+                            <f:selectItems value="#{historialController.itemsAvailableSelectOne}"
+                                           var="idhistorialItem"
+                                           itemValue="#{idhistorialItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{detallehistorialController.create}" value="#{bundle.Save}" update="display,:DetallehistorialListForm:datalist,:growl" oncomplete="handleSubmit(args,'DetallehistorialCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DetallehistorialCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ComponenteformlaViewDlg" widgetVar="ComponenteformlaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewComponenteformlaTitle}">
+            <h:form id="ComponenteformlaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{componenteformlaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewComponenteformlaLabel_idcomponenteformla}"/>
+                        <h:outputText value="#{componenteformlaController.selected.idcomponenteformla}" title="#{bundle.ViewComponenteformlaTitle_idcomponenteformla}"/>
+                        <h:outputText value="#{bundle.ViewComponenteformlaLabel_descripcion}"/>
+                        <h:outputText value="#{componenteformlaController.selected.descripcion}" title="#{bundle.ViewComponenteformlaTitle_descripcion}"/>
+                        <h:outputText value="#{bundle.ViewComponenteformlaLabel_unidad}"/>
+                        <h:outputText value="#{componenteformlaController.selected.unidad}" title="#{bundle.ViewComponenteformlaTitle_unidad}"/>
+                        <h:outputText value="#{bundle.ViewComponenteformlaLabel_idindicador}"/>
+                        <h:outputText value="#{componenteformlaController.selected.idindicador}" title="#{bundle.ViewComponenteformlaTitle_idindicador}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ComponenteformlaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

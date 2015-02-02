@@ -200,20 +200,24 @@
                                 </h:panelGrid>
                                 
                                 <h:panelGrid columns="1">
-                                    <p:dataTable id="componentesTbl" style="width: 400px" var="comp" value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.componenteformlaCollection}" editable="true" editMode="cell" widgetVar="cellComponentes">
+                                    <p:dataTable id="componentesTbl" style="width: 400px" var="comEd" value="#{objetivoestrategicoController.nuevoObjetivoestrategicoindicador.indicador.componenteformlaCollection}" editable="true" editMode="cell" widgetVar="cellComEd">
                                         <f:facet name="header">
                                             COMPONENTES FORMULA
                                         </f:facet>
                                         <p:column headerText="Descripcion">                                            
-                                                <h:outputText value="#{comp.descripcion}" />                                           
+                                                <h:outputText value="#{comEd.descripcion}" />                                           
                                         </p:column>
+
+                                        <p:ajax event="cellEdit"  />
+
                                         <p:column headerText="Unidades">
                                             <p:cellEditor>
-                                                <f:facet name="output"><h:outputText value="#{comp.unidad}" /></f:facet>
-                                                <f:facet name="input"><p:inputText value="#{comp.unidad}" style="width: 200px"/></f:facet>
+                                                <f:facet name="output"><h:outputText value="#{comEd.unidad}" /></f:facet>
+                                                <f:facet name="input"><p:inputText id="modelInput" value="#{comEd.unidad}" style="width:96%"/></f:facet>
                                             </p:cellEditor>
                                         </p:column>
-                                        
+
+
                                     </p:dataTable>
                                 </h:panelGrid>
                                 

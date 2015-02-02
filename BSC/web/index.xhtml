@@ -33,11 +33,11 @@
                         <p:commandButton id="loginButton" value="Login"
                                          actionListener="#{loginController.verficarLogin()}" update=":mensajes"
                                          oncomplete="manejarLogin(xhr, status, args)" style="height: 75px;
-                                             width: 75px;
-                                             background-image: url(img/fondo-boton.png);
-                                             background-size: 75px;
-                                             border-radius: 50px;
-                                             color:#ffffff" />
+                                         width: 75px;
+                                         background-image: url(img/fondo-boton.png);
+                                         background-size: 75px;
+                                         border-radius: 50px;
+                                         color:#ffffff" />
                         <h:panelGrid>
                             <p:selectOneRadio id="console" value="#{loginController.tipo}" style="color: #ffffff;">
                                 <f:selectItem itemLabel="Usuario" itemValue="0" />

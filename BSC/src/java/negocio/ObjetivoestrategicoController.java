@@ -1,5 +1,7 @@
 package negocio;
 
+import bean.ComponenteformlaFacade;
+import bean.DetallehistorialFacade;
 import bean.HistorialFacade;
 import bean.IndicadorFacade;
 import modelo.Objetivoestrategico;
@@ -31,6 +33,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import modelo.Componenteformla;
+import modelo.Detallehistorial;
 import modelo.Historial;
 import modelo.Indicador;
 import modelo.Objetivoestrategicoindicador;
@@ -58,6 +61,10 @@ public class ObjetivoestrategicoController implements Serializable {
     private ObjetivoestrategicoindicadorFacade ejbFacadeObjEstInd;
     @EJB
     private HistorialFacade ejbFacadeHistorial;
+    @EJB
+    private ComponenteformlaFacade ejbFacadeComp;
+    @EJB
+    private DetallehistorialFacade ejbFacadeDeta;
     private List<Objetivoestrategico> items = null;
     private Objetivoestrategico selected;
     private Objetivoestrategicoindicador metaSeleccionada;
@@ -69,9 +76,11 @@ public class ObjetivoestrategicoController implements Serializable {
     private List<Historial> histrorial;
     private Historial nuevoHistorial;
     private double nuevoVolorIndocador;
+    private Date fecha;
     private LineChartModel dateModel;
     private List<String> noms = null;
     Arbol arbol;
+    private List<Detallehistorial> itemsdetalle;
 
     public List<String> getNoms() {
         return noms;
@@ -94,9 +103,17 @@ public class ObjetivoestrategicoController implements Serializable {
             items = getFacade().findAll();
             getItemsNombre();
         }
+        fecha=new Date();
     }
 
     public void evaluar() {
+        itemsdetalle = new ArrayList<Detallehistorial>();
+        Detallehistorial det;
+        for (Componenteformla com : metaSeleccionada.getIndicador().getComponenteformlaCollection()) {
+            det = new Detallehistorial();
+            det.setIdcomponenteformula(com);
+            itemsdetalle.add(det);
+        }
         System.out.println("cargo");
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/BSC/faces/objetivoestrategico/Evaluar.xhtml");
@@ -108,6 +125,52 @@ public class ObjetivoestrategicoController implements Serializable {
     public void Evaluar() {
         System.out.println("cargo ");
 
+    }
+
+    public void calculaIndicador() {
+        boolean calucular = true;
+        System.out.println("inicio");
+        for (Detallehistorial d : itemsdetalle) {
+            System.out.println("Valor "+d.getValor());
+            if (d.getValor() == null)
+            calucular = false;
+        }
+        System.out.println(calucular);
+        if (calucular) {
+            if (!metaSeleccionada.getIndicador().getFormula().equals("")) {
+                String formula = metaSeleccionada.getIndicador().getFormula().replaceAll("\\s", "").trim();
+                Validacion cadena = new Validacion(formula);
+                if (cadena.Exp_Valida()) {
+                    String Exp = formula.trim();
+                    //Borra parentesis del inicio y fin si toda la expresion esta entre parentesis
+                    if (Exp.charAt(0) == '(' && Exp.charAt(Exp.length() - 1) == ')') {
+                        int p = 1, i = 1;
+                        while (p != 0) {
+                            if (Exp.charAt(i) == '(') {
+                                p++;
+                            }
+                            if (Exp.charAt(i) == ')') {
+                                p--;
+                            }
+                            i++;
+                        }
+                        if (i == Exp.length()) {
+                            Exp = Exp.substring(1, Exp.length() - 1);
+                        }
+                    }
+                    arbol = new Arbol(Exp);
+                    arbol.Formar_Arbol();
+                    arbol.reemplazarValores(itemsdetalle);
+                    List term = arbol.listarTerminos();
+                    nuevoObjetivoestrategicoindicador.getIndicador().setComponenteformlaCollection(new ArrayList());
+                    nuevoVolorIndocador= Double.parseDouble(arbol.Calcular());
+                    for (int i = 0; i < term.size(); i++) {
+                        System.out.println("term " + term.get(i));
+                        
+                    }
+                }
+            }
+        }
     }
 
     public void obtieneComponentes() {
@@ -135,11 +198,11 @@ public class ObjetivoestrategicoController implements Serializable {
                     }
                     arbol = new Arbol(Exp);
                     arbol.Formar_Arbol();
-                    List term=arbol.listarTerminos();
+                    List term = arbol.listarTerminos();
                     nuevoObjetivoestrategicoindicador.getIndicador().setComponenteformlaCollection(new ArrayList());
-                    for (int i=0;i<term.size();i++){
-                        System.out.println("term "+term.get(i));
-                        Componenteformla c=new Componenteformla();
+                    for (int i = 0; i < term.size(); i++) {
+                        System.out.println("term " + term.get(i));
+                        Componenteformla c = new Componenteformla();
                         c.setDescripcion((String) term.get(i));
                         c.setIdindicador(nuevoObjetivoestrategicoindicador.getIndicador());
                         nuevoObjetivoestrategicoindicador.getIndicador().getComponenteformlaCollection().add(c);
@@ -185,8 +248,13 @@ public class ObjetivoestrategicoController implements Serializable {
         nuevoHistorial = new Historial();
         nuevoHistorial.setValor(new BigDecimal(nuevoVolorIndocador));
         nuevoHistorial.setIdIndicador(metaSeleccionada.getIndicador());
-        nuevoHistorial.setFechaMedicion(new Date());
+        nuevoHistorial.setFechaMedicion(fecha);
         ejbFacadeHistorial.create(nuevoHistorial);
+        for (int i=0;i<itemsdetalle.size();i++){
+            itemsdetalle.get(i).setIdhistorial(nuevoHistorial);
+            itemsdetalle.get(i).setIddetallehistorial(0);
+            ejbFacadeDeta.create(itemsdetalle.get(i));
+        }
         ejbFacadeIndicador.edit(metaSeleccionada.getIndicador());
         ejbFacadeObjEstInd.edit(metaSeleccionada);
         nuevoVolorIndocador = 0;
@@ -245,7 +313,16 @@ public class ObjetivoestrategicoController implements Serializable {
         semaforos.add(getRojo());
         nuevoObjetivoestrategicoindicador.getIndicador().setSemaforoCollection(semaforos);
         nuevoObjetivoestrategicoindicador.getIndicador().setSemaforoCollection(null);
+        Collection<Componenteformla> componentes = nuevoObjetivoestrategicoindicador.getIndicador().getComponenteformlaCollection();
+        nuevoObjetivoestrategicoindicador.getIndicador().setComponenteformlaCollection(null);
         ejbFacadeIndicador.create(nuevoObjetivoestrategicoindicador.getIndicador());
+        nuevoObjetivoestrategicoindicador.getIndicador().setComponenteformlaCollection(componentes);
+        for (Componenteformla c : componentes) {
+            c.setIdcomponenteformla(0);
+            c.setIdindicador(nuevoObjetivoestrategicoindicador.getIndicador());
+            ejbFacadeComp.create(c);
+        }
+        ejbFacadeIndicador.edit(nuevoObjetivoestrategicoindicador.getIndicador());
         nuevoObjetivoestrategicoindicador.getIndicador().setSemaforoCollection(semaforos);
         nuevoObjetivoestrategicoindicador.setObjetivoestrategicoindicadorPK(new ObjetivoestrategicoindicadorPK(
                 selected.getIdObjetivoEstrategico(),
@@ -423,7 +500,7 @@ public class ObjetivoestrategicoController implements Serializable {
             objEstInd.getIndicador().setObjetivoestrategicoindicadorCollection(null);
             Collection<Semaforo> semList = objEstInd.getIndicador().getSemaforoCollection();
             objEstInd.getIndicador().setSemaforoCollection(null);
-            Collection <Componenteformla> componentes=objEstInd.getIndicador().getComponenteformlaCollection();
+            Collection<Componenteformla> componentes = objEstInd.getIndicador().getComponenteformlaCollection();
             objEstInd.getIndicador().setComponenteformlaCollection(null);
             ejbFacadeIndicador.create(objEstInd.getIndicador());
             objEstInd.getIndicador().setComponenteformlaCollection(componentes);
@@ -626,6 +703,34 @@ public class ObjetivoestrategicoController implements Serializable {
      */
     public void setDateModel(LineChartModel dateModel) {
         this.dateModel = dateModel;
+    }
+
+    /**
+     * @return the itemsdetalle
+     */
+    public List<Detallehistorial> getItemsdetalle() {
+        return itemsdetalle;
+    }
+
+    /**
+     * @param itemsdetalle the itemsdetalle to set
+     */
+    public void setItemsdetalle(List<Detallehistorial> itemsdetalle) {
+        this.itemsdetalle = itemsdetalle;
+    }
+
+    /**
+     * @return the fecha
+     */
+    public Date getFecha() {
+        return fecha;
+    }
+
+    /**
+     * @param fecha the fecha to set
+     */
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     @FacesConverter(forClass = Objetivoestrategico.class)

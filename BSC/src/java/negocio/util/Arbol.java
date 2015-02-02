@@ -3,6 +3,7 @@ package negocio.util;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
+import modelo.Detallehistorial;
 
 /**
  * Genera un árbol de expresión a partir de una cadena de caracteres y la resuelve
@@ -16,6 +17,7 @@ public class Arbol {
     private String Lista[][];
     private int n;
     private List<String>terminos;
+    private List<Detallehistorial>valores;
     //private JFrame ventana=new JFrame();
 //Contructor
     public Arbol() {
@@ -253,6 +255,12 @@ public class Arbol {
         return res;
     }
     
+    public void reemplazarValores(List<Detallehistorial> valores){
+        System.out.println("Reeplazo");
+        this.valores=valores;
+        this.reemplazar(Raiz);
+    }
+    
     public List listarTerminos(){
         terminos=new ArrayList<>();
         this.getTerminos(Raiz);
@@ -267,6 +275,18 @@ public class Arbol {
         res=res+a.valor;
         Pre(a.Izquierda);
         Pre(a.Derecha);
+        }
+    }
+    
+    private void reemplazar (Nodo a){
+        if (a!=null) {
+            for (int i=0;i<valores.size();i++){
+                if (a.valor.equals(valores.get(i).getIdcomponenteformula().getDescripcion())){
+                    a.valor=String.valueOf(valores.get(i).getValor().doubleValue());
+                }
+            }
+        reemplazar(a.Izquierda);
+        reemplazar(a.Derecha);
         }
     }
     
