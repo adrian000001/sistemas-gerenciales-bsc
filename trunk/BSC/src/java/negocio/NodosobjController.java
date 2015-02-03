@@ -3,8 +3,10 @@ package negocio;
 import modelo.util.JsfUtil;
 import modelo.util.JsfUtil.PersistAction;
 import bean.NodosobjFacade;
+import bean.ObjetivoestrategicoFacade;
 import generadormapaestrategico.MapaEstrategico;
 import generadormapaestrategico.NewClass;
+import grafico.GenerarMapa;
 
 import java.io.Serializable;
 import java.util.List;
@@ -22,15 +24,18 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import modelo.Nodosobj;
+import modelo.Objetivoestrategico;
 
 @ManagedBean(name = "nodosobjController")
 @SessionScoped
 public class NodosobjController implements Serializable {
-
+    @EJB
+    private bean.ObjetivoestrategicoFacade ejbEstragias;
     @EJB
     private bean.NodosobjFacade ejbFacade;
     private List<Nodosobj> items = null;
     private Nodosobj selected;
+    private List<Objetivoestrategico> objetivosEstrategicosLista;
     private String ruta;
      @PostConstruct
     public void init(){
@@ -57,19 +62,11 @@ public class NodosobjController implements Serializable {
     }
       private ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 
-    public void generarArbol()
-    {
-         ruta = ec.getRealPath("img")+"\\arbol.png";
-         System.out.println("holaaaaaaaa");
-       MapaEstrategico mp = new MapaEstrategico();
-       System.out.println(items.size()+"000");
-       for (int i = 0; i < items.size(); i++) {
-            
-            mp.insertarNodo(items.get(i).getObjOrigen(), items.get(i).getObjDestino());
-        }
-        mp.graficarArbol(mp);   // Graficacion de la matriz
-        System.out.println("El tamaño es: " + mp.obtenerTamaño(mp.getRaiz(), mp));
-        
+    public void generarArbol() {
+       objetivosEstrategicosLista = ejbEstragias.findAll();
+        GenerarMapa bean = new GenerarMapa(objetivosEstrategicosLista,items);
+        bean.main();
+  
     }
     public NodosobjController() {
     }
@@ -200,5 +197,18 @@ public class NodosobjController implements Serializable {
         }
 
     }
+
+    public ObjetivoestrategicoFacade getEjbEstragias() {
+        return ejbEstragias;
+    }
+
+    public void setEjbEstragias(ObjetivoestrategicoFacade ejbEstragias) {
+        this.ejbEstragias = ejbEstragias;
+    }
+
+    public void setObjetivosEstrategicosLista(List<Objetivoestrategico> objetivosEstrategicosLista) {
+        this.objetivosEstrategicosLista = objetivosEstrategicosLista;
+    }
+    
 
 }
