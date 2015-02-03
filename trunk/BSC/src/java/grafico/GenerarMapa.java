@@ -53,66 +53,50 @@ public class GenerarMapa {
 
             grafo g = new grafo();
             for (Objetivoestrategico ob : objEstrategicos) {
-                char color=' ';
+                char color = ' ';
                 ArrayList<Objetivoestrategicoindicador> indicadores = new ArrayList();
-                ArrayList aux=new ArrayList();
+                ArrayList aux = new ArrayList();
                 for (Objetivoestrategicoindicador ind : ob.getObjetivoestrategicoindicadorCollection()) {
-                    
                     indicadores.add(ind);
-
                 }
-                
-                    
-                
-                System.out.println("hiiiiii"+indicadores.size());
-                Objetivoestrategicoindicador i=indicadores.get(indicadores.size()-1);
+
+                System.out.println("hiiiiii" + indicadores.size());
+                Objetivoestrategicoindicador i = indicadores.get(indicadores.size() - 1);
                 for (Semaforo sem : i.getIndicador().getSemaforoCollection()) {
-                    if(i.getValorActual()>=sem.getLimiteInferior().doubleValue() && i.getValorActual()<=sem.getLimiteSuperior().doubleValue())
-                    {
-                        
-                        if (color!=' '){
-                            color=sem.getColor();
-                        }  
-                        else{
-                            color='v';
-                        }
-                        
-                            
-                        
+                    if (i.getValorActual() >= sem.getLimiteInferior().doubleValue() && i.getValorActual() <= sem.getLimiteSuperior().doubleValue()) {
+
+                            color = sem.getColor();
                     }
-                
-                
-                    if(color=='v')
-                    {System.out.println("aquiii "+color);
+
+                    if (color == 'v') {
+                        System.out.println("aquiii " + color);
                         g.agregarNodo(String.valueOf(ob.getIdObjetivoEstrategico()),
-                        ob.getNombre(), "green", ob.getIdPerspectiva().getNombre());
+                                ob.getNombre(), "green", ob.getIdPerspectiva().getNombre());
                         //aux.add(String.valueOf(ob.getIdObjetivoEstrategico())+"!"+)
                     }
-                    if(color=='n')
-                    {
-                        System.out.println("aquiii "+color);
+                    if (color == 'n') {
+                        System.out.println("aquiii " + color);
                         g.agregarNodo(String.valueOf(ob.getIdObjetivoEstrategico()),
-                        ob.getNombre(), "yellow", ob.getIdPerspectiva().getNombre());
-            
+                                ob.getNombre(), "yellow", ob.getIdPerspectiva().getNombre());
+
                     }
-                    if(color=='r')
-                    {
-                        System.out.println("aquiii "+color);
+                    if (color == 'r') {
+                        System.out.println("aquiii " + color);
                         g.agregarNodo(String.valueOf(ob.getIdObjetivoEstrategico()),
-                        ob.getNombre(), "red", ob.getIdPerspectiva().getNombre());
-            
+                                ob.getNombre(), "red", ob.getIdPerspectiva().getNombre());
+
                     }
-                    
-                    
-                 
+
                 }
                 g.agregarNodo(String.valueOf(ob.getIdObjetivoEstrategico()),
                         ob.getNombre(), "lightgrey", ob.getIdPerspectiva().getNombre());
             }
 
+            
             for (Nodosobj nodo : relaciones) {
                 g.conectarNodo(nodo.getObjOrigen(), nodo.getObjDestino());
             }
+            
 
 //      grafo g = new grafo();
             // g.agregarNodo("1","Minimizar costos para aumentar la calidad de los productos.","lightblue","financiera");
