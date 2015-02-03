@@ -51,104 +51,83 @@ public class GenerarMapa {
         try {
             //Creamos nuestro grafo
 
-            grafo g = new grafo();
+            grafo g1 = new grafo();
             for (Objetivoestrategico ob : objEstrategicos) {
-                Character color = ' ';
+                System.out.println("33333"+ob.getNombre());
+                String color = "v";
                 ArrayList<Objetivoestrategicoindicador> indicadores = new ArrayList();
                 ArrayList aux = new ArrayList();
                 for (Objetivoestrategicoindicador ind : ob.getObjetivoestrategicoindicadorCollection()) {
                     indicadores.add(ind);
                 }
 
-                System.out.println("hiiiiii" + indicadores.size());
-
+                
+                if(indicadores.size()!=0)
+                {
+                    System.out.println("hiiiiii" + indicadores.size());
                 Objetivoestrategicoindicador i = indicadores.get(indicadores.size() - 1);
                 for (Semaforo sem : i.getIndicador().getSemaforoCollection()) {
                     System.out.println(i.getValorActual()+"valor actual");
-                    if (i.getValorActual() >= sem.getLimiteInferior().doubleValue() && i.getValorActual() <= sem.getLimiteSuperior().doubleValue()) {
+                    double d=i.getValorActual();
+                    if (d==0) {
 
-                        color = sem.getColor();
+                        color = "v";
                     }
+                    else
+                    {
+                        if (i.getValorActual() >= sem.getLimiteInferior().doubleValue() && i.getValorActual() <= sem.getLimiteSuperior().doubleValue()) {
 
+                        color = ""+sem.getColor();
+                    }
+                    }
+                    
+                    
+                    System.out.println("gayyy"+color);
                     if (color.equals("v")) {
                         System.out.println("aquiii " + color);
-                        g.agregarNodo(String.valueOf(ob.getIdObjetivoEstrategico()),
+                        g1.agregarNodo(String.valueOf(ob.getIdObjetivoEstrategico()),
                                 ob.getNombre(), "chartreuse3", ob.getIdPerspectiva().getNombre());
                         //aux.add(String.valueOf(ob.getIdObjetivoEstrategico())+"!"+)
                     }
                     if (color.equals("n")) {
                         System.out.println("aquiii " + color);
-                        g.agregarNodo(String.valueOf(ob.getIdObjetivoEstrategico()),
+                        g1.agregarNodo(String.valueOf(ob.getIdObjetivoEstrategico()),
                                 ob.getNombre(), "gold2", ob.getIdPerspectiva().getNombre());
                     }
                     if (color.equals("r")) {
                         System.out.println("aquiii " + color);
-                        g.agregarNodo(String.valueOf(ob.getIdObjetivoEstrategico()),
+                        
+                        g1.agregarNodo(String.valueOf(ob.getIdObjetivoEstrategico()),
                                 ob.getNombre(), "firebrick1", ob.getIdPerspectiva().getNombre());
 
                     }
 
+                }}
+                else
+                {
+                  g1.agregarNodo(String.valueOf(ob.getIdObjetivoEstrategico()),
+                        ob.getNombre(), "lightgrey", ob.getIdPerspectiva().getNombre());
+              
                 }
-//                g.agregarNodo(String.valueOf(ob.getIdObjetivoEstrategico()),
-//                        ob.getNombre(), "lightgrey", ob.getIdPerspectiva().getNombre());
-            }
+               }
 
             for (Nodosobj nodo : relaciones) {
-                g.conectarNodo(nodo.getObjOrigen(), nodo.getObjDestino());
+                g1.conectarNodo(nodo.getObjOrigen(), nodo.getObjDestino());
             }
 
-//      grafo g = new grafo();
-            // g.agregarNodo("1","Minimizar costos para aumentar la calidad de los productos.","lightblue","financiera");
-//      g.agregarNodo("2","Mejorar la rentabilidad de la organización.","red","financiera");
-//      g.agregarNodo("3","Aumentar las ventas para tener mayores ingresos.","red","financiera");
-//      g.agregarNodo("4","Mejorar la calidad de los productos para la satisfacción de los clientes.","yellow","clientes");
-//      g.agregarNodo("5","Crear una línea de producción con materiales de mejor calidad.","blue","clientes");
-//      g.agregarNodo("6","Implementar nueva estrategia de ventas online.","lightblue","clientes");
-//      g.agregarNodo("7","Efectuar estrategias de atención y servicios para asegurar la fidelidad de los clientes.","lightblue","clientes");
-//      g.agregarNodo("8","Gestionar eficientemente los procesos de producción.","blue","procesosInternos");
-//      g.agregarNodo("9","Mejorar la asistencia de entrega de pedidos.","blue","procesosInternos");
-//      g.agregarNodo("10","Optimizar la atención de los pedidos.","blue","procesosInternos");
-//      g.agregarNodo("11","Disponer de materia prima de calidad.","blue","procesosInternos");
-//      g.agregarNodo("12","Potencializar la especialización del personal en nuevas áreas de producción.","blue","aprendizaje");
-//      g.agregarNodo("13","Capacitar al personal para mejorar el espíritu competitivo.","blue","aprendizaje");
-//      g.agregarNodo("14","Desarrollar una plan estratégico para la contratación del personal.","blue","aprendizaje");
-//      g.agregarNodo("15","Disponer de abastecedores de materia prima propios de la empresa.","blue","aprendizaje");
-//      
-//      g.conectarNodo("2", "3");
-//      g.conectarNodo("2", "1");
-//      
-//      g.conectarNodo("3", "6");
-//      g.conectarNodo("3", "7");
-//      g.conectarNodo("3", "5");
-//      g.conectarNodo("3", "4");
-//      
-//      g.conectarNodo("1", "5");
-//      
-//      g.conectarNodo("6", "9");
-//      g.conectarNodo("6", "10");
-//      
-//      g.conectarNodo("7", "10");
-//      g.conectarNodo("5", "8");
-//      
-//      g.conectarNodo("9", "8");
-//      g.conectarNodo("9", "11");
-//      
-//      g.conectarNodo("9", "13");
-//      g.conectarNodo("9", "14");
-//      
-//      g.conectarNodo("10", "13");
-//      g.conectarNodo("8", "14");
-//      g.conectarNodo("8", "12");
-//      g.conectarNodo("11", "15");
-//      
             generaDot gen = new generaDot();
-            gen.generar(g);
-
+            if(g1!=null)
+            {
+            gen.generar(g1);
+    
+            }
+            
             String dotPath = "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe";
 
             String fileInputPath = "prueba.txt";
             //String fileOutputPath = "web\\imagenes\\grafo.jpg";
             String ruta = ec.getRealPath("img");
+            System.out.println("heyyyy "+ruta);
             String fileOutputPath = ruta + "/grafo.jpg";
             String tParam = "-Tjpg";
             String tOParam = "-o";
