@@ -82,7 +82,7 @@ public class GenerarMapa {
                     }
                     
                     
-                    System.out.println("gayyy"+color);
+                    System.out.println("este color: "+color);
                     if (color.equals("v")) {
                         System.out.println("aquiii " + color);
                         g1.agregarNodo(String.valueOf(ob.getIdObjetivoEstrategico()),
@@ -92,7 +92,7 @@ public class GenerarMapa {
                     if (color.equals("n")) {
                         System.out.println("aquiii " + color);
                         g1.agregarNodo(String.valueOf(ob.getIdObjetivoEstrategico()),
-                                ob.getNombre(), "gold2", ob.getIdPerspectiva().getNombre());
+                                ob.getNombre(), "orange", ob.getIdPerspectiva().getNombre());
                     }
                     if (color.equals("r")) {
                         System.out.println("aquiii " + color);

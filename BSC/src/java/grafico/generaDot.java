@@ -31,9 +31,9 @@ public class generaDot {
             pw.println("graph [ dpi = 300 ]");
 
             declaraNodosAristas("Financiera", "0", g, "lightgrey", "Financiera");
-            declaraNodosAristas("Empresarial", "1", g, "lightgrey", "Clientes");
-            declaraNodosAristas("Procesos", "2", g, "lightgrey", "Procesos Internos");
-            declaraNodosAristas("Aprendizaje", "3", g, "lightgrey", "Aprendizaje y Conocimientos");
+            declaraNodosAristas("Empresarial", "1", g, "lightblue", "Clientes");
+            declaraNodosAristas("Procesos", "2", g, "yellow", "Procesos Internos");
+            declaraNodosAristas("Aprendizaje", "3", g, "violet", "Aprendizaje y Conocimientos");
 
             for (Iterator<arista> it = g.getListaAristas().iterator(); it.hasNext();) {//escribe las conexiones
                 arista object = it.next();

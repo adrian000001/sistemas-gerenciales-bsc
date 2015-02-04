@@ -46,11 +46,35 @@
                             <h:outputText value="#{item.objDestino}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{nodosobjController.prepareCreate}" update=":NodosobjCreateForm" oncomplete="PF('NodosobjCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" actionListener="#{nodosobjController.generarArbol}" value="#{bundle.View}" update=":NodosobjViewForm" oncomplete="PF('NodosobjViewDialog').show()" disabled="#{empty nodosobjController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":NodosobjEditForm" oncomplete="PF('NodosobjEditDialog').show()" disabled="#{empty nodosobjController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{nodosobjController.destroy}" update=":growl,datalist" disabled="#{empty nodosobjController.selected}"/>
-                            <p:commandButton value="Ver grafico" id="ajax" actionListener="#{nodosobjController.generarArbol}" ajax="false" styleClass="ui-priority-primary" icon="ui-icon-search"  update=":graficoForm" oncomplete="PF('graficoDialog').show()" /> 
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="createButton" icon="ui-icon-plus"   title="#{bundle.Create}" actionListener="#{nodosobjController.prepareCreate}" update=":NodosobjCreateForm" oncomplete="PF('NodosobjCreateDialog').show()"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="viewButton"   icon="ui-icon-search" actionListener="#{nodosobjController.generarArbol}" title="#{bundle.View}" update=":NodosobjViewForm" oncomplete="PF('NodosobjViewDialog').show()" disabled="#{empty nodosobjController.selected}"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="editButton"   icon="ui-icon-pencil" title="#{bundle.Edit}" update=":NodosobjEditForm" oncomplete="PF('NodosobjEditDialog').show()" disabled="#{empty nodosobjController.selected}"/>
+                            <p:commandButton style="height: 75px;
+                                             width: 75px;
+                                             background-image: url(../img/fondo-boton.png);
+                                             background-size: 75px;
+                                             border-radius: 50px;
+                                             color:#ffffff"
+                                             id="deleteButton" icon="ui-icon-trash"  title="#{bundle.Delete}" actionListener="#{nodosobjController.destroy}" update=":growl,datalist" disabled="#{empty nodosobjController.selected}"/>
+                            <p:commandButton value="Generar Grafico" id="ajax" actionListener="#{nodosobjController.generarArbol}" ajax="false" styleClass="ui-priority-primary" update=":graficoForm" oncomplete="PF('graficoDialog').show()" /> 
                 
                         
                         </f:facet>
