@@ -5,6 +5,7 @@ import modelo.Objetivoestrategicoindicador;
 import negocio.util.JsfUtil;
 import negocio.util.JsfUtil.PersistAction;
 import bean.ObjetivoestrategicoindicadorFacade;
+import bean.SemaforoFacade;
 import informes.Informe;
 
 import java.io.Serializable;
@@ -23,6 +24,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import modelo.Historial;
 import modelo.Indicador;
+import modelo.Semaforo;
 
 @ManagedBean(name = "objetivoestrategicoindicadorController")
 @SessionScoped
@@ -32,6 +34,8 @@ public class ObjetivoestrategicoindicadorController implements Serializable {
     private bean.ObjetivoestrategicoindicadorFacade ejbFacade;
     @EJB
     private HistorialFacade ejbFacadeHistorial;
+    @EJB
+    private SemaforoFacade ejbFacadeSemaforo;
     private List<Objetivoestrategicoindicador> items = null;
     private Objetivoestrategicoindicador selected;
 
@@ -98,7 +102,9 @@ public class ObjetivoestrategicoindicadorController implements Serializable {
         items = getFacade().findAll();
         for (int i=0;i<items.size();i++){
             List <Historial> histrorial = ejbFacadeHistorial.getSemaforosIndicador(items.get(i).getIndicador().getIdIndicador());
+            List <Semaforo> semaforos = ejbFacadeSemaforo.getSemaforosIndicador(items.get(i).getIndicador().getIdIndicador());
             items.get(i).getIndicador().setHistorialCollection(histrorial);
+            items.get(i).getIndicador().setSemaforoCollection(semaforos);
         }
         return items;
     }

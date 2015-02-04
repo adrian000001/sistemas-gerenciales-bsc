@@ -32,9 +32,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Semaforo.findByIdSemaforo", query = "SELECT s FROM Semaforo s WHERE s.idSemaforo = :idSemaforo"),
     @NamedQuery(name = "Semaforo.findByColor", query = "SELECT s FROM Semaforo s WHERE s.color = :color"),
     @NamedQuery(name = "Semaforo.findByLimiteInferior", query = "SELECT s FROM Semaforo s WHERE s.limiteInferior = :limiteInferior"),
-    @NamedQuery(name = "Semaforo.findByLimiteSuperior", query = "SELECT s FROM Semaforo s WHERE s.limiteSuperior = :limiteSuperior")})
+    @NamedQuery(name = "Semaforo.findByLimiteSuperior", query = "SELECT s FROM Semaforo s WHERE s.limiteSuperior = :limiteSuperior"),
+    @NamedQuery(name = "Semaforo.findByIdIndicador", query = "SELECT s FROM Semaforo s WHERE s.idIndicador.idIndicador = :idIndicador")})
 public class Semaforo implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static String findByIdIndicador="Semaforo.findByIdIndicador";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
