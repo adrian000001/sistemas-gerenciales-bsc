@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import modelo.Semaforo;
 
 /**
@@ -29,4 +30,9 @@ public class SemaforoFacade extends AbstractFacade<Semaforo> {
         super(Semaforo.class);
     }
        
+    public List<Semaforo> getSemaforosIndicador(Integer  idIndicador) {
+        Query query = this.em.createNamedQuery(Semaforo.findByIdIndicador);
+        query.setParameter("idIndicador",idIndicador);
+        return query.getResultList();
+    }
 }
